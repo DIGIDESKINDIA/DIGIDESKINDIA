@@ -1,0 +1,317 @@
+@import "tailwindcss";
+
+:root {
+  --dd-bg: #f8fafc;
+  --dd-bg-muted: #ffffff;
+  --dd-bg-elevated: #ffffff;
+  --dd-surface: #ffffff;
+  --dd-surface-soft: #f8fafc;
+  --dd-surface-strong: #e2e8f0;
+  --dd-text: #0f172a;
+  --dd-text-muted: #475569;
+  --dd-text-soft: #64748b;
+  --dd-border: #e2e8f0;
+  --dd-border-strong: rgba(15, 23, 42, 0.08);
+}
+
+html[data-theme="dark"] {
+  --dd-bg: #050b18;
+  --dd-bg-muted: #081225;
+  --dd-bg-elevated: #0b1428;
+  --dd-surface: #0f1b33;
+  --dd-surface-soft: #081225;
+  --dd-surface-strong: rgba(59, 130, 246, 0.12);
+  --dd-text: #ffffff;
+  --dd-text-muted: #cbd5e1;
+  --dd-text-soft: #94a3b8;
+  --dd-border: rgba(148, 163, 184, 0.15);
+  --dd-border-strong: rgba(59, 130, 246, 0.18);
+}
+
+/* ===========================
+   Base
+=========================== */
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--dd-bg);
+  color: var(--dd-text);
+  overflow-x: hidden;
+}
+
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition-property: background-color, border-color, color, box-shadow, fill, stroke;
+  transition-duration: 180ms;
+  transition-timing-function: ease;
+}
+
+html[data-theme="dark"] .bg-slate-50 {
+  background-color: var(--dd-bg) !important;
+}
+
+html[data-theme="dark"] .bg-white {
+  background-color: var(--dd-bg-muted) !important;
+}
+
+html[data-theme="dark"] .bg-slate-950 {
+  background-color: #050b18 !important;
+}
+
+html[data-theme="dark"] .text-slate-900,
+html[data-theme="dark"] .text-slate-800,
+html[data-theme="dark"] .text-slate-700 {
+  color: var(--dd-text) !important;
+}
+
+html[data-theme="dark"] .text-slate-600,
+html[data-theme="dark"] .text-slate-500,
+html[data-theme="dark"] .text-slate-400 {
+  color: var(--dd-text-soft) !important;
+}
+
+html[data-theme="dark"] .border-slate-200,
+html[data-theme="dark"] .border-slate-100,
+html[data-theme="dark"] .border-white\/10,
+html[data-theme="dark"] .border-white\/60,
+html[data-theme="dark"] .border-white\/70 {
+  border-color: var(--dd-border) !important;
+}
+
+html[data-theme="dark"] .shadow-sm,
+html[data-theme="dark"] .shadow-md,
+html[data-theme="dark"] .shadow-xl,
+html[data-theme="dark"] .shadow-2xl {
+  box-shadow: 0 20px 48px rgba(2, 6, 23, 0.28) !important;
+}
+
+/* ===========================
+   Utilities
+=========================== */
+
+.container-custom {
+  @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+.section-padding {
+  @apply py-20 lg:py-28;
+}
+
+.glass {
+  @apply bg-white/70 backdrop-blur-xl border border-white/30;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent;
+}
+
+/* ===========================
+   Animations
+=========================== */
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-18px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 7s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float 9s ease-in-out infinite;
+}
+
+@keyframes heroGlowFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+@keyframes tirangaWave {
+  0% {
+    transform: perspective(1100px) rotateY(0deg) translate3d(0, 0, 0) skewY(0deg);
+  }
+
+  25% {
+    transform: perspective(1100px) rotateY(-8deg) translate3d(0, -1px, 0) skewY(-1deg);
+  }
+
+  50% {
+    transform: perspective(1100px) rotateY(6deg) translate3d(0, 1px, 0) skewY(1deg);
+  }
+
+  75% {
+    transform: perspective(1100px) rotateY(-5deg) translate3d(0, -1px, 0) skewY(-0.5deg);
+  }
+
+  100% {
+    transform: perspective(1100px) rotateY(0deg) translate3d(0, 0, 0) skewY(0deg);
+  }
+}
+
+@keyframes tirangaShimmer {
+  0% {
+    transform: translateX(-35%);
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 0.18;
+  }
+
+  100% {
+    transform: translateX(135%);
+    opacity: 0;
+  }
+}
+
+.hero-glow-float {
+  animation: heroGlowFloat 8s ease-in-out infinite;
+}
+
+.flag-wave {
+  animation: tirangaWave 6.5s ease-in-out infinite;
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.flag-shimmer {
+  animation: tirangaShimmer 7s linear infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes chakraRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.chakra-spin {
+  animation: chakraRotate 18s linear infinite;
+  will-change: transform;
+}
+
+.no-animation {
+  animation: none !important;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float-delayed,
+  .animate-float-slow,
+  .hero-glow-float,
+  .flag-wave,
+  .flag-shimmer,
+  .chakra-spin {
+    animation: none !important;
+  }
+}
+.hero-artwork-blend {
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    black 95%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse at center,
+    black 95%,
+    transparent 100%
+  );
+}
+
+/* ===========================
+   Hero Animations
+=========================== */
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes run-light {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+@keyframes trail-drift {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-3px);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 42s linear infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle 3.5s ease-in-out infinite;
+}
+
+.pole-light {
+  stroke-dasharray: 8 6;
+  animation: run-light 1.4s linear infinite;
+}
+
+.animate-trail-drift {
+  animation: trail-drift 8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-slow,
+  .animate-twinkle,
+  .pole-light,
+  .animate-trail-drift {
+    animation: none !important;
+  }
+}

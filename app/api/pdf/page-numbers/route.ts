@@ -1,0 +1,172 @@
+import { NextRequest, NextResponse } from "next/server";
+
+import {
+  PdfFile,
+  ValidationError,
+  PdfEngineError,
+} from "@/lib/pdf";
+
+import { addPageNumbers } from "@/lib/pdf/page-numbers";
+
+export const runtime = "nodejs";
+
+const MAX_FILE_SIZE = 100 * 1024 * 1024;
+
+export async function POST(
+  request: NextRequest
+) {
+  try {
+    const formData =
+      await request.formData();
+
+    const upload = formData.get(
+      "file"
+    ) as File | null;
+
+    if (!upload) {
+      throw new ValidationError(
+        "No PDF selected."
+      );
+    }
+
+    if (
+      upload.type !==
+      "application/pdf"
+    ) {
+      throw new ValidationError(
+        "Please upload a valid PDF."
+      );
+    }
+
+    if (upload.size === 0) {
+      throw new ValidationError(
+        "Selected PDF is empty."
+      );
+    }
+
+    if (
+      upload.size >
+      MAX_FILE_SIZE
+    ) {
+      throw new ValidationError(
+        "Maximum supported PDF size is 100 MB."
+      );
+    }
+
+    const startFrom = Number(
+      formData.get("startFrom") ?? 1
+    );
+
+    const fontSize = Number(
+      formData.get("fontSize") ?? 12
+    );
+
+    const x = Number(
+      formData.get("x") ?? 0
+    );
+
+    const y = Number(
+      formData.get("y") ?? 25
+    );
+
+    const pagesValue =
+      formData.get("pages");
+
+    let pages:
+      | number[]
+      | undefined;
+
+    if (
+      typeof pagesValue ===
+        "string" &&
+      pagesValue.trim()
+    ) {
+      pages = pagesValue
+        .split(",")
+        .map((page) =>
+          Number(page.trim())
+        )
+        .filter((page) =>
+          Number.isInteger(page)
+        );
+    }
+
+    const pdf: PdfFile = {
+      name: upload.name,
+      size: upload.size,
+      buffer:
+        new Uint8Array(
+          await upload.arrayBuffer()
+        ),
+    };
+
+    const output =
+      await addPageNumbers({
+        file: pdf,
+        pages,
+        startFrom,
+        fontSize,
+        x,
+        y,
+      });
+
+    const now = new Date();
+
+    const fileName = `Page-Numbers-${now.getFullYear()}-${String(
+      now.getMonth() + 1
+    ).padStart(2, "0")}-${String(
+      now.getDate()
+    ).padStart(2, "0")}.pdf`;
+
+    return new NextResponse(
+      Buffer.from(output),
+      {
+        status: 200,
+        headers: {
+          "Content-Type":
+            "application/pdf",
+
+          "Content-Disposition": `attachment; filename="${fileName}"`,
+
+          "Cache-Control":
+            "no-store",
+        },
+      }
+    );
+  } catch (error) {
+    console.error(
+      "[PAGE_NUMBERS]",
+      error
+    );
+
+    if (
+      error instanceof
+        ValidationError ||
+      error instanceof
+        PdfEngineError
+    ) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            error.message,
+        },
+        {
+          status:
+            error.statusCode,
+        }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        success: false,
+        message:
+          "Unable to add page numbers.",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+}

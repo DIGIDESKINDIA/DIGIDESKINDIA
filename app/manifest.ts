@@ -1,0 +1,27 @@
+import type { MetadataRoute } from "next";
+
+export default function manifest(): MetadataRoute.Manifest {
+  return {
+    name: "Digital Desk India",
+    short_name: "DigiDesk",
+    description:
+      "Government Services, PDF Tools, Image Tools and AI Assistant in one platform.",
+    start_url: "/",
+    display: "standalone",
+    background_color: "#f8fafc",
+    theme_color: "#0f172a",
+    lang: "en-IN",
+    icons: [
+      {
+        src: "/images/logo.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        src: "/images/logo.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
+    ],
+  };
+}

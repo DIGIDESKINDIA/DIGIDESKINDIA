@@ -1,0 +1,2084 @@
+
+> frontend@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.10 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.137.1:3000
+- Environments: .env.local
+✓ Ready in 1768ms
+- Experiments (use with caution):
+  · optimizePackageImports
+
+○ Compiling / ...
+ GET / 200 in 13.2s (next.js: 12.5s, application-code: 720ms)
+ GET /manifest.webmanifest 200 in 869ms (next.js: 837ms, application-code: 33ms)
+[browser] Uncaught ReferenceError: drawScene is not defined
+    at TirangaHero.useCallback[render] (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_0uyxjbp._.js:2023:13)
+ GET / 200 in 1229ms (next.js: 109ms, application-code: 1120ms)
+ GET /manifest.webmanifest 200 in 38ms (next.js: 16ms, application-code: 23ms)
+[browser] Uncaught ReferenceError: drawScene is not defined
+    at TirangaHero.useCallback[render] (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_0uyxjbp._.js:2023:13)
+ GET / 200 in 4.9s (next.js: 2.3s, application-code: 2.6s)
+ GET /manifest.webmanifest 200 in 749ms (next.js: 682ms, application-code: 67ms)
+ GET /manifest.webmanifest 200 in 45ms (next.js: 14ms, application-code: 30ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopSync (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9449:40)
+    at renderRootSync (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ScrollAndMaybeFocusHandler cacheNode={{rsc:{...}, ...}}>
+      <InnerScrollAndFocusHandlerOld focusAndScrollRef={{scrollRef:null, ...}} cacheNode={{rsc:{...}, ...}}>
+        <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+          <LoadingBoundary name="/" loading={null}>
+            <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>
+              <HTTPAccessFallbackErrorBoundary pathname="/" notFound={{...}} forbidden={undefined} ...>
+                <RedirectBoundary>
+                  <RedirectErrorBoundary router={{...}}>
+                    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+                      <SegmentViewNode type="page" pagePath="page.tsx">
+                        <SegmentTrieNode>
+                        <HomePage>
+                          <MainLayout>
+                            <ManishAIProvider>
+                              <div
++                               className="bg-[#050B18] text-white"
+-                               className="bg-slate-50 text-slate-900"
+                              >
+                                <Navbar>
+                                  <TopBar>
+                                    <div
++                                     className="border-b border-white/10 bg-[#040914] text-white"
+-                                     className="border-b border-slate-200 bg-slate-950 text-white"
+                                    >
+                                  <header
++                                   className="sticky top-0 z-50 transition-all duration-300 border-b border-white/10 ..."
+-                                   className="sticky top-0 z-50 transition-all duration-300 bg-white"
+                                  >
+                                    <div className="mx-auto ma...">
+                                      <div className="flex flex-...">
+                                        <LinkComponent>
+                                        ...
+                                          <nav className="flex items...">
+                                            <LinkComponent href="/" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/"
+                                              >
++                                               Home
+                                            <LinkComponent href="/service" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/service"
+                                              >
++                                               Government Services
+                                            <LinkComponent href="/pdf-tools" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/pdf-tools"
+                                              >
++                                               PDF Tools
+                                            <LinkComponent href="/image-tools" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/image-tools"
+                                              >
++                                               Image Tools
+                                            <LinkComponent href="/ai" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/ai"
+                                              >
++                                               AI Assistant
+                                            <LinkComponent href="/service" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/service"
+                                              >
++                                               CSC Services
+                                            <LinkComponent href="/pricing" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/pricing"
+                                              >
++                                               Pricing
+                                            <LinkComponent href="/contact" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/contact"
+                                              >
++                                               Contact Us
+                                        <div className="hidden ite...">
+                                          <LinkComponent href="/search" aria-label="Search" className="inline-fle...">
+                                            <a
+                                              aria-label="Search"
++                                             className="inline-flex h-11 w-11 items-center justify-center rounded-xl ..."
+-                                             className="inline-flex h-11 w-11 items-center justify-center rounded-xl ..."
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/search"
+                                            >
+                                          <ThemeToggle>
+                                            <button
+                                              type="button"
+                                              onClick={function ThemeProvider.useMemo[value]}
++                                             aria-label="Switch to light theme"
+-                                             aria-label="Switch to dark theme"
++                                             className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 te..."
+-                                             className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 te..."
+                                            >
+                                              <Sun size={18}>
+                                                <svg
+                                                  ref={null}
+                                                  xmlns="http://www.w3.org/2000/svg"
+                                                  width={18}
+                                                  height={18}
+                                                  viewBox="0 0 24 24"
+                                                  fill="none"
+                                                  stroke="currentColor"
+                                                  strokeWidth={2}
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
++                                                 className="lucide lucide-sun"
+-                                                 className="lucide lucide-moon"
+                                                  aria-hidden="true"
+                                                >
++                                                 <circle cx="12" cy="12" r="4">
+-                                                 <path
+-                                                   d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6..."
+-                                                 >
+                                                  ...
+                                              ...
+                                          ...
+                                        ...
+                                    ...
+                                ...
+                      ...
+                    ...
+        ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at beginWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6758:918)
+    at runWithFiberInDEV (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at performUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9555:97)
+    at workLoopConcurrentByScheduler (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at circle (<anonymous>)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4116:220)
+    at Array.map (<anonymous>)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4116:21)
+    at Sun (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4147:411)
+    at ThemeToggle (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_0uyxjbp._.js:263:224)
+    at Navbar (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_0uyxjbp._.js:716:243)
+    at MainLayout (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_0uyxjbp._.js:1925:219)
+    at HomePage (app\page.tsx:6:5)
+  4 | export default function HomePage() {
+  5 |   return (
+> 6 |     <MainLayout>
+    |     ^
+  7 |       <HomeLanding />
+  8 |     </MainLayout>
+  9 |   );
+[browser] Uncaught ReferenceError: drawScene is not defined
+    at TirangaHero.useCallback[render] (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_0uyxjbp._.js:2023:13)
+ GET /manifest.webmanifest 200 in 112ms (next.js: 14ms, application-code: 99ms)
+ GET / 200 in 640ms (next.js: 15ms, application-code: 625ms)
+ GET /manifest.webmanifest 200 in 32ms (next.js: 13ms, application-code: 19ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopSync (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9449:40)
+    at renderRootSync (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ScrollAndMaybeFocusHandler cacheNode={{rsc:{...}, ...}}>
+      <InnerScrollAndFocusHandlerOld focusAndScrollRef={{scrollRef:null, ...}} cacheNode={{rsc:{...}, ...}}>
+        <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+          <LoadingBoundary name="/" loading={null}>
+            <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>
+              <HTTPAccessFallbackErrorBoundary pathname="/" notFound={{...}} forbidden={undefined} ...>
+                <RedirectBoundary>
+                  <RedirectErrorBoundary router={{...}}>
+                    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+                      <SegmentViewNode type="page" pagePath="page.tsx">
+                        <SegmentTrieNode>
+                        <HomePage>
+                          <MainLayout>
+                            <ManishAIProvider>
+                              <div
++                               className="bg-[#050B18] text-white"
+-                               className="bg-slate-50 text-slate-900"
+                              >
+                                <Navbar>
+                                  <TopBar>
+                                    <div
++                                     className="border-b border-white/10 bg-[#040914] text-white"
+-                                     className="border-b border-slate-200 bg-slate-950 text-white"
+                                    >
+                                  <header
++                                   className="sticky top-0 z-50 transition-all duration-300 border-b border-white/10 ..."
+-                                   className="sticky top-0 z-50 transition-all duration-300 bg-white"
+                                  >
+                                    <div className="mx-auto ma...">
+                                      <div className="flex flex-...">
+                                        <LinkComponent>
+                                        ...
+                                          <nav className="flex items...">
+                                            <LinkComponent href="/" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/"
+                                              >
++                                               Home
+                                            <LinkComponent href="/service" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/service"
+                                              >
++                                               Government Services
+                                            <LinkComponent href="/pdf-tools" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/pdf-tools"
+                                              >
++                                               PDF Tools
+                                            <LinkComponent href="/image-tools" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/image-tools"
+                                              >
++                                               Image Tools
+                                            <LinkComponent href="/ai" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/ai"
+                                              >
++                                               AI Assistant
+                                            <LinkComponent href="/service" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/service"
+                                              >
++                                               CSC Services
+                                            <LinkComponent href="/pricing" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/pricing"
+                                              >
++                                               Pricing
+                                            <LinkComponent href="/contact" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/contact"
+                                              >
++                                               Contact Us
+                                        <div className="hidden ite...">
+                                          <LinkComponent href="/search" aria-label="Search" className="inline-fle...">
+                                            <a
+                                              aria-label="Search"
++                                             className="inline-flex h-11 w-11 items-center justify-center rounded-xl ..."
+-                                             className="inline-flex h-11 w-11 items-center justify-center rounded-xl ..."
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/search"
+                                            >
+                                          <ThemeToggle>
+                                            <button
+                                              type="button"
+                                              onClick={function ThemeProvider.useMemo[value]}
++                                             aria-label="Switch to light theme"
+-                                             aria-label="Switch to dark theme"
++                                             className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 te..."
+-                                             className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 te..."
+                                            >
+                                              <Sun size={18}>
+                                                <svg
+                                                  ref={null}
+                                                  xmlns="http://www.w3.org/2000/svg"
+                                                  width={18}
+                                                  height={18}
+                                                  viewBox="0 0 24 24"
+                                                  fill="none"
+                                                  stroke="currentColor"
+                                                  strokeWidth={2}
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
++                                                 className="lucide lucide-sun"
+-                                                 className="lucide lucide-moon"
+                                                  aria-hidden="true"
+                                                >
++                                                 <circle cx="12" cy="12" r="4">
+-                                                 <path
+-                                                   d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6..."
+-                                                 >
+                                                  ...
+                                              ...
+                                          ...
+                                        ...
+                                    ...
+                                ...
+                      ...
+                    ...
+        ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at beginWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6758:918)
+    at runWithFiberInDEV (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at performUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9555:97)
+    at workLoopConcurrentByScheduler (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at circle (<anonymous>)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4116:220)
+    at Array.map (<anonymous>)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4116:21)
+    at Sun (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4147:411)
+    at ThemeToggle (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_0uyxjbp._.js:263:224)
+    at Navbar (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_0uyxjbp._.js:716:243)
+    at MainLayout (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_0uyxjbp._.js:1925:219)
+    at HomePage (app\page.tsx:6:5)
+  4 | export default function HomePage() {
+  5 |   return (
+> 6 |     <MainLayout>
+    |     ^
+  7 |       <HomeLanding />
+  8 |     </MainLayout>
+  9 |   );
+[browser] Uncaught ReferenceError: drawScene is not defined
+    at TirangaHero.useCallback[render] (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_0uyxjbp._.js:2023:13)
+⨯ ./components/home/TirangaHero.tsx:132:1
+Expected '}', got '<eof>'
+  [90m130 |[0m
+  [90m131 |[0m     [36mreturn[0m () => {
+[31m[1m>[0m [90m132 |[0m
+  [90m    |[0m [31m[1m^[0m
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/home/TirangaHero.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/home/TirangaHero.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+
+ GET / 500 in 4.7s (next.js: 3.8s, application-code: 941ms)
+[browser] Uncaught Error: ./components/home/TirangaHero.tsx:132:1
+Expected '}', got '<eof>'
+  130 |
+  131 |     return () => {
+> 132 |
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/home/TirangaHero.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/home/TirangaHero.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./components/home/TirangaHero.tsx:132:1)
+    at <unknown> (Error: (./components/home/TirangaHero.tsx:132:1)
+[browser] ./components/home/TirangaHero.tsx:132:1
+Expected '}', got '<eof>'
+  130 |
+  131 |     return () => {
+> 132 |
+      | ^
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/home/TirangaHero.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/home/TirangaHero.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component] 
+    at handleErrors (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2774:21)
+    at processMessage (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2835:28)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2680:13)
+    at WebSocket.handleMessage (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2325:17) (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)
+⨯ ./components/home/tirangaDraw.ts:86:1
+'import', and 'export' cannot be used outside of module code
+  [90m84 |[0m     ctx.shadowBlur = [35m0[0m;
+  [90m85 |[0m     ctx.strokeStyle = trail.core;
+[31m[1m>[0m [90m86 |[0m [36mexport[0m [36mfunction[0m drawLargeChakra(ctx: [33mCanvasRenderingContext2D[0m, width: number, height: numb...
+  [90m   |[0m [31m[1m^^^^^^[0m
+  [90m87 |[0m   ctx.save();
+  [90m88 |[0m   [36mconst[0m centerX = width * [35m0.58[0m;
+  [90m89 |[0m   [36mconst[0m centerY = height * [35m0.45[0m;
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/home/tirangaDraw.ts [Client Component Browser]
+    ./components/home/TirangaHero.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/home/tirangaDraw.ts [Client Component SSR]
+    ./components/home/TirangaHero.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+
+ GET / 500 in 52ms (next.js: 35ms, application-code: 16ms)
+[browser] Uncaught Error: ./components/home/tirangaDraw.ts:86:1
+'import', and 'export' cannot be used outside of module code
+  84 |     ctx.shadowBlur = 0;
+  85 |     ctx.strokeStyle = trail.core;
+> 86 | export function drawLargeChakra(ctx: CanvasRenderingContext2D, width: number, height: numb...
+     | ^^^^^^
+  87 |   ctx.save();
+  88 |   const centerX = width * 0.58;
+  89 |   const centerY = height * 0.45;
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/home/tirangaDraw.ts [Client Component Browser]
+    ./components/home/TirangaHero.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/home/tirangaDraw.ts [Client Component SSR]
+    ./components/home/TirangaHero.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./components/home/tirangaDraw.ts:86:1)
+    at <unknown> (Error: (./components/home/tirangaDraw.ts:86:1)
+[browser] ./components/home/tirangaDraw.ts:86:1
+'import', and 'export' cannot be used outside of module code
+  84 |     ctx.shadowBlur = 0;
+  85 |     ctx.strokeStyle = trail.core;
+> 86 | export function drawLargeChakra(ctx: CanvasRenderingContext2D, width: number, height: numb...
+     | ^^^^^^
+  87 |   ctx.save();
+  88 |   const centerX = width * 0.58;
+  89 |   const centerY = height * 0.45;
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/home/tirangaDraw.ts [Client Component Browser]
+    ./components/home/TirangaHero.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/home/tirangaDraw.ts [Client Component SSR]
+    ./components/home/TirangaHero.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component] 
+    at handleErrors (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2774:21)
+    at processMessage (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2835:28)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2680:13)
+    at WebSocket.handleMessage (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2325:17) (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)
+⨯ ./components/home/tirangaDraw.ts:9:1
+'import', and 'export' cannot be used outside of module code
+  [90m 7 |[0m
+  [90m 8 |[0m
+[31m[1m>[0m [90m 9 |[0m [36mexport[0m [36mfunction[0m drawStars(ctx: [33mCanvasRenderingContext2D[0m, width: number, height: number, ti...
+  [90m   |[0m [31m[1m^^^^^^[0m
+  [90m10 |[0m   ctx.save();
+  [90m11 |[0m   [36mfor[0m ([36mlet[0m i = [35m0[0m; i < [35m44[0m; i++) {
+  [90m12 |[0m     [36mconst[0m sx = ((i * [35m127.1[0m + [35m311.7[0m) % [35m997[0m) / [35m997[0m;
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/home/tirangaDraw.ts [Client Component Browser]
+    ./components/home/TirangaHero.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/home/tirangaDraw.ts [Client Component SSR]
+    ./components/home/TirangaHero.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+
+ GET / 500 in 938ms (next.js: 687ms, application-code: 251ms)
+[browser] Uncaught Error: ./components/home/tirangaDraw.ts:9:1
+'import', and 'export' cannot be used outside of module code
+   7 |
+   8 |
+>  9 | export function drawStars(ctx: CanvasRenderingContext2D, width: number, height: number, ti...
+     | ^^^^^^
+  10 |   ctx.save();
+  11 |   for (let i = 0; i < 44; i++) {
+  12 |     const sx = ((i * 127.1 + 311.7) % 997) / 997;
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/home/tirangaDraw.ts [Client Component Browser]
+    ./components/home/TirangaHero.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/home/tirangaDraw.ts [Client Component SSR]
+    ./components/home/TirangaHero.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./components/home/tirangaDraw.ts:9:1)
+    at <unknown> (Error: (./components/home/tirangaDraw.ts:9:1)
+[browser] ./components/home/tirangaDraw.ts:9:1
+'import', and 'export' cannot be used outside of module code
+   7 |
+   8 |
+>  9 | export function drawStars(ctx: CanvasRenderingContext2D, width: number, height: number, ti...
+     | ^^^^^^
+  10 |   ctx.save();
+  11 |   for (let i = 0; i < 44; i++) {
+  12 |     const sx = ((i * 127.1 + 311.7) % 997) / 997;
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/home/tirangaDraw.ts [Client Component Browser]
+    ./components/home/TirangaHero.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/home/tirangaDraw.ts [Client Component SSR]
+    ./components/home/TirangaHero.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component] 
+    at handleErrors (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2774:21)
+    at processMessage (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2835:28)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2680:13)
+    at WebSocket.handleMessage (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2325:17) (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)
+[browser] ./components/home/tirangaDraw.ts:9:1
+'import', and 'export' cannot be used outside of module code
+   7 |
+   8 |
+>  9 | export function drawStars(ctx: CanvasRenderingContext2D, width: number, height: number, ti...
+     | ^^^^^^
+  10 |   ctx.save();
+  11 |   for (let i = 0; i < 44; i++) {
+  12 |     const sx = ((i * 127.1 + 311.7) % 997) / 997;
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/home/tirangaDraw.ts [Client Component Browser]
+    ./components/home/TirangaHero.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/home/tirangaDraw.ts [Client Component SSR]
+    ./components/home/TirangaHero.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component] 
+    at handleErrors (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2774:21)
+    at processMessage (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2835:28)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2680:13)
+    at WebSocket.handleMessage (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_client_16lnmlo._.js:2325:17) (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)
+⨯ ./components/home/HomeLanding.tsx:12:1
+Module not found: Can't resolve '@/components/home/TirangaHero'
+  [90m10 |[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m11 |[0m
+[31m[1m>[0m [90m12 |[0m [36mimport[0m [33mTirangaHero[0m [36mfrom[0m [32m"@/components/home/TirangaHero"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m13 |[0m [36mimport[0m { useManishAI } [36mfrom[0m [32m"@/components/ai/ManishAIProvider"[0m;
+  [90m14 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m"@/components/theme/ThemeProvider"[0m;
+  [90m15 |[0m
+
+Import map: aliased to relative './components/home/TirangaHero' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./components/home/HomeLanding.tsx
+    ./app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./components/home/HomeLanding.tsx:12:1
+Module not found: Can't resolve '@/components/home/TirangaHero'
+  [90m10 |[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m11 |[0m
+[31m[1m>[0m [90m12 |[0m [36mimport[0m [33mTirangaHero[0m [36mfrom[0m [32m"@/components/home/TirangaHero"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m13 |[0m [36mimport[0m { useManishAI } [36mfrom[0m [32m"@/components/ai/ManishAIProvider"[0m;
+  [90m14 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m"@/components/theme/ThemeProvider"[0m;
+  [90m15 |[0m
+
+Import map: aliased to relative './components/home/TirangaHero' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./components/home/HomeLanding.tsx
+    ./app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./components/home/HomeLanding.tsx:12:1
+Module not found: Can't resolve '@/components/home/TirangaHero'
+  [90m10 |[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m11 |[0m
+[31m[1m>[0m [90m12 |[0m [36mimport[0m [33mTirangaHero[0m [36mfrom[0m [32m"@/components/home/TirangaHero"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m13 |[0m [36mimport[0m { useManishAI } [36mfrom[0m [32m"@/components/ai/ManishAIProvider"[0m;
+  [90m14 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m"@/components/theme/ThemeProvider"[0m;
+  [90m15 |[0m
+
+Import map: aliased to relative './components/home/TirangaHero' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./components/home/HomeLanding.tsx
+    ./app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./components/home/HomeLanding.tsx:12:1
+Module not found: Can't resolve '@/components/home/TirangaHero'
+  [90m10 |[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m11 |[0m
+[31m[1m>[0m [90m12 |[0m [36mimport[0m [33mTirangaHero[0m [36mfrom[0m [32m"@/components/home/TirangaHero"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m13 |[0m [36mimport[0m { useManishAI } [36mfrom[0m [32m"@/components/ai/ManishAIProvider"[0m;
+  [90m14 |[0m [36mimport[0m { useTheme } [36mfrom[0m [32m"@/components/theme/ThemeProvider"[0m;
+  [90m15 |[0m
+
+Import map: aliased to relative './components/home/TirangaHero' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./components/home/HomeLanding.tsx
+    ./app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./components/home/TirangaHero.tsx:4:1
+Module not found: Can't resolve './tirangaDraw'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useEffect, useRef } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { drawScene } [36mfrom[0m [32m"./tirangaDraw"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mTirangaHero[0m() {
+  [90m7 |[0m   [36mconst[0m canvasRef = useRef<[33mHTMLCanvasElement[0m | [36mnull[0m>([36mnull[0m);
+
+
+
+Import traces:
+  Client Component Browser:
+    ./components/home/TirangaHero.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/home/TirangaHero.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./components/home/TirangaHero.tsx:4:1
+Module not found: Can't resolve './tirangaDraw'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useEffect, useRef } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { drawScene } [36mfrom[0m [32m"./tirangaDraw"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mTirangaHero[0m() {
+  [90m7 |[0m   [36mconst[0m canvasRef = useRef<[33mHTMLCanvasElement[0m | [36mnull[0m>([36mnull[0m);
+
+
+
+Import traces:
+  Client Component Browser:
+    ./components/home/TirangaHero.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/home/TirangaHero.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./components/home/TirangaHero.tsx:4:1
+Module not found: Can't resolve './tirangaDraw'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useEffect, useRef } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { drawScene } [36mfrom[0m [32m"./tirangaDraw"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mTirangaHero[0m() {
+  [90m7 |[0m   [36mconst[0m canvasRef = useRef<[33mHTMLCanvasElement[0m | [36mnull[0m>([36mnull[0m);
+
+
+
+Import traces:
+  Client Component Browser:
+    ./components/home/TirangaHero.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/home/TirangaHero.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./components/home/TirangaHero.tsx:4:1
+Module not found: Can't resolve './tirangaDraw'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useEffect, useRef } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { drawScene } [36mfrom[0m [32m"./tirangaDraw"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mTirangaHero[0m() {
+  [90m7 |[0m   [36mconst[0m canvasRef = useRef<[33mHTMLCanvasElement[0m | [36mnull[0m>([36mnull[0m);
+
+
+
+Import traces:
+  Client Component Browser:
+    ./components/home/TirangaHero.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Client Component Browser]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/home/TirangaHero.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Client Component SSR]
+    ./components/home/HomeLanding.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+✓ Compiled in 442ms
+✓ Compiled in 163ms
+✓ Compiled in 317ms
+ GET / 200 in 3.3s (next.js: 1649ms, application-code: 1689ms)
+ GET /manifest.webmanifest 200 in 621ms (next.js: 594ms, application-code: 27ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopSync (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9449:40)
+    at renderRootSync (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)
+ GET /manifest.webmanifest 200 in 60ms (next.js: 23ms, application-code: 37ms)
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ScrollAndMaybeFocusHandler cacheNode={{rsc:{...}, ...}}>
+      <InnerScrollAndFocusHandlerOld focusAndScrollRef={{scrollRef:null, ...}} cacheNode={{rsc:{...}, ...}}>
+        <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+          <LoadingBoundary name="/" loading={null}>
+            <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>
+              <HTTPAccessFallbackErrorBoundary pathname="/" notFound={{...}} forbidden={undefined} ...>
+                <RedirectBoundary>
+                  <RedirectErrorBoundary router={{...}}>
+                    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+                      <SegmentViewNode type="page" pagePath="page.tsx">
+                        <SegmentTrieNode>
+                        <HomePage>
+                          <MainLayout>
+                            <ManishAIProvider>
+                              <div
++                               className="bg-[#050B18] text-white"
+-                               className="bg-slate-50 text-slate-900"
+                              >
+                                <Navbar>
+                                  <TopBar>
+                                    <div
++                                     className="border-b border-white/10 bg-[#040914] text-white"
+-                                     className="border-b border-slate-200 bg-slate-950 text-white"
+                                    >
+                                  <header
++                                   className="sticky top-0 z-50 transition-all duration-300 border-b border-white/10 ..."
+-                                   className="sticky top-0 z-50 transition-all duration-300 bg-white"
+                                  >
+                                    <div className="mx-auto ma...">
+                                      <div className="flex flex-...">
+                                        <LinkComponent>
+                                        ...
+                                          <nav className="flex items...">
+                                            <LinkComponent href="/" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/"
+                                              >
++                                               Home
+                                            <LinkComponent href="/service" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/service"
+                                              >
++                                               Government Services
+                                            <LinkComponent href="/pdf-tools" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/pdf-tools"
+                                              >
++                                               PDF Tools
+                                            <LinkComponent href="/image-tools" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/image-tools"
+                                              >
++                                               Image Tools
+                                            <LinkComponent href="/ai" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/ai"
+                                              >
++                                               AI Assistant
+                                            <LinkComponent href="/service" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/service"
+                                              >
++                                               CSC Services
+                                            <LinkComponent href="/pricing" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/pricing"
+                                              >
++                                               Pricing
+                                            <LinkComponent href="/contact" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/contact"
+                                              >
++                                               Contact Us
+                                        <div className="hidden ite...">
+                                          <LinkComponent href="/search" aria-label="Search" className="inline-fle...">
+                                            <a
+                                              aria-label="Search"
++                                             className="inline-flex h-11 w-11 items-center justify-center rounded-xl ..."
+-                                             className="inline-flex h-11 w-11 items-center justify-center rounded-xl ..."
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/search"
+                                            >
+                                          <ThemeToggle>
+                                            <button
+                                              type="button"
+                                              onClick={function ThemeProvider.useMemo[value]}
++                                             aria-label="Switch to light theme"
+-                                             aria-label="Switch to dark theme"
++                                             className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 te..."
+-                                             className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 te..."
+                                            >
+                                              <Sun size={18}>
+                                                <svg
+                                                  ref={null}
+                                                  xmlns="http://www.w3.org/2000/svg"
+                                                  width={18}
+                                                  height={18}
+                                                  viewBox="0 0 24 24"
+                                                  fill="none"
+                                                  stroke="currentColor"
+                                                  strokeWidth={2}
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
++                                                 className="lucide lucide-sun"
+-                                                 className="lucide lucide-moon"
+                                                  aria-hidden="true"
+                                                >
++                                                 <circle cx="12" cy="12" r="4">
+-                                                 <path
+-                                                   d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6..."
+-                                                 >
+                                                  ...
+                                              ...
+                                          ...
+                                        ...
+                                    ...
+                                ...
+                      ...
+                    ...
+        ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at beginWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6758:918)
+    at runWithFiberInDEV (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at performUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9555:97)
+    at workLoopConcurrentByScheduler (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at circle (<anonymous>)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4116:220)
+    at Array.map (<anonymous>)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4116:21)
+    at Sun (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4147:411)
+    at ThemeToggle (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_1zrszjt._.js:263:224)
+    at Navbar (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_1zrszjt._.js:716:243)
+    at MainLayout (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_1zrszjt._.js:1925:219)
+    at HomePage (app\page.tsx:6:5)
+  4 | export default function HomePage() {
+  5 |   return (
+> 6 |     <MainLayout>
+    |     ^
+  7 |       <HomeLanding />
+  8 |     </MainLayout>
+  9 |   );
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopSync (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9449:40)
+    at renderRootSync (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ScrollAndMaybeFocusHandler cacheNode={{rsc:<Fragment>, ...}}>
+      <InnerScrollAndFocusHandlerOld focusAndScrollRef={{scrollRef:null, ...}} cacheNode={{rsc:<Fragment>, ...}}>
+        <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+          <LoadingBoundary name="/" loading={null}>
+            <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+              <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+                <RedirectBoundary>
+                  <RedirectErrorBoundary router={{...}}>
+                    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                      <SegmentViewNode type="page" pagePath="page.tsx">
+                        <SegmentTrieNode>
+                        <HomePage>
+                          <MainLayout>
+                            <ManishAIProvider>
+                              <div
++                               className="bg-[#050B18] text-white"
+-                               className="bg-slate-50 text-slate-900"
+                              >
+                                <Navbar>
+                                  <TopBar>
+                                    <div
++                                     className="border-b border-white/10 bg-[#040914] text-white"
+-                                     className="border-b border-slate-200 bg-slate-950 text-white"
+                                    >
+                                  <header
++                                   className="sticky top-0 z-50 transition-all duration-300 border-b border-white/10 ..."
+-                                   className="sticky top-0 z-50 transition-all duration-300 bg-white"
+                                  >
+                                    <div className="mx-auto ma...">
+                                      <div className="flex flex-...">
+                                        <LinkComponent>
+                                        ...
+                                          <nav className="flex items...">
+                                            <LinkComponent href="/" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/"
+                                              >
++                                               Home
+                                            <LinkComponent href="/service" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/service"
+                                              >
++                                               Government Services
+                                            <LinkComponent href="/pdf-tools" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/pdf-tools"
+                                              >
++                                               PDF Tools
+                                            <LinkComponent href="/image-tools" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/image-tools"
+                                              >
++                                               Image Tools
+                                            <LinkComponent href="/ai" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/ai"
+                                              >
++                                               AI Assistant
+                                            <LinkComponent href="/service" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/service"
+                                              >
++                                               CSC Services
+                                            <LinkComponent href="/pricing" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/pricing"
+                                              >
++                                               Pricing
+                                            <LinkComponent href="/contact" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/contact"
+                                              >
++                                               Contact Us
+                                        <div className="hidden ite...">
+                                          <LinkComponent href="/search" aria-label="Search" className="inline-fle...">
+                                            <a
+                                              aria-label="Search"
++                                             className="inline-flex h-11 w-11 items-center justify-center rounded-xl ..."
+-                                             className="inline-flex h-11 w-11 items-center justify-center rounded-xl ..."
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/search"
+                                            >
+                                          <ThemeToggle>
+                                            <button
+                                              type="button"
+                                              onClick={function ThemeProvider.useMemo[value]}
++                                             aria-label="Switch to light theme"
+-                                             aria-label="Switch to dark theme"
++                                             className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 te..."
+-                                             className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 te..."
+                                            >
+                                              <Sun size={18}>
+                                                <svg
+                                                  ref={null}
+                                                  xmlns="http://www.w3.org/2000/svg"
+                                                  width={18}
+                                                  height={18}
+                                                  viewBox="0 0 24 24"
+                                                  fill="none"
+                                                  stroke="currentColor"
+                                                  strokeWidth={2}
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
++                                                 className="lucide lucide-sun"
+-                                                 className="lucide lucide-moon"
+                                                  aria-hidden="true"
+                                                >
++                                                 <circle cx="12" cy="12" r="4">
+-                                                 <path
+-                                                   d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6..."
+-                                                 >
+                                                  ...
+                                              ...
+                                          ...
+                                        ...
+                                    ...
+                                ...
+                      ...
+                    ...
+        ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at beginWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6758:918)
+    at runWithFiberInDEV (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at performUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9555:97)
+    at workLoopConcurrentByScheduler (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at circle (<anonymous>)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4116:220)
+    at Array.map (<anonymous>)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4116:21)
+    at Sun (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4147:411)
+    at ThemeToggle (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_1zrszjt._.js:263:224)
+    at Navbar (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_1zrszjt._.js:716:243)
+    at MainLayout (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_1zrszjt._.js:1925:219)
+    at HomePage (app\page.tsx:6:5)
+  4 | export default function HomePage() {
+  5 |   return (
+> 6 |     <MainLayout>
+    |     ^
+  7 |       <HomeLanding />
+  8 |     </MainLayout>
+  9 |   );
+ GET /manifest.webmanifest 200 in 262ms (next.js: 128ms, application-code: 134ms)
+ GET / 200 in 937ms (next.js: 162ms, application-code: 776ms)
+ GET /manifest.webmanifest 200 in 27ms (next.js: 11ms, application-code: 16ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopSync (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9449:40)
+    at renderRootSync (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ScrollAndMaybeFocusHandler cacheNode={{rsc:{...}, ...}}>
+      <InnerScrollAndFocusHandlerOld focusAndScrollRef={{scrollRef:null, ...}} cacheNode={{rsc:{...}, ...}}>
+        <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+          <LoadingBoundary name="/" loading={null}>
+            <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>
+              <HTTPAccessFallbackErrorBoundary pathname="/" notFound={{...}} forbidden={undefined} ...>
+                <RedirectBoundary>
+                  <RedirectErrorBoundary router={{...}}>
+                    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+                      <SegmentViewNode type="page" pagePath="page.tsx">
+                        <SegmentTrieNode>
+                        <HomePage>
+                          <MainLayout>
+                            <ManishAIProvider>
+                              <div
++                               className="bg-[#050B18] text-white"
+-                               className="bg-slate-50 text-slate-900"
+                              >
+                                <Navbar>
+                                  <TopBar>
+                                    <div
++                                     className="border-b border-white/10 bg-[#040914] text-white"
+-                                     className="border-b border-slate-200 bg-slate-950 text-white"
+                                    >
+                                  <header
++                                   className="sticky top-0 z-50 transition-all duration-300 border-b border-white/10 ..."
+-                                   className="sticky top-0 z-50 transition-all duration-300 bg-white"
+                                  >
+                                    <div className="mx-auto ma...">
+                                      <div className="flex flex-...">
+                                        <LinkComponent>
+                                        ...
+                                          <nav className="flex items...">
+                                            <LinkComponent href="/" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/"
+                                              >
++                                               Home
+                                            <LinkComponent href="/service" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/service"
+                                              >
++                                               Government Services
+                                            <LinkComponent href="/pdf-tools" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/pdf-tools"
+                                              >
++                                               PDF Tools
+                                            <LinkComponent href="/image-tools" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/image-tools"
+                                              >
++                                               Image Tools
+                                            <LinkComponent href="/ai" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/ai"
+                                              >
++                                               AI Assistant
+                                            <LinkComponent href="/service" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/service"
+                                              >
++                                               CSC Services
+                                            <LinkComponent href="/pricing" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/pricing"
+                                              >
++                                               Pricing
+                                            <LinkComponent href="/contact" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/contact"
+                                              >
++                                               Contact Us
+                                        <div className="hidden ite...">
+                                          <LinkComponent href="/search" aria-label="Search" className="inline-fle...">
+                                            <a
+                                              aria-label="Search"
++                                             className="inline-flex h-11 w-11 items-center justify-center rounded-xl ..."
+-                                             className="inline-flex h-11 w-11 items-center justify-center rounded-xl ..."
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/search"
+                                            >
+                                          <ThemeToggle>
+                                            <button
+                                              type="button"
+                                              onClick={function ThemeProvider.useMemo[value]}
++                                             aria-label="Switch to light theme"
+-                                             aria-label="Switch to dark theme"
++                                             className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 te..."
+-                                             className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 te..."
+                                            >
+                                              <Sun size={18}>
+                                                <svg
+                                                  ref={null}
+                                                  xmlns="http://www.w3.org/2000/svg"
+                                                  width={18}
+                                                  height={18}
+                                                  viewBox="0 0 24 24"
+                                                  fill="none"
+                                                  stroke="currentColor"
+                                                  strokeWidth={2}
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
++                                                 className="lucide lucide-sun"
+-                                                 className="lucide lucide-moon"
+                                                  aria-hidden="true"
+                                                >
++                                                 <circle cx="12" cy="12" r="4">
+-                                                 <path
+-                                                   d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6..."
+-                                                 >
+                                                  ...
+                                              ...
+                                          ...
+                                        ...
+                                    ...
+                                ...
+                      ...
+                    ...
+        ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at beginWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6758:918)
+    at runWithFiberInDEV (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at performUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9555:97)
+    at workLoopConcurrentByScheduler (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at circle (<anonymous>)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4116:220)
+    at Array.map (<anonymous>)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4116:21)
+    at Sun (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4147:411)
+    at ThemeToggle (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_1zrszjt._.js:263:224)
+    at Navbar (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_1zrszjt._.js:716:243)
+    at MainLayout (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_1zrszjt._.js:1925:219)
+    at HomePage (app\page.tsx:6:5)
+  4 | export default function HomePage() {
+  5 |   return (
+> 6 |     <MainLayout>
+    |     ^
+  7 |       <HomeLanding />
+  8 |     </MainLayout>
+  9 |   );
+ GET /manifest.webmanifest 200 in 98ms (next.js: 22ms, application-code: 76ms)
+✓ Compiled in 3.6s
+ GET / 200 in 4.3s (next.js: 3.9s, application-code: 389ms)
+ GET /manifest.webmanifest 200 in 1004ms (next.js: 910ms, application-code: 94ms)
+✓ Compiled in 1261ms
+ GET / 200 in 433ms (next.js: 312ms, application-code: 121ms)
+ GET /manifest.webmanifest 200 in 160ms (next.js: 104ms, application-code: 56ms)
+✓ Compiled in 315ms
+ GET / 200 in 296ms (next.js: 194ms, application-code: 102ms)
+ GET /manifest.webmanifest 200 in 122ms (next.js: 99ms, application-code: 23ms)
+✓ Compiled in 2.4s
+ GET / 200 in 835ms (next.js: 590ms, application-code: 246ms)
+ GET /manifest.webmanifest 200 in 254ms (next.js: 183ms, application-code: 71ms)
+ GET / 200 in 1000ms (next.js: 179ms, application-code: 820ms)
+ GET /manifest.webmanifest 200 in 26ms (next.js: 18ms, application-code: 8ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopSync (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9449:40)
+    at renderRootSync (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ScrollAndMaybeFocusHandler cacheNode={{rsc:{...}, ...}}>
+      <InnerScrollAndFocusHandlerOld focusAndScrollRef={{scrollRef:null, ...}} cacheNode={{rsc:{...}, ...}}>
+        <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+          <LoadingBoundary name="/" loading={null}>
+            <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>
+              <HTTPAccessFallbackErrorBoundary pathname="/" notFound={{...}} forbidden={undefined} ...>
+                <RedirectBoundary>
+                  <RedirectErrorBoundary router={{...}}>
+                    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+                      <SegmentViewNode type="page" pagePath="page.tsx">
+                        <SegmentTrieNode>
+                        <HomePage>
+                          <MainLayout>
+                            <ManishAIProvider>
+                              <div
++                               className="bg-[#050B18] text-white"
+-                               className="bg-slate-50 text-slate-900"
+                              >
+                                <Navbar>
+                                  <TopBar>
+                                    <div
++                                     className="border-b border-white/10 bg-[#040914] text-white"
+-                                     className="border-b border-slate-200 bg-slate-950 text-white"
+                                    >
+                                  <header
++                                   className="sticky top-0 z-50 transition-all duration-300 border-b border-white/10 ..."
+-                                   className="sticky top-0 z-50 transition-all duration-300 bg-white"
+                                  >
+                                    <div className="mx-auto ma...">
+                                      <div className="flex flex-...">
+                                        <LinkComponent>
+                                        ...
+                                          <nav className="flex items...">
+                                            <LinkComponent href="/" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/"
+                                              >
++                                               Home
+                                            <LinkComponent href="/service" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/service"
+                                              >
++                                               Government Services
+                                            <LinkComponent href="/pdf-tools" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/pdf-tools"
+                                              >
++                                               PDF Tools
+                                            <LinkComponent href="/image-tools" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/image-tools"
+                                              >
++                                               Image Tools
+                                            <LinkComponent href="/ai" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/ai"
+                                              >
++                                               AI Assistant
+                                            <LinkComponent href="/service" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/service"
+                                              >
++                                               CSC Services
+                                            <LinkComponent href="/pricing" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/pricing"
+                                              >
++                                               Pricing
+                                            <LinkComponent href="/contact" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/contact"
+                                              >
++                                               Contact Us
+                                        <div className="hidden ite...">
+                                          <LinkComponent href="/search" aria-label="Search" className="inline-fle...">
+                                            <a
+                                              aria-label="Search"
++                                             className="inline-flex h-11 w-11 items-center justify-center rounded-xl ..."
+-                                             className="inline-flex h-11 w-11 items-center justify-center rounded-xl ..."
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/search"
+                                            >
+                                          <ThemeToggle>
+                                            <button
+                                              type="button"
+                                              onClick={function ThemeProvider.useMemo[value]}
++                                             aria-label="Switch to light theme"
+-                                             aria-label="Switch to dark theme"
++                                             className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 te..."
+-                                             className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 te..."
+                                            >
+                                              <Sun size={18}>
+                                                <svg
+                                                  ref={null}
+                                                  xmlns="http://www.w3.org/2000/svg"
+                                                  width={18}
+                                                  height={18}
+                                                  viewBox="0 0 24 24"
+                                                  fill="none"
+                                                  stroke="currentColor"
+                                                  strokeWidth={2}
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
++                                                 className="lucide lucide-sun"
+-                                                 className="lucide lucide-moon"
+                                                  aria-hidden="true"
+                                                >
++                                                 <circle cx="12" cy="12" r="4">
+-                                                 <path
+-                                                   d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6..."
+-                                                 >
+                                                  ...
+                                              ...
+                                          ...
+                                        ...
+                                    ...
+                                ...
+                      ...
+                    ...
+        ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at beginWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6758:918)
+    at runWithFiberInDEV (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at performUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9555:97)
+    at workLoopConcurrentByScheduler (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at circle (<anonymous>)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4116:220)
+    at Array.map (<anonymous>)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4116:21)
+    at Sun (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4147:411)
+    at ThemeToggle (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_1zrszjt._.js:263:224)
+    at Navbar (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_1zrszjt._.js:716:243)
+    at MainLayout (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_1zrszjt._.js:1925:219)
+    at HomePage (app\page.tsx:6:5)
+  4 | export default function HomePage() {
+  5 |   return (
+> 6 |     <MainLayout>
+    |     ^
+  7 |       <HomeLanding />
+  8 |     </MainLayout>
+  9 |   );
+ GET /manifest.webmanifest 200 in 22ms (next.js: 8ms, application-code: 14ms)
+ GET / 200 in 415ms (next.js: 145ms, application-code: 270ms)
+ GET /manifest.webmanifest 200 in 16ms (next.js: 5ms, application-code: 11ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6945:102)
+    at runWithFiberInDEV (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopSync (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9449:40)
+    at renderRootSync (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ScrollAndMaybeFocusHandler cacheNode={{rsc:{...}, ...}}>
+      <InnerScrollAndFocusHandlerOld focusAndScrollRef={{scrollRef:null, ...}} cacheNode={{rsc:{...}, ...}}>
+        <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+          <LoadingBoundary name="/" loading={null}>
+            <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>
+              <HTTPAccessFallbackErrorBoundary pathname="/" notFound={{...}} forbidden={undefined} ...>
+                <RedirectBoundary>
+                  <RedirectErrorBoundary router={{...}}>
+                    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+                      <SegmentViewNode type="page" pagePath="page.tsx">
+                        <SegmentTrieNode>
+                        <HomePage>
+                          <MainLayout>
+                            <ManishAIProvider>
+                              <div
++                               className="bg-[#050B18] text-white"
+-                               className="bg-slate-50 text-slate-900"
+                              >
+                                <Navbar>
+                                  <TopBar>
+                                    <div
++                                     className="border-b border-white/10 bg-[#040914] text-white"
+-                                     className="border-b border-slate-200 bg-slate-950 text-white"
+                                    >
+                                  <header
++                                   className="sticky top-0 z-50 transition-all duration-300 border-b border-white/10 ..."
+-                                   className="sticky top-0 z-50 transition-all duration-300 bg-white"
+                                  >
+                                    <div className="mx-auto ma...">
+                                      <div className="flex flex-...">
+                                        <LinkComponent>
+                                        ...
+                                          <nav className="flex items...">
+                                            <LinkComponent href="/" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/"
+                                              >
++                                               Home
+                                            <LinkComponent href="/service" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/service"
+                                              >
++                                               Government Services
+                                            <LinkComponent href="/pdf-tools" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/pdf-tools"
+                                              >
++                                               PDF Tools
+                                            <LinkComponent href="/image-tools" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/image-tools"
+                                              >
++                                               Image Tools
+                                            <LinkComponent href="/ai" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/ai"
+                                              >
++                                               AI Assistant
+                                            <LinkComponent href="/service" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/service"
+                                              >
++                                               CSC Services
+                                            <LinkComponent href="/pricing" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/pricing"
+                                              >
++                                               Pricing
+                                            <LinkComponent href="/contact" className="relative w...">
+                                              <a
++                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+-                                               className="relative whitespace-nowrap text-sm font-semibold transition..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/contact"
+                                              >
++                                               Contact Us
+                                        <div className="hidden ite...">
+                                          <LinkComponent href="/search" aria-label="Search" className="inline-fle...">
+                                            <a
+                                              aria-label="Search"
++                                             className="inline-flex h-11 w-11 items-center justify-center rounded-xl ..."
+-                                             className="inline-flex h-11 w-11 items-center justify-center rounded-xl ..."
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/search"
+                                            >
+                                          <ThemeToggle>
+                                            <button
+                                              type="button"
+                                              onClick={function ThemeProvider.useMemo[value]}
++                                             aria-label="Switch to light theme"
+-                                             aria-label="Switch to dark theme"
++                                             className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 te..."
+-                                             className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 te..."
+                                            >
+                                              <Sun size={18}>
+                                                <svg
+                                                  ref={null}
+                                                  xmlns="http://www.w3.org/2000/svg"
+                                                  width={18}
+                                                  height={18}
+                                                  viewBox="0 0 24 24"
+                                                  fill="none"
+                                                  stroke="currentColor"
+                                                  strokeWidth={2}
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
++                                                 className="lucide lucide-sun"
+-                                                 className="lucide lucide-moon"
+                                                  aria-hidden="true"
+                                                >
++                                                 <circle cx="12" cy="12" r="4">
+-                                                 <path
+-                                                   d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6..."
+-                                                 >
+                                                  ...
+                                              ...
+                                          ...
+                                        ...
+                                    ...
+                                ...
+                      ...
+                    ...
+        ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at beginWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6758:918)
+    at runWithFiberInDEV (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at performUnitOfWork (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9555:97)
+    at workLoopConcurrentByScheduler (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at circle (<anonymous>)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4116:220)
+    at Array.map (<anonymous>)
+    at <unknown> (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4116:21)
+    at Sun (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/node_modules_065jz7m._.js:4147:411)
+    at ThemeToggle (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_1zrszjt._.js:263:224)
+    at Navbar (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_1zrszjt._.js:716:243)
+    at MainLayout (file://C:/Users/Sumit kumar/Downloads/aaj/digital-desk-main (2)/digital-desk-main/.next/dev/static/chunks/_1zrszjt._.js:1925:219)
+    at HomePage (app\page.tsx:6:5)
+  4 | export default function HomePage() {
+  5 |   return (
+> 6 |     <MainLayout>
+    |     ^
+  7 |       <HomeLanding />
+  8 |     </MainLayout>
+  9 |   );
+ GET /manifest.webmanifest 200 in 49ms (next.js: 21ms, application-code: 27ms)

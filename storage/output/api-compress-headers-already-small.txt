@@ -1,0 +1,27 @@
+HTTP/1.1 200 OK
+X-DNS-Prefetch-Control: on
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=(), browsing-topics=()
+Cross-Origin-Opener-Policy: same-origin
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+cache-control: no-store
+content-disposition: attachment; filename="api-compress-test-compressed.pdf"
+content-length: 71231
+content-type: application/pdf
+x-compressed-size: 71231
+x-compression-dpi: normal
+x-compression-preset: medium
+x-compression-stage: original
+x-jpeg-quality: normal
+x-original-size: 71231
+x-processing-time: 464
+x-reduction-percent: 0
+x-saved-bytes: 0
+x-target-reached: false
+x-target-size: 0
+Date: Sat, 08 Aug 2026 16:17:29 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+

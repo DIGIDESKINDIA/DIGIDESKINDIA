@@ -1,0 +1,1 @@
+export { default } from "../../(tools)/pdf/page-numbers/page";

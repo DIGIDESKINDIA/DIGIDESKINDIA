@@ -1,0 +1,29 @@
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+X-DNS-Prefetch-Control: on
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=(), browsing-topics=()
+Cross-Origin-Opener-Policy: same-origin
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+cache-control: no-store
+content-disposition: attachment; filename="3e0ba4e7-c78e-4355-aaf1-161741710290-Certificate Examination Form-compressed-increased-compressed.pdf"
+content-length: 71231
+content-type: application/pdf
+x-compressed-size: 71231
+x-compression-dpi: 58
+x-compression-preset: medium
+x-compression-stage: jpeg-58dpi-q42
+x-jpeg-quality: 42
+x-original-size: 5242880
+x-processing-time: 1535
+x-reduction-percent: 99
+x-saved-bytes: 5171649
+x-target-reached: true
+x-target-size: 102400
+Date: Sat, 08 Aug 2026 16:17:06 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
