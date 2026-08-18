@@ -10,7 +10,6 @@ import { imageToPdf } from "@/lib/pdf/image-to-pdf";
 export const runtime = "nodejs";
 
 const MAX_FILES = 30;
-const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
 const SUPPORTED_TYPES = [
   "image/jpeg",
@@ -83,15 +82,6 @@ export async function POST(
       ) {
         throw new ValidationError(
           `"${image.name}" is empty.`
-        );
-      }
-
-      if (
-        image.size >
-        MAX_FILE_SIZE
-      ) {
-        throw new ValidationError(
-          `"${image.name}" exceeds 50 MB.`
         );
       }
 

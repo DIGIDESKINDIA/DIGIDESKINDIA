@@ -187,7 +187,7 @@ async function encodeToFormat(
 function getImagePipeline(input: ImageUploadFile) {
   validateImageFile(input);
 
-  return sharp(Buffer.from(input.buffer));
+  return sharp(input.buffer);
 }
 
 export async function compressImageFile(
@@ -515,6 +515,177 @@ export async function imageFilesToPdf(
       objectsPerTick: 100,
     })
   );
+}
+
+type BackgroundRemovalResult = {
+  buffer: Buffer;
+  fileName: string;
+  contentType: string;
+  originalSize: number;
+  outputSize: number;
+};
+
+type BackgroundRemovalOptions = {
+  // Color-distance tolerance (0-100). Higher removes more aggressive edges
+  // but risks eating softer foreground edges.
+  tolerance?: number;
+};
+
+const MAX_ANALYSIS_DIMENSION = 800;
+
+function colorDistanceSq(
+  r1: number, g1: number, b1: number,
+  r2: number, g2: number, b2: number
+): number {
+  const dr = r1 - r2;
+  const dg = g1 - g2;
+  const db = b1 - b2;
+  return dr * dr + dg * dg + db * db;
+}
+
+/**
+ * Remove a (relatively uniform) background using a border-seeded region
+ * growing algorithm over adjacency, so smooth gradients are handled better
+ * than a naive single-threshold key. Runs entirely on the server with
+ * `sharp` and requires no third-party API.
+ */
+export async function removeImageBackground(
+  input: ImageUploadFile,
+  options: BackgroundRemovalOptions = {}
+): Promise<BackgroundRemovalResult> {
+  validateImageFile(input);
+
+  const buffer = Buffer.from(input.buffer);
+  const fullPipeline = sharp(buffer);
+  const metadata = await fullPipeline.metadata();
+
+  if (!metadata.width || !metadata.height) {
+    throw new ValidationError("Unable to read image dimensions.");
+  }
+
+  // ---------- 1. Downscale for cheap analysis -----------------------------
+  const analysisScale = Math.min(
+    1,
+    MAX_ANALYSIS_DIMENSION / Math.max(metadata.width, metadata.height)
+  );
+  const analysisWidth = Math.max(1, Math.round(metadata.width * analysisScale));
+  const analysisHeight = Math.max(1, Math.round(metadata.height * analysisScale));
+
+  const analysis = await sharp(buffer)
+    .resize(analysisWidth, analysisHeight, { fit: "fill" })
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  const px = analysis.data;
+  const { width: aw, height: ah, channels: ac } = analysis.info;
+  const step = ac;
+
+  // ---------- 2. Border-seeded flood fill ----------------------------------
+  const tolerance = clamp(options.tolerance ?? 40, 5, 200);
+  // Reference background color = average colour along the outer frame.
+  let bgR = 0, bgG = 0, bgB = 0, seedCount = 0;
+
+  const sampleBorder = (x: number, y: number) => {
+    const i = (y * aw + x) * step;
+    bgR += px[i];
+    bgG += px[i + 1];
+    bgB += px[i + 2];
+    seedCount++;
+  };
+
+  for (let x = 0; x < aw; x++) {
+    sampleBorder(x, 0);
+    sampleBorder(x, ah - 1);
+  }
+  for (let y = 1; y < ah - 1; y++) {
+    sampleBorder(0, y);
+    sampleBorder(aw - 1, y);
+  }
+
+  if (seedCount === 0) {
+    throw new ValidationError("Unable to sample the image background.");
+  }
+
+  bgR = Math.round(bgR / seedCount);
+  bgG = Math.round(bgG / seedCount);
+  bgB = Math.round(bgB / seedCount);
+
+  const maxDistanceSq = tolerance * tolerance * 3;
+  const isBackground = new Uint8Array(aw * ah);
+
+  const queue = new Int32Array(aw * ah);
+  let head = 0;
+  let tail = 0;
+
+  const push = (index: number) => { queue[tail++] = index; };
+
+  for (let x = 0; x < aw; x++) {
+    push(x);
+    push((ah - 1) * aw + x);
+  }
+  for (let y = 1; y < ah - 1; y++) {
+    push(y * aw);
+    push(y * aw + (aw - 1));
+  }
+
+  while (head < tail) {
+    const index = queue[head++];
+    if (isBackground[index]) continue;
+
+    const x = index % aw;
+    const y = (index / aw) | 0;
+    const p = index * step;
+    const r = px[p];
+    const g = px[p + 1];
+    const b = px[p + 2];
+
+    // Keep only connected pixels close to the reference background colour.
+    if (colorDistanceSq(r, g, b, bgR, bgG, bgB) > maxDistanceSq) {
+      continue;
+    }
+
+    isBackground[index] = 1;
+
+    if (x > 0) push(index - 1);
+    if (x < aw - 1) push(index + 1);
+    if (y > 0) push(index - aw);
+    if (y < ah - 1) push(index + aw);
+  }
+
+  // ---------- 3. Apply per-pixel alpha on the full-resolution image --------
+  const fullRes = await sharp(buffer)
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  const full = fullRes.data;
+  const { width: fw, height: fh, channels: fc } = fullRes.info;
+  const stepFull = fc;
+
+  for (let y = 0; y < fh; y++) {
+    const sy = Math.min(ah - 1, Math.round((y / fh) * (ah - 1)));
+    for (let x = 0; x < fw; x++) {
+      const sx = Math.min(aw - 1, Math.round((x / fw) * (aw - 1)));
+      if (isBackground[sy * aw + sx]) {
+        full[(y * fw + x) * stepFull + 3] = 0;
+      }
+    }
+  }
+
+  const output = await sharp(Buffer.from(full), {
+    raw: { width: fw, height: fh, channels: stepFull },
+  })
+    .png({ compressionLevel: 9, palette: true })
+    .toBuffer();
+
+  return {
+    buffer: output,
+    fileName: `${getBaseName(input.name)}-nobg.png`,
+    contentType: "image/png",
+    originalSize: input.size,
+    outputSize: output.length,
+  };
 }
 
 type PassportTargetConfig = {

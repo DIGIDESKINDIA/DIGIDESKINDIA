@@ -21,7 +21,7 @@ export default function TopBar() {
         {/* Left Section */}
         <div className="flex items-center gap-2">
           <ShieldCheck size={16} className="text-orange-500" />
-          <span>INDIA'S TRUSTED DIGITAL SERVICES PLATFORM</span>
+          <span>INDIA&apos;S TRUSTED DIGITAL SERVICES PLATFORM</span>
           <span className="text-gray-400 font-bold">•</span>
           <span>BUILT FOR EVERY INDIAN</span>
         </div>

@@ -1,6 +1,6 @@
 // File: lib/pdf/constants.ts
 
-export const MAX_UPLOAD_SIZE = 100 * 1024 * 1024;
+export const MAX_UPLOAD_SIZE = Number.MAX_SAFE_INTEGER;
 
 export const MAX_FILES = 20;
 

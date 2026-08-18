@@ -18,8 +18,6 @@ export const dynamic = "force-dynamic";
 
 const execFileAsync = promisify(execFile);
 
-const MAX_FILE_SIZE = 100 * 1024 * 1024;
-
 type CompressionAttempt = {
   path: string;
   size: number;
@@ -748,21 +746,6 @@ export async function POST(
         },
         {
           status: 400,
-        }
-      );
-    }
-
-    if (
-      uploaded.size >
-      MAX_FILE_SIZE
-    ) {
-      return NextResponse.json(
-        {
-          error:
-            "Maximum file size is 100 MB.",
-        },
-        {
-          status: 413,
         }
       );
     }

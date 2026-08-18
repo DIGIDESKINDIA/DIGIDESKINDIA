@@ -89,6 +89,10 @@ export default function ThemeProvider({
       nextTheme = "dark";
     }
 
+    // Intentionally apply the persisted/OS theme only after hydration to
+    // keep the server and first client render identical (avoids hydration
+    // mismatches). This is the React-blessed escape hatch for theme providers.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(nextTheme);
     applyTheme(nextTheme);
   }, []);

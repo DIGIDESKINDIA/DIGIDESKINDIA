@@ -42,8 +42,6 @@ type CompressionResult = {
   fileName: string;
 };
 
-const MAX_FILE_SIZE = 100 * 1024 * 1024;
-
 const compressionOptions: {
   id: CompressionMode;
   title: string;
@@ -186,10 +184,6 @@ export default function CompressPDFPage() {
 
     if (selectedFile.size <= 0) {
       return "This PDF file is empty.";
-    }
-
-    if (selectedFile.size > MAX_FILE_SIZE) {
-      return "Maximum supported PDF size is 100 MB.";
     }
 
     return "";
@@ -565,7 +559,7 @@ export default function CompressPDFPage() {
 
               <span className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-4 py-3">
                 <Gauge size={17} />
-                Up to 100 MB
+                Large-file processing
               </span>
             </div>
           </div>
@@ -612,8 +606,7 @@ export default function CompressPDFPage() {
                 </button>
 
                 <p className="mt-4 text-xs text-slate-400">
-                  PDF only • Maximum file size
-                  100 MB
+                  PDF only • Large valid files are supported
                 </p>
               </div>
             ) : (

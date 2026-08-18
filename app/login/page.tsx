@@ -11,26 +11,37 @@ export default function LoginPage() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const login = () => {
-    const adminUser =
-      process.env.NEXT_PUBLIC_ADMIN_USERNAME;
+  const login = async () => {
+    if (!username.trim() || !password) {
+      setError("Please enter your username and password.");
+      return;
+    }
 
-    const adminPass =
-      process.env.NEXT_PUBLIC_ADMIN_PASSWORD;
+    setLoading(true);
+    setError("");
 
-    if (
-      username === adminUser &&
-      password === adminPass
-    ) {
-      localStorage.setItem(
-        "digitaldesk_admin",
-        "true"
-      );
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
 
-      router.push("/app/admin");
-    } else {
-      alert("Invalid Login");
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        setError(data?.message ?? "Invalid login.");
+        return;
+      }
+
+      router.push("/admin");
+    } catch {
+      setError("Unable to connect. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -63,10 +74,17 @@ export default function LoginPage() {
 
         <button
           onClick={login}
-          className="w-full bg-blue-600 text-white py-3 rounded-xl"
+          disabled={loading}
+          className="w-full bg-blue-600 text-white py-3 rounded-xl transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          Login
+          {loading ? "Signing in…" : "Login"}
         </button>
+
+        {error && (
+          <p className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-center text-sm font-semibold text-red-700">
+            {error}
+          </p>
+        )}
       </div>
     </main>
   );

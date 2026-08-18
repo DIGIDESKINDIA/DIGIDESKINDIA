@@ -1,10 +1,8 @@
 import { ValidationError } from "./errors";
 import type { PdfFile } from "./types";
 
-export const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100 MB
 export const MAX_FILES = 30;
 export const MIN_FILES = 1;
-export const MAX_TOTAL_SIZE = 500 * 1024 * 1024; // 500 MB
 
 const PDF_SIGNATURE = "%PDF";
 
@@ -26,12 +24,6 @@ export function validatePdf(file: PdfFile): void {
   if (file.buffer !== undefined && !file.buffer.length) {
     throw new ValidationError(
       `"${file.name}" has no data.`
-    );
-  }
-
-  if (file.size > MAX_FILE_SIZE) {
-    throw new ValidationError(
-      `"${file.name}" exceeds the maximum file size of 100 MB.`
     );
   }
 
@@ -71,12 +63,8 @@ export function validateMultiple(
 
   const uniqueFiles = new Set<string>();
 
-  let totalSize = 0;
-
   for (const file of files) {
     validatePdf(file);
-
-    totalSize += file.size;
 
     const key = `${file.name}-${file.size}`;
 
@@ -87,12 +75,6 @@ export function validateMultiple(
     }
 
     uniqueFiles.add(key);
-  }
-
-  if (totalSize > MAX_TOTAL_SIZE) {
-    throw new ValidationError(
-      "Total upload size exceeds 500 MB."
-    );
   }
 }
 

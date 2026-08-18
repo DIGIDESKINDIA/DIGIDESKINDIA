@@ -15,7 +15,7 @@ export async function readSingleImageFile(
     throw new ValidationError("Image file is required.");
   }
 
-  const buffer = new Uint8Array(await upload.arrayBuffer());
+  const buffer = Buffer.from(await upload.arrayBuffer());
 
   const file: ImageUploadFile = {
     name: upload.name,
@@ -50,7 +50,7 @@ export async function readMultipleImageFiles(
       name: upload.name,
       type: upload.type,
       size: upload.size,
-      buffer: new Uint8Array(await upload.arrayBuffer()),
+      buffer: Buffer.from(await upload.arrayBuffer()),
     };
 
     validateImageFile(file);

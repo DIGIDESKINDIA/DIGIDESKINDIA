@@ -1,0 +1,113 @@
+▲ Next.js 16.2.10 (Turbopack)
+- Environments: .env.local
+- Experiments (use with caution):
+  · optimizePackageImports
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 79s
+  Running TypeScript ...
+  Finished TypeScript in 50s ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/86) ...
+  Generating static pages using 11 workers (21/86) 
+  Generating static pages using 11 workers (42/86) 
+  Generating static pages using 11 workers (64/86) 
+✓ Generating static pages using 11 workers (86/86) in 8.4s
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /ai
+├ ○ /ai/resume
+├ ƒ /api/ai
+├ ƒ /api/auth/login
+├ ƒ /api/auth/logout
+├ ƒ /api/auth/me
+├ ƒ /api/image/compress
+├ ƒ /api/image/convert
+├ ƒ /api/image/crop
+├ ƒ /api/image/image-to-pdf
+├ ƒ /api/image/passport-photo
+├ ƒ /api/image/remove-background
+├ ƒ /api/image/resize
+├ ƒ /api/image/rotate
+├ ƒ /api/image/watermark
+├ ƒ /api/leads
+├ ƒ /api/pdf/compress
+├ ƒ /api/pdf/convert
+├ ƒ /api/pdf/decrypt
+├ ƒ /api/pdf/delete-pages
+├ ƒ /api/pdf/encrypt
+├ ƒ /api/pdf/extract-pages
+├ ƒ /api/pdf/image-to-pdf
+├ ƒ /api/pdf/increase-size
+├ ƒ /api/pdf/info
+├ ƒ /api/pdf/merge
+├ ƒ /api/pdf/metadata
+├ ƒ /api/pdf/ocr
+├ ƒ /api/pdf/organize
+├ ƒ /api/pdf/page-numbers
+├ ƒ /api/pdf/parser
+├ ƒ /api/pdf/pdf-to-image
+├ ƒ /api/pdf/preview
+├ ƒ /api/pdf/protect
+├ ƒ /api/pdf/rotate
+├ ƒ /api/pdf/split
+├ ƒ /api/pdf/thumbnail
+├ ƒ /api/pdf/unlock
+├ ƒ /api/pdf/watermark
+├ ○ /contact
+├ ○ /help-center
+├ ○ /image-tools
+├ ○ /image-tools/compress-image
+├ ○ /image-tools/convert-image
+├ ○ /image-tools/crop-image
+├ ○ /image-tools/image-to-pdf
+├ ○ /image-tools/passport-photo
+├ ○ /image-tools/remove-background
+├ ○ /image-tools/resize-image
+├ ○ /image-tools/rotate-image
+├ ○ /image-tools/watermark-image
+├ ○ /login
+├ ○ /manifest.webmanifest
+├ ○ /pdf-tools
+├ ○ /pdf-tools/compress
+├ ○ /pdf-tools/compress-pdf
+├ ○ /pdf-tools/delete-pages
+├ ○ /pdf-tools/extract-pages
+├ ○ /pdf-tools/increase-pdf-size
+├ ○ /pdf-tools/jpg-to-pdf
+├ ○ /pdf-tools/merge
+├ ○ /pdf-tools/merge-pdf
+├ ○ /pdf-tools/organize-pdf
+├ ○ /pdf-tools/page-numbers
+├ ○ /pdf-tools/pdf-to-jpg
+├ ○ /pdf-tools/protect-pdf
+├ ○ /pdf-tools/rotate
+├ ○ /pdf-tools/split
+├ ○ /pdf-tools/split-pdf
+├ ○ /pdf-tools/unlock-pdf
+├ ○ /pdf-tools/watermark
+├ ○ /pdf/compress
+├ ○ /pdf/delete-pages
+├ ○ /pdf/extract-pages
+├ ○ /pdf/merge
+├ ○ /pdf/page-numbers
+├ ○ /pdf/rotate
+├ ○ /pdf/split
+├ ○ /pdf/watermark
+├ ○ /pricing
+├ ○ /privacy-policy
+├ ○ /refund-policy
+├ ƒ /search
+├ ○ /service
+├ ƒ /service/[slug]
+└ ○ /terms
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

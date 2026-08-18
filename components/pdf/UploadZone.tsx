@@ -36,7 +36,7 @@ export default function UploadZone({
 
   maxFiles = 30,
 
-  maxFileSize = 100 * 1024 * 1024,
+  maxFileSize: _maxFileSize,
 
   value = [],
 
@@ -64,12 +64,9 @@ export default function UploadZone({
     }
 
     for (const file of files) {
-      if (
-        file.size >
-        maxFileSize
-      ) {
+      if (file.size <= 0) {
         toast.error(
-          `${file.name} exceeds ${(maxFileSize / 1024 / 1024).toFixed(0)} MB`
+          `${file.name} is empty.`
         );
 
         return;
@@ -164,7 +161,7 @@ export default function UploadZone({
 
           <p className="mt-2 text-sm text-slate-400">
 
-            Max {maxFiles} files
+            Up to {maxFiles} files
 
           </p>
 

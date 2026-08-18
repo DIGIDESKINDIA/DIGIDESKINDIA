@@ -11,8 +11,6 @@ import {
   FileText,
 } from "lucide-react";
 
-const MAX_SIZE = 100 * 1024 * 1024;
-
 export default function RotatePDFPage() {
   const inputRef =
     useRef<HTMLInputElement>(null);
@@ -37,16 +35,6 @@ export default function RotatePDFPage() {
     ) {
       toast.error(
         "Please select a PDF file."
-      );
-      return;
-    }
-
-    if (
-      selected.size >
-      MAX_SIZE
-    ) {
-      toast.error(
-        "Maximum PDF size is 100 MB."
       );
       return;
     }

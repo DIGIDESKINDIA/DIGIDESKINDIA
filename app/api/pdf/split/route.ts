@@ -10,7 +10,6 @@ import { splitPDF } from "@/lib/pdf";
 export const runtime = "nodejs";
 
 const UPLOAD_DIR = "storage/uploads";
-const MAX_FILE_SIZE = 100 * 1024 * 1024;
 
 export async function POST(
     request: NextRequest
@@ -69,19 +68,6 @@ export async function POST(
                 },
                 {
                     status: 400,
-                }
-            );
-        }
-
-        if (file.size > MAX_FILE_SIZE) {
-            return NextResponse.json(
-                {
-                    success: false,
-                    message:
-                        "Maximum PDF size is 100 MB.",
-                },
-                {
-                    status: 413,
                 }
             );
         }

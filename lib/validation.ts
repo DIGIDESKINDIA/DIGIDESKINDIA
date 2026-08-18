@@ -1,6 +1,5 @@
 import { PDFDocument } from "pdf-lib";
 
-export const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB
 export const MAX_FILES = 20;
 
 export async function validatePdfFile(file: File) {
@@ -10,12 +9,6 @@ export async function validatePdfFile(file: File) {
 
   if (file.size === 0) {
     throw new Error(`${file.name} is empty.`);
-  }
-
-  if (file.size > MAX_FILE_SIZE) {
-    throw new Error(
-      `${file.name} exceeds the maximum file size of 100MB.`
-    );
   }
 
   try {

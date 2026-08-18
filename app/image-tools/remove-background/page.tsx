@@ -2,19 +2,65 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { saveAs } from "file-saver";
+import toast from "react-hot-toast";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export default function RemoveBackgroundPage() {
   const [preview, setPreview] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+  const [processing, setProcessing] = useState(false);
+  const [error, setError] = useState("");
 
   function handleImage(
     e: React.ChangeEvent<HTMLInputElement>
   ) {
-    const file = e.target.files?.[0];
+    const selected = e.target.files?.[0];
 
-    if (!file) return;
+    if (!selected) return;
 
-    setPreview(URL.createObjectURL(file));
+    setFile(selected);
+    setError("");
+    setPreview(URL.createObjectURL(selected));
+  }
+
+  async function removeBackground() {
+    if (!file) {
+      toast.error("Please select an image.");
+      return;
+    }
+
+    setProcessing(true);
+    setError("");
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch("/api/image/remove-background", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.message ?? "Unable to remove background.");
+      }
+
+      const blob = await response.blob();
+      const name = file.name.replace(/\.[^.]+$/, "")
+        ? `${file.name.replace(/\.[^.]+$/, "")}-nobg.png`
+        : "image-nobg.png";
+
+      saveAs(blob, name);
+      toast.success("Background removed successfully.");
+    } catch (e) {
+      const message = e instanceof Error ? e.message : "Background removal failed.";
+      setError(message);
+      toast.error(message);
+    } finally {
+      setProcessing(false);
+    }
   }
 
   return (
@@ -87,11 +133,8 @@ export default function RemoveBackgroundPage() {
                 </div>
 
                 <button
-                  onClick={() =>
-                    alert(
-                      "AI Background Removal API abhi connect nahi hai."
-                    )
-                  }
+                  onClick={removeBackground}
+                  disabled={processing}
                   className="
                     mt-8
                     w-full
@@ -102,11 +145,20 @@ export default function RemoveBackgroundPage() {
                     py-4
                     text-white
                     font-bold
+                    transition
                     hover:opacity-90
+                    disabled:cursor-not-allowed
+                    disabled:opacity-60
                   "
                 >
-                  Remove Background
+                  {processing ? "Removing background…" : "Remove Background"}
                 </button>
+
+                {error && (
+                  <p className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-center text-sm font-semibold text-red-700">
+                    {error}
+                  </p>
+                )}
 
               </div>
             )}

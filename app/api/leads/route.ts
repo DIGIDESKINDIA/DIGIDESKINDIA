@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { connectDB } from "@/lib/mongodb";
 import Lead from "@/models/Lead";
+import { isAuthenticated } from "@/lib/auth/session";
 
 export const runtime = "nodejs";
 
@@ -23,6 +24,13 @@ const UpdateLeadStatusSchema = z.object({
 
 export async function GET() {
   try {
+    if (!(await isAuthenticated())) {
+      return NextResponse.json(
+        { success: false, message: "Unauthorized." },
+        { status: 401 }
+      );
+    }
+
     await connectDB();
 
     const leads = await Lead.find().sort({
@@ -90,6 +98,13 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   try {
+    if (!(await isAuthenticated())) {
+      return NextResponse.json(
+        { success: false, message: "Unauthorized." },
+        { status: 401 }
+      );
+    }
+
     const body = await req.json();
 
     // Validate input
@@ -146,6 +161,13 @@ export async function PUT(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
+    if (!(await isAuthenticated())) {
+      return NextResponse.json(
+        { success: false, message: "Unauthorized." },
+        { status: 401 }
+      );
+    }
+
     const body = await req.json();
 
     const { id } = z.object({
@@ -178,7 +200,7 @@ export async function DELETE(req: NextRequest) {
         {
           success: false,
           message: "Validation failed.",
-          errors: error.issues.map((e: any) => ({
+          errors: error.issues.map((e: z.ZodIssue) => ({
             path: e.path.join("."),
             message: e.message,
           })),

@@ -45,7 +45,7 @@ export default function PDFDropzone({
 
     maxFiles = 50,
 
-    maxSize = 100 * 1024 * 1024,
+    maxSize: _maxSize,
 
     accept = ["application/pdf"],
 
@@ -103,13 +103,9 @@ export default function PDFDropzone({
                         return;
                     }
 
-                    if (
-                        file.size >
-                        maxSize
-                    ) {
-
+                    if (file.size <= 0) {
                         setError(
-                            `${file.name} exceeds the maximum size.`
+                            `${file.name} is empty.`
                         );
 
                         return;
@@ -133,7 +129,6 @@ export default function PDFDropzone({
             [
                 accept,
                 maxFiles,
-                maxSize,
                 onFiles,
             ]
 
@@ -238,7 +233,7 @@ ${
 
                         <p className="mt-2 text-xs">
 
-                            {(maxSize / 1024 / 1024).toFixed(0)} MB
+                            Large files supported
 
                         </p>
 

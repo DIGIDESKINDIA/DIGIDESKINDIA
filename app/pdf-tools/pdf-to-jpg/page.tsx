@@ -11,9 +11,6 @@ import {
   Upload,
 } from "lucide-react";
 
-const MAX_FILE_SIZE =
-  100 * 1024 * 1024;
-
 export default function PdfToJpgPage() {
   const inputRef =
     useRef<HTMLInputElement>(null);
@@ -55,16 +52,6 @@ export default function PdfToJpgPage() {
     if (selected.size === 0) {
       toast.error(
         "Selected PDF is empty."
-      );
-      return;
-    }
-
-    if (
-      selected.size >
-      MAX_FILE_SIZE
-    ) {
-      toast.error(
-        "Maximum PDF size is 100 MB."
       );
       return;
     }

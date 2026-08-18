@@ -7,7 +7,6 @@ import {
   Bot,
   CreditCard,
   FileCheck,
-  FileImage,
   FileText,
   GraduationCap,
   ImageIcon,

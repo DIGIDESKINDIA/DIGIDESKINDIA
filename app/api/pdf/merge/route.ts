@@ -1,140 +1,60 @@
-// File: app/api/pdf/merge/route.ts
-
 import { NextRequest, NextResponse } from "next/server";
-import path from "path";
-import fs from "fs/promises";
-import crypto from "crypto";
-
 import { mergePDF } from "@/lib/pdf";
+import { createTempDir, deleteTempDir, generateSafeFileName } from "@/lib/utils/file-upload";
+import fs from "fs/promises";
+import path from "path";
+import crypto from "crypto";
 
 export const runtime = "nodejs";
 
-export async function POST(
-    request: NextRequest
-) {
 
+export async function POST(request: NextRequest) {
+    let tempDir = "";
     try {
+        const form = await request.formData();
+        const uploads = form.getAll("files") as File[];
 
-        const form =
-            await request.formData();
-
-        const uploads =
-            form.getAll("files") as File[];
-
-        if (
-            uploads.length < 2
-        ) {
-
+        if (uploads.length < 2) {
             return NextResponse.json(
-
-                {
-
-                    success: false,
-
-                    message:
-                        "Minimum two PDFs required.",
-
-                },
-
-                {
-
-                    status: 400,
-
-                }
-
+                { success: false, message: "Minimum two PDFs required." },
+                { status: 400 }
             );
-
         }
 
-        const uploadDir =
-            "storage/uploads";
-
-        await fs.mkdir(
-            uploadDir,
-            {
-                recursive: true,
-            }
-        );
-
+        tempDir = await createTempDir();
         const files = [];
 
         for (const upload of uploads) {
+            const bytes = Buffer.from(await upload.arrayBuffer());
+            const fileName = generateSafeFileName(upload.name);
+            const filePath = path.join(tempDir, fileName);
 
-            const bytes =
-                Buffer.from(
-                    await upload.arrayBuffer()
-                );
-
-            const fileName =
-                `${crypto.randomUUID()}-${upload.name}`;
-
-            const filePath =
-                path.join(
-                    uploadDir,
-                    fileName
-                );
-
-            await fs.writeFile(
-                filePath,
-                bytes
-            );
+            await fs.writeFile(filePath, bytes);
 
             files.push({
-
-                id:
-                    crypto.randomUUID(),
-
-                name:
-                    upload.name,
-
-                size:
-                    upload.size,
-
-                type:
-                    upload.type,
-
-                path:
-                    filePath,
-
+                id: crypto.randomUUID(),
+                name: upload.name,
+                size: upload.size,
+                type: upload.type,
+                path: filePath,
             });
-
         }
 
-        const result =
-            await mergePDF({
+        const result = await mergePDF({ files });
 
-                files,
-
-            });
-
-        return NextResponse.json(
-            result
-        );
+        return NextResponse.json(result);
 
     } catch (error) {
-
         return NextResponse.json(
-
             {
-
                 success: false,
-
-                message:
-
-                    error instanceof Error
-                        ? error.message
-                        : "Merge failed.",
-
+                message: error instanceof Error ? error.message : "Merge failed.",
             },
-
-            {
-
-                status: 500,
-
-            }
-
+            { status: 500 }
         );
-
+    } finally {
+        if (tempDir) {
+            await deleteTempDir(tempDir);
+        }
     }
-
 }

@@ -10,9 +10,6 @@ import { deletePages } from "@/lib/pdf/delete-pages";
 
 export const runtime = "nodejs";
 
-const MAX_FILE_SIZE =
-  100 * 1024 * 1024;
-
 export async function POST(
   request: NextRequest
 ) {
@@ -46,15 +43,6 @@ export async function POST(
     if (upload.size === 0) {
       throw new ValidationError(
         "Selected PDF is empty."
-      );
-    }
-
-    if (
-      upload.size >
-      MAX_FILE_SIZE
-    ) {
-      throw new ValidationError(
-        "Maximum PDF size is 100 MB."
       );
     }
 

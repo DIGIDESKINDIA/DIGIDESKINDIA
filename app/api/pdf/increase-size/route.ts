@@ -3,9 +3,6 @@ import { NextResponse } from "next/server";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const MAX_UPLOAD_SIZE = 100 * 1024 * 1024;
-const MAX_OUTPUT_SIZE = 150 * 1024 * 1024;
-
 function safeFileName(name: string) {
   const clean = name
     .replace(/[^\w.\-() ]+/g, "_")
@@ -65,18 +62,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Upload limit
-    if (file.size > MAX_UPLOAD_SIZE) {
-      return NextResponse.json(
-        {
-          error: "Maximum upload size is 100 MB.",
-        },
-        {
-          status: 413,
-        }
-      );
-    }
-
     // Read requested target
     const targetBytes = Number(targetRaw);
 
@@ -101,18 +86,6 @@ export async function POST(request: Request) {
         {
           error:
             "Target size must be larger than the original PDF.",
-        },
-        {
-          status: 400,
-        }
-      );
-    }
-
-    // Output safety limit
-    if (targetBytes > MAX_OUTPUT_SIZE) {
-      return NextResponse.json(
-        {
-          error: "Maximum output size is 150 MB.",
         },
         {
           status: 400,

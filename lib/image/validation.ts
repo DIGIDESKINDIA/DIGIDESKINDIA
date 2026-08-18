@@ -2,8 +2,6 @@ import path from "path";
 
 import { ValidationError } from "@/lib/pdf/errors";
 
-export const MAX_IMAGE_FILE_SIZE = 25 * 1024 * 1024;
-
 export const SUPPORTED_IMAGE_MIME_TYPES = [
   "image/jpeg",
   "image/jpg",
@@ -36,12 +34,6 @@ export function validateImageFile(file: ImageUploadFile): void {
 
   if (file.size <= 0) {
     throw new ValidationError(`"${file.name}" is empty.`);
-  }
-
-  if (file.size > MAX_IMAGE_FILE_SIZE) {
-    throw new ValidationError(
-      `"${file.name}" exceeds the maximum file size of 25 MB.`
-    );
   }
 
   if (!file.buffer.length) {

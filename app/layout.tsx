@@ -13,7 +13,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://digideskindia.in"),
+  metadataBase: new URL("https://digideskindia.com"),
 
   title: {
     default: "DigiDesk India",
@@ -74,16 +74,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://digideskindia.in",
+    url: "https://digideskindia.com",
     siteName: "DigiDesk India",
     title: "DigiDesk India",
     description:
       "India's premium digital services platform for Government Services, PDF Tools, Image Tools and AI assistance.",
     images: [
       {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
+        url: "/images/logo.png",
+        width: 200,
+        height: 200,
         alt: "Digital Desk India",
       },
     ],
@@ -94,13 +94,12 @@ export const metadata: Metadata = {
     title: "DigiDesk India",
     description:
       "Government Services • PDF Tools • Image Tools • Manish AI",
-    images: ["/og-image.jpg"],
+    images: ["/images/logo.png"],
   },
 
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
   },
 
   manifest: "/manifest.webmanifest",

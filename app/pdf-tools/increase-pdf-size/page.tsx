@@ -31,12 +31,6 @@ type Result = {
   addedBytes: number;
 };
 
-const MAX_UPLOAD_SIZE =
-  100 * 1024 * 1024;
-
-const MAX_OUTPUT_SIZE =
-  150 * 1024 * 1024;
-
 const PRESETS = [
   {
     label: "500 KB",
@@ -103,14 +97,7 @@ function getSuggestedTarget(
     1024 *
     1024;
 
-  if (
-    target <=
-    MAX_OUTPUT_SIZE
-  ) {
-    return target;
-  }
-
-  return null;
+  return target;
 }
 
 export default function IncreasePDFSizePage() {
@@ -210,16 +197,6 @@ export default function IncreasePDFSizePage() {
     ) {
       setError(
         "The selected PDF is empty."
-      );
-      return;
-    }
-
-    if (
-      selectedFile.size >
-      MAX_UPLOAD_SIZE
-    ) {
-      setError(
-        "Maximum upload size is 100 MB."
       );
       return;
     }
@@ -384,16 +361,6 @@ export default function IncreasePDFSizePage() {
         `Target must be larger than the current PDF (${formatBytes(
           file.size
         )}).`
-      );
-      return;
-    }
-
-    if (
-      bytes >
-      MAX_OUTPUT_SIZE
-    ) {
-      setError(
-        "Maximum output size is 150 MB."
       );
       return;
     }

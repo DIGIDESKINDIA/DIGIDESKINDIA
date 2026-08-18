@@ -1,0 +1,238 @@
+{
+  "pdf": [
+    {
+      "tool": "Info",
+      "endpoint": "info",
+      "status": "FAIL",
+      "error": "No PDF selected.",
+      "details": {
+        "statusCode": 400
+      }
+    },
+    {
+      "tool": "Rotate",
+      "endpoint": "rotate",
+      "status": "FAIL",
+      "error": "PDF file is required.",
+      "details": {
+        "statusCode": 400
+      }
+    },
+    {
+      "tool": "Watermark",
+      "endpoint": "watermark",
+      "status": "FAIL",
+      "error": "PDF file is required.",
+      "details": {
+        "statusCode": 400
+      }
+    },
+    {
+      "tool": "Extract Pages",
+      "endpoint": "extract-pages",
+      "status": "FAIL",
+      "error": "PDF file is required.",
+      "details": {
+        "statusCode": 400
+      }
+    },
+    {
+      "tool": "Delete Pages",
+      "endpoint": "delete-pages",
+      "status": "FAIL",
+      "error": "No PDF selected.",
+      "details": {
+        "statusCode": 400
+      }
+    },
+    {
+      "tool": "Protect",
+      "endpoint": "protect",
+      "status": "FAIL",
+      "error": "No PDF selected.",
+      "details": {
+        "statusCode": 400
+      }
+    },
+    {
+      "tool": "Unlock",
+      "endpoint": "unlock",
+      "status": "FAIL",
+      "error": "No PDF selected.",
+      "details": {
+        "statusCode": 400
+      }
+    },
+    {
+      "tool": "Split",
+      "endpoint": "split",
+      "status": "FAIL",
+      "error": "PDF file is required.",
+      "details": {
+        "statusCode": 400
+      }
+    },
+    {
+      "tool": "Compress",
+      "endpoint": "compress",
+      "status": "FAIL",
+      "error": "Please upload a PDF.",
+      "details": {
+        "statusCode": 400
+      }
+    },
+    {
+      "tool": "Page Numbers",
+      "endpoint": "page-numbers",
+      "status": "FAIL",
+      "error": "No PDF selected.",
+      "details": {
+        "statusCode": 400
+      }
+    },
+    {
+      "tool": "Metadata",
+      "endpoint": "metadata",
+      "status": "FAIL",
+      "error": "No PDF selected.",
+      "details": {
+        "statusCode": 400
+      }
+    },
+    {
+      "tool": "Merge",
+      "endpoint": "merge",
+      "status": "PASS",
+      "error": null,
+      "details": {
+        "statusCode": 200,
+        "responseType": "JSON"
+      }
+    },
+    {
+      "tool": "Organize",
+      "endpoint": "organize",
+      "status": "FAIL",
+      "error": "No PDF selected.",
+      "details": {
+        "statusCode": 400
+      }
+    },
+    {
+      "tool": "Image to PDF",
+      "endpoint": "image-to-pdf",
+      "status": "FAIL",
+      "error": "No images selected.",
+      "details": {
+        "statusCode": 400
+      }
+    },
+    {
+      "tool": "PDF to Image",
+      "endpoint": "pdf-to-image",
+      "status": "FAIL",
+      "error": "No PDF selected.",
+      "details": {
+        "statusCode": 400
+      }
+    }
+  ],
+  "image": [
+    {
+      "tool": "Resize",
+      "endpoint": "resize",
+      "status": "PASS",
+      "error": null,
+      "details": {
+        "statusCode": 200,
+        "responseSize": "0.00",
+        "responseType": "image/png"
+      }
+    },
+    {
+      "tool": "Crop",
+      "endpoint": "crop",
+      "status": "PASS",
+      "error": null,
+      "details": {
+        "statusCode": 200,
+        "responseSize": "0.00",
+        "responseType": "image/png"
+      }
+    },
+    {
+      "tool": "Rotate",
+      "endpoint": "rotate",
+      "status": "PASS",
+      "error": null,
+      "details": {
+        "statusCode": 200,
+        "responseSize": "0.01",
+        "responseType": "image/png"
+      }
+    },
+    {
+      "tool": "Compress",
+      "endpoint": "compress",
+      "status": "PASS",
+      "error": null,
+      "details": {
+        "statusCode": 200,
+        "responseSize": "0.00",
+        "responseType": "image/png"
+      }
+    },
+    {
+      "tool": "Convert",
+      "endpoint": "convert",
+      "status": "FAIL",
+      "error": "Unsupported output format.",
+      "details": {
+        "statusCode": 400
+      }
+    },
+    {
+      "tool": "Watermark",
+      "endpoint": "watermark",
+      "status": "PASS",
+      "error": null,
+      "details": {
+        "statusCode": 200,
+        "responseSize": "0.01",
+        "responseType": "image/png"
+      }
+    },
+    {
+      "tool": "Passport Photo",
+      "endpoint": "passport-photo",
+      "status": "PASS",
+      "error": null,
+      "details": {
+        "statusCode": 200,
+        "responseSize": "0.30",
+        "responseType": "image/jpeg"
+      }
+    },
+    {
+      "tool": "Remove Background",
+      "endpoint": "remove-background",
+      "status": "PASS",
+      "error": null,
+      "details": {
+        "statusCode": 200,
+        "responseSize": "0.00",
+        "responseType": "image/png"
+      }
+    },
+    {
+      "tool": "Image to PDF",
+      "endpoint": "image-to-pdf",
+      "status": "FAIL",
+      "error": "Unable to convert images to PDF.",
+      "details": {
+        "statusCode": 500
+      }
+    }
+  ],
+  "timestamp": "2026-08-18T18:30:14.704Z"
+}

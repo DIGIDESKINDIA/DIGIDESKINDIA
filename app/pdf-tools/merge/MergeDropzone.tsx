@@ -8,7 +8,6 @@ interface Props {
   setFiles: (files: File[]) => void;
 }
 
-const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100 MB
 const MAX_FILES = 30;
 
 export default function MergeDropzone({
@@ -30,11 +29,6 @@ export default function MergeDropzone({
 
       if (file.size === 0) {
         toast.error(`${file.name} is empty.`);
-        continue;
-      }
-
-      if (file.size > MAX_FILE_SIZE) {
-        toast.error(`${file.name} exceeds 100MB.`);
         continue;
       }
 
@@ -123,7 +117,7 @@ export default function MergeDropzone({
         </div>
 
         <p className="mt-5 text-sm text-slate-400">
-          Maximum {MAX_FILES} files • 100 MB each
+          Maximum {MAX_FILES} files
         </p>
 
         <input

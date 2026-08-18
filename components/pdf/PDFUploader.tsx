@@ -47,7 +47,7 @@ export default function PDFUploader({
 
     accept = ".pdf",
 
-    maxSize = 100 * 1024 * 1024,
+    maxSize: _maxSize,
 
 }: Props) {
 
@@ -64,8 +64,9 @@ export default function PDFUploader({
 
             Array.from(list).forEach((file) => {
 
-                if (file.size > maxSize)
+                if (file.size <= 0) {
                     return;
+                }
 
                 uploaded.push({
 
@@ -103,7 +104,6 @@ export default function PDFUploader({
 
         [
             files,
-            maxSize,
             multiple,
             setFiles,
         ]

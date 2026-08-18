@@ -6,6 +6,7 @@ export {
   getPassportTargets,
   getSupportedOutputFormats,
   imageFilesToPdf,
+  removeImageBackground,
   resizeImageFile,
   rotateImageFile,
   watermarkImageFile,
