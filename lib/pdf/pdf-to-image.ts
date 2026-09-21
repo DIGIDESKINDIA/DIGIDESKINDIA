@@ -1,19 +1,12 @@
 import { PdfToImageOptions } from "./types";
 import { ValidationError } from "./errors";
 import { validatePdf } from "./validation";
+import { PDFDocument } from "pdf-lib";
 import { execFile } from "child_process";
 import { promisify } from "util";
-import {
-  mkdtemp,
-  readFile,
-  readdir,
-  rm,
-  stat,
-  writeFile,
-} from "fs/promises";
+import { mkdtemp, readFile, rm, stat, writeFile } from "fs/promises";
 import os from "os";
 import path from "path";
-import { PDFDocument } from "pdf-lib";
 
 /**
  * Placeholder interface for future renderer.
@@ -34,93 +27,25 @@ export interface PdfImage {
   buffer: Uint8Array;
 }
 
-const execFileAsync =
-  promisify(execFile);
+const execFileAsync = promisify(execFile);
 
 async function findGhostscript(): Promise<string> {
-  const configured =
-    process.env.GHOSTSCRIPT_PATH?.trim();
-
+  const configured = process.env.GHOSTSCRIPT_PATH?.trim();
   if (configured) {
     try {
       await stat(configured);
       return configured;
-    } catch {
-      // Continue.
-    }
+    } catch {}
   }
 
-  const commands =
-    process.platform === "win32"
-      ? ["gswin64c.exe", "gswin32c.exe"]
-      : ["gs"];
-
-  for (const command of commands) {
+  for (const command of process.platform === "win32" ? ["gswin64c.exe", "gswin32c.exe"] : ["gs"]) {
     try {
-      await execFileAsync(command, ["-version"], {
-        windowsHide: true,
-        timeout: 10000,
-      });
-
+      await execFileAsync(command, ["-version"], { windowsHide: true, timeout: 10000 });
       return command;
-    } catch {
-      // Continue.
-    }
+    } catch {}
   }
 
-  if (process.platform === "win32") {
-    const root = path.join(
-      process.env.ProgramFiles || "C:\\Program Files",
-      "gs"
-    );
-
-    try {
-      const entries = await readdir(root, {
-        withFileTypes: true,
-      });
-
-      const versions = entries
-        .filter((entry) => entry.isDirectory())
-        .map((entry) => entry.name)
-        .sort((a, b) =>
-          b.localeCompare(a, undefined, {
-            numeric: true,
-          })
-        );
-
-      for (const version of versions) {
-        const candidates = [
-          path.join(
-            root,
-            version,
-            "bin",
-            "gswin64c.exe"
-          ),
-          path.join(
-            root,
-            version,
-            "bin",
-            "gswin32c.exe"
-          ),
-        ];
-
-        for (const exe of candidates) {
-          try {
-            await stat(exe);
-            return exe;
-          } catch {
-            // Continue.
-          }
-        }
-      }
-    } catch {
-      // Continue.
-    }
-  }
-
-  throw new ValidationError(
-    "Ghostscript is required for PDF to image conversion. Install Ghostscript or set GHOSTSCRIPT_PATH."
-  );
+  throw new ValidationError("Ghostscript is required for PDF to image conversion. Install Ghostscript or set GHOSTSCRIPT_PATH.");
 }
 
 async function renderPageWithGhostscript({
@@ -171,15 +96,11 @@ async function renderPageWithGhostscript({
     inputPdf
   );
 
-  await execFileAsync(
-    ghostscript,
-    args,
-    {
-      windowsHide: true,
-      timeout: 180000,
-      maxBuffer: 20 * 1024 * 1024,
-    }
-  );
+  await execFileAsync(ghostscript, args, {
+    windowsHide: true,
+    timeout: 180000,
+    maxBuffer: 20 * 1024 * 1024,
+  });
 }
 
 export async function pdfToImages({
@@ -272,9 +193,6 @@ export async function pdfToImages({
     );
   }
 
-  const ghostscript =
-    await findGhostscript();
-
   const dpi = Math.max(
     72,
     Math.min(
@@ -283,67 +201,39 @@ export async function pdfToImages({
     )
   );
 
-  const tempRoot =
-    await mkdtemp(
-      path.join(
-        /*turbopackIgnore: true*/ os.tmpdir(),
-        "digital-desk-pdf-to-image-"
-      )
-    );
-
+  const ghostscript = await findGhostscript();
+  const tempRoot = await mkdtemp(path.join(os.tmpdir(), "digital-desk-pdf-to-image-"));
   const output: PdfImage[] = [];
 
   try {
-    const inputPdf = path.join(
-      tempRoot,
-      "input.pdf"
-    );
-
+    const inputPdf = path.join(tempRoot, "input.pdf");
     await writeFile(inputPdf, sourceBytes);
 
     for (const pageNumber of pageNumbers) {
-      const ext =
-        normalizedFormat === "png"
-          ? "png"
-          : "jpg";
-
-      const outputFile = path.join(
-        tempRoot,
-        `page-${String(pageNumber).padStart(3, "0")}.${ext}`
-      );
-
+      const ext = normalizedFormat === "png" ? "png" : "jpg";
+      const filename = `page-${String(pageNumber).padStart(3, "0")}.${ext}`;
+      const outputFile = path.join(tempRoot, filename);
       await renderPageWithGhostscript({
         ghostscript,
         inputPdf,
         outputFile,
-        page: pageNumber,
-        quality,
-        dpi,
+      page: pageNumber,
+      quality,
+      dpi,
         format: normalizedFormat,
       });
+      const buffer = await readFile(outputFile);
 
-      const buffer =
-        await readFile(outputFile);
-
-      output.push({
-        page: pageNumber,
-        filename: path.basename(outputFile),
-        mimeType:
-          normalizedFormat === "png"
-            ? "image/png"
-            : "image/jpeg",
+    output.push({
+      page: pageNumber,
+      filename,
+      mimeType: normalizedFormat === "png" ? "image/png" : "image/jpeg",
         buffer: new Uint8Array(buffer),
       });
     }
 
     return output;
   } finally {
-    await rm(
-      tempRoot,
-      {
-        recursive: true,
-        force: true,
-      }
-    ).catch(() => {});
+    await rm(tempRoot, { recursive: true, force: true }).catch(() => {});
   }
 }

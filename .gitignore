@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# PDF-to-Word OCR
+# Uncompressed Tesseract language models (*.traineddata) are runtime-generated
+# by ensureTessdata() from the committed *.traineddata.gz files in this folder.
+/storage/tessdata/*.traineddata
+/storage/.ocr-cache/
+# Generated local/test artifacts
+storage/
+output/
+benchmark-output/
+temp/
+*.log
+*.headers.txt

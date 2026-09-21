@@ -54,6 +54,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/sign-pdf`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/pdf-tools/split-pdf`,
       lastModified: new Date(),
       changeFrequency: "monthly",
@@ -115,6 +121,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/pdf-tools/pdf-to-jpg`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/pdf-tools/pdf-to-word`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,

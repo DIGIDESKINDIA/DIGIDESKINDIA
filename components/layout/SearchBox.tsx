@@ -13,7 +13,6 @@ import {
 const suggestions = [
   "Compress PDF",
   "Merge PDF",
-  "PDF to Word",
   "Passport Photo",
   "Remove Background",
   "PAN Card",

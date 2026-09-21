@@ -1,0 +1,1 @@
+export const PDF_TO_PPTX_MAX_FILE_SIZE = 100 * 1024 * 1024;

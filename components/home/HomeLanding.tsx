@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type ComponentType, type ReactNode } from "react";
 import {
-  ArrowRight, BadgeCheck, Building2, Clock3, Combine, Crop,
-  FileImage, FileText, Landmark, RotateCw, Search, Scissors,
-  ShieldCheck, Sparkles, Wand2,
+  ArrowRight, BadgeCheck, Building2, CarFront, Clock3, Combine, CreditCard, Crop,
+  FileImage, FileOutput, FileText, GraduationCap, IdCard, Landmark, Plane, RotateCw, Search,
+  Scissors, ShieldCheck, Sparkles, Wand2,
 } from "lucide-react";
 
 import Hero from "@/components/home/Hero";
@@ -36,13 +36,13 @@ const trustCards = [
 ];
 
 const popularServices = [
-  { title: "Aadhaar Services", description: "Download, Update & Verify Aadhaar", href: "/service/aadhaar", icon: ShieldCheck },
-  { title: "PAN Card Services", description: "Apply New PAN, Correction & More", href: "/service/pan-card", icon: FileText },
-  { title: "Passport Services", description: "Apply New Passport, Renewal & Tracking", href: "/service/passport", icon: Landmark },
-  { title: "Driving License", description: "Apply DL, Renewal, Status & More", href: "/service/driving-licence", icon: Building2 },
-  { title: "Vehicle Services", description: "RC, Insurance, PUC & Challan", href: "/service", icon: FileImage },
-  { title: "Education Services", description: "Results, Certificates & Admissions", href: "/education", icon: Sparkles },
-];
+  { title: "Aadhaar Services", description: "Download, Update & Verify Aadhaar", href: "/service/aadhaar", icon: IdCard, accent: "cyan" },
+  { title: "PAN Card Services", description: "Apply New PAN, Correction & More", href: "/service/pan-card", icon: CreditCard, accent: "blue" },
+  { title: "Passport Services", description: "Apply New Passport, Renewal & Tracking", href: "/service/passport", icon: Plane, accent: "violet" },
+  { title: "Driving License", description: "Apply DL, Renewal, Status & More", href: "/service/driving-licence", icon: CarFront, accent: "amber" },
+  { title: "Vehicle Services", description: "RC, Insurance, PUC & Challan", href: "/service", icon: Building2, accent: "emerald" },
+  { title: "Education Services", description: "Results, Certificates & Admissions", href: "/education", icon: GraduationCap, accent: "rose" },
+] as const;
 
 const pdfTools = [
   { title: "Merge PDF", href: "/pdf-tools/merge-pdf", icon: Combine },
@@ -51,6 +51,7 @@ const pdfTools = [
   { title: "Rotate PDF", href: "/pdf-tools/rotate", icon: RotateCw },
   { title: "JPG to PDF", href: "/pdf-tools/jpg-to-pdf", icon: FileImage },
   { title: "PDF to JPG", href: "/pdf-tools/pdf-to-jpg", icon: FileImage },
+  { title: "PDF to Word", href: "/pdf-tools/pdf-to-word", icon: FileOutput },
   { title: "Delete Pages", href: "/pdf-tools/delete-pages", icon: Scissors },
   { title: "Organize PDF", href: "/pdf-tools/organize-pdf", icon: Sparkles },
 ];
@@ -116,28 +117,40 @@ function SectionHeading({ eyebrow, title, description }: { eyebrow: string; titl
   );
 }
 
-function ServiceCard({ href, title, description, icon }: { href: string; title: string; description: string; icon: ReactNode }) {
+type ServiceAccent = "blue" | "cyan" | "violet" | "amber" | "emerald" | "rose";
+
+function ServiceCard({ href, title, description, icon, accent = "blue" }: { href: string; title: string; description: string; icon: ReactNode; accent?: ServiceAccent }) {
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  const accentStyles = {
+    blue: "from-blue-600 to-indigo-500 text-blue-100 ring-blue-400/20 shadow-blue-500/20",
+    cyan: "from-cyan-500 to-sky-500 text-cyan-100 ring-cyan-300/25 shadow-cyan-500/20",
+    violet: "from-violet-600 to-fuchsia-500 text-violet-100 ring-violet-400/20 shadow-violet-500/20",
+    amber: "from-amber-500 to-orange-500 text-amber-50 ring-amber-300/25 shadow-amber-500/20",
+    emerald: "from-emerald-500 to-teal-500 text-emerald-50 ring-emerald-300/25 shadow-emerald-500/20",
+    rose: "from-rose-500 to-pink-500 text-rose-50 ring-rose-300/25 shadow-rose-500/20",
+  }[accent];
 
   return (
     <Link
       href={href}
       className={
         isDark
-          ? "group rounded-2xl border border-white/10 bg-white/5 p-5 shadow-[0_18px_45px_rgba(2,6,23,0.3)] transition hover:-translate-y-1 hover:border-blue-400/30 hover:shadow-[0_24px_55px_rgba(37,99,235,0.18)]"
-          : "group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-md"
+          ? "group rounded-2xl border border-white/10 bg-white/5 p-4 shadow-[0_14px_32px_rgba(2,6,23,0.28)] transition hover:-translate-y-1 hover:border-blue-400/30 hover:shadow-[0_20px_42px_rgba(37,99,235,0.18)]"
+          : "group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"
       }
     >
       <div className="flex items-center justify-between gap-4">
         <div
           className={
             isDark
-              ? "flex h-12 w-12 items-center justify-center rounded-xl bg-white/8 text-blue-300 transition group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-cyan-500 group-hover:text-white"
-              : "flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-blue-700 transition group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-cyan-500 group-hover:text-white"
+                ? `relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br ${accentStyles} shadow-lg ring-4 transition duration-300 group-hover:rotate-2 group-hover:scale-105`
+                : `relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br ${accentStyles} shadow-lg ring-4 transition duration-300 group-hover:rotate-2 group-hover:scale-105`
           }
         >
-          {icon}
+            <span className="absolute inset-1 rounded-xl border border-white/30" />
+            <span className="absolute -right-3 -top-3 h-7 w-7 rounded-full bg-white/20 blur-md" />
+            <span className="relative drop-shadow-md">{icon}</span>
         </div>
         <span
           className={
@@ -149,11 +162,11 @@ function ServiceCard({ href, title, description, icon }: { href: string; title: 
           View
         </span>
       </div>
-      <h3 className={isDark ? "mt-5 text-xl font-bold text-white" : "mt-5 text-xl font-bold text-slate-900"}>
+      <h3 className={isDark ? "mt-4 text-base font-bold text-white" : "mt-4 text-base font-bold text-slate-900"}>
         {title}
       </h3>
-      <p className={isDark ? "mt-2.5 text-sm leading-7 text-slate-300" : "mt-2.5 text-sm leading-7 text-slate-600"}>{description}</p>
-      <div className="mt-5 inline-flex items-center gap-2 font-semibold text-blue-700">
+      <p className={isDark ? "mt-2 text-xs leading-5 text-slate-300" : "mt-2 text-xs leading-5 text-slate-600"}>{description}</p>
+      <div className="mt-4 inline-flex items-center gap-2 text-xs font-bold text-blue-700 dark:text-cyan-300">
         Open
         <ArrowRight size={16} className="transition group-hover:translate-x-1" />
       </div>
@@ -175,25 +188,25 @@ function ToolCard({
   return (
     <Link
       href={href}
-      className={
+        className={
         isDark
-          ? `group rounded-2xl border border-white/10 bg-white/5 ${compact ? "p-4" : "p-5"} shadow-[0_18px_45px_rgba(2,6,23,0.3)] transition hover:-translate-y-1 hover:border-blue-400/25 hover:shadow-[0_24px_55px_rgba(37,99,235,0.16)]`
-          : `group rounded-2xl border border-slate-200 bg-white ${compact ? "p-4" : "p-5"} shadow-sm transition hover:-translate-y-1 hover:shadow-md`
+          ? `group flex min-h-[178px] flex-col rounded-2xl border border-white/10 bg-white/5 ${compact ? "p-3.5" : "p-4"} shadow-[0_14px_32px_rgba(2,6,23,0.28)] transition hover:-translate-y-1 hover:border-blue-400/25 hover:shadow-[0_20px_42px_rgba(37,99,235,0.16)]`
+          : `group flex min-h-[178px] flex-col rounded-2xl border border-slate-200 bg-white ${compact ? "p-3.5" : "p-4"} shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg`
       }
     >
       <div
-        className={`flex h-12 w-12 items-center justify-center rounded-xl text-white shadow-sm ${
+        className={`flex h-10 w-10 items-center justify-center rounded-xl text-white shadow-[0_8px_18px_rgba(14,165,233,0.18)] ring-4 ring-blue-500/10 ${
           accent === "pdf" ? "bg-gradient-to-br from-blue-700 to-sky-500" : "bg-gradient-to-br from-emerald-600 to-cyan-500"
         }`}>
         <Icon size={20} />
       </div>
-      <h3 className={isDark ? "mt-4 text-lg font-bold text-white" : "mt-4 text-lg font-bold text-slate-900"}>{title}</h3>
-      <p className={isDark ? "mt-2 text-sm leading-6 text-slate-300" : "mt-2 text-sm leading-6 text-slate-600"}>
+      <h3 className={isDark ? "mt-3 text-sm font-bold text-white" : "mt-3 text-sm font-bold text-slate-900"}>{title}</h3>
+      <p className={isDark ? "mt-1.5 flex-1 text-xs leading-5 text-slate-300" : "mt-1.5 flex-1 text-xs leading-5 text-slate-600"}>
         Secure tool workflow on a live DigiDesk India route.
       </p>
-      <div className={`mt-5 inline-flex items-center gap-2 font-semibold ${accent === "pdf" ? "text-blue-700" : "text-emerald-700"}`}>
+      <div className={`mt-3 inline-flex items-center gap-2 text-xs font-bold ${accent === "pdf" ? "text-blue-700 dark:text-cyan-300" : "text-emerald-700 dark:text-emerald-300"}`}>
         Open Tool
-        <ArrowRight size={18} className="transition group-hover:translate-x-1" />
+        <ArrowRight size={15} className="transition group-hover:translate-x-1" />
       </div>
     </Link>
   );
@@ -292,7 +305,8 @@ export default function HomeLanding() {
                 href={service.href}
                 title={service.title}
                 description={service.description}
-                icon={<Icon size={24} />}
+                icon={<Icon size={23} strokeWidth={1.9} />}
+                accent={service.accent}
               />
             );
           })}
@@ -360,7 +374,7 @@ export default function HomeLanding() {
           title="A premium category view for important citizen services"
           description="Explore high-demand categories without the feel of a traditional government portal."
         />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(205px,1fr))] gap-4">
           {[
             { title: "Central Services", description: "PAN, Aadhaar, Passport and identity-related national services.", icon: Landmark, href: "/service" },
             { title: "State Services", description: "Certificates, scholarship and citizen-document workflows.", icon: BadgeCheck, href: "/service" },
@@ -374,7 +388,7 @@ export default function HomeLanding() {
                 href={service.href}
                 title={service.title}
                 description={service.description}
-                icon={<Icon size={24} />}
+                icon={<Icon size={23} strokeWidth={1.9} />}
               />
             );
           })}
@@ -388,7 +402,7 @@ export default function HomeLanding() {
           title="Fast document utilities for everyday workflows"
           description="All cards below are mapped to existing live PDF routes."
         />
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(185px,1fr))] gap-4">
           {pdfTools.map((tool) => (
             <ToolCard key={tool.title} href={tool.href} title={tool.title} icon={tool.icon} accent="pdf" compact />
           ))}
@@ -402,7 +416,7 @@ export default function HomeLanding() {
           title="Essential image workflows in one clean grid"
           description="Compression, conversion, document prep and passport-photo utilities in production routes."
         />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(185px,1fr))] gap-4">
           {imageTools.map((tool) => (
             <ToolCard key={tool.title} href={tool.href} title={tool.title} icon={tool.icon} accent="image" />
           ))}
@@ -461,7 +475,7 @@ export default function HomeLanding() {
                 href="/service"
                 title={item.title}
                 description={item.description}
-                icon={<Icon size={24} />}
+                icon={<Icon size={23} strokeWidth={1.9} />}
               />
             );
           })}

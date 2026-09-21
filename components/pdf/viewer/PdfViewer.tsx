@@ -14,14 +14,12 @@ import {
 
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
+import { getPdfWorkerSource } from "@/lib/pdf/pdf-worker";
 
 import PdfError from "./PdfError";
 import PdfLoading from "./PdfLoading";
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url
-).toString();
+pdfjs.GlobalWorkerOptions.workerSrc = getPdfWorkerSource(pdfjs.version);
 
 interface PdfViewerProps {
   file: File;

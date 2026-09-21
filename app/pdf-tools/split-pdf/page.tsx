@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import SplitButton from "./SplitButton";
+import PdfFilePreview from "@/components/pdf/PdfFilePreview";
 
 export default function SplitPDFPage() {
   const inputRef =
@@ -184,6 +185,8 @@ export default function SplitPDFPage() {
             </div>
 
           )}
+
+          <PdfFilePreview file={file} title="PDF Preview" />
 
           <SplitButton
             file={file}

@@ -32,7 +32,7 @@ const stats = [
 
 export default function PdfStats() {
   return (
-    <section className="bg-white py-16">
+    <section className="bg-white py-12 dark:bg-[#081225]">
       <div className="mx-auto grid max-w-7xl gap-6 px-5 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((item) => {
           const Icon = item.icon;
@@ -40,17 +40,17 @@ export default function PdfStats() {
           return (
             <div
               key={item.title}
-              className="rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm transition hover:-translate-y-2 hover:shadow-xl"
+              className="rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm transition hover:-translate-y-2 hover:shadow-xl dark:border-white/10 dark:bg-white/[0.045] dark:shadow-[0_12px_30px_rgba(2,6,23,0.24)]"
             >
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-100 text-blue-700">
                 <Icon size={30} />
               </div>
 
-              <h3 className="mt-5 text-4xl font-black">
+              <h3 className="mt-5 text-4xl font-black text-slate-900 dark:text-white">
                 {item.title}
               </h3>
 
-              <p className="mt-2 text-slate-600">
+              <p className="mt-2 text-slate-600 dark:text-slate-400">
                 {item.subtitle}
               </p>
             </div>

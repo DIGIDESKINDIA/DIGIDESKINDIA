@@ -26,6 +26,32 @@ MOCK_AI=false
 
 Keep `.env.local` out of source control.
 
+Excel to PDF
+------------
+
+Excel files are rendered by LibreOffice in headless mode. This preserves the workbook's print layout, formatting, formulas, number formats, sheets, and page settings. The API does not fall back to a text or hand-drawn PDF renderer.
+
+Install LibreOffice on Windows, then either add its `program` directory to `PATH` or set the executable explicitly in `.env.local`:
+
+```
+LIBREOFFICE_PATH=C:\Program Files\LibreOffice\program\soffice.exe
+```
+
+The converter also checks `C:\Program Files`, `C:\Program Files (x86)`, and the per-user LibreOffice installation path. If no executable is found, Excel conversion returns a clear dependency error instead of generating a misleading PDF.
+
+HTML to PDF
+-----------
+
+HTML files are rendered with Playwright Chromium through the existing `POST /api/pdf/convert` endpoint using `type=html-to-pdf`. The renderer accepts `.html` and `.htm`, uses the uploaded file directory as the secure base URL for local relative resources, blocks external network requests, honors print CSS and CSS page sizing, and returns a selectable-text PDF.
+
+Install the browser in deployment environments with:
+
+```bash
+npx playwright install chromium
+```
+
+When using an existing system Chrome installation, set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` to its executable path.
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.

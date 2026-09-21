@@ -23,6 +23,8 @@ export async function addPageNumbers({
   pages,
   startFrom = 1,
   fontSize = 12,
+  position = "bottom-center",
+  margins = "default",
   x = 0,
   y = 25,
 }: AddPageNumberOptions): Promise<Uint8Array> {
@@ -58,6 +60,27 @@ export async function addPageNumbers({
     throw new ValidationError(
       "PDF contains no pages."
     );
+  }
+
+  if (!Number.isInteger(startFrom) || startFrom < 1) {
+    throw new ValidationError("Start number must be a positive integer.");
+  }
+
+  if (!Number.isFinite(fontSize) || fontSize < 8 || fontSize > 72) {
+    throw new ValidationError("Font size must be between 8 and 72.");
+  }
+
+  const validPositions = new Set([
+    "top-left",
+    "top-center",
+    "top-right",
+    "bottom-left",
+    "bottom-center",
+    "bottom-right",
+  ]);
+
+  if (!validPositions.has(position)) {
+    throw new ValidationError("Invalid page number position.");
   }
 
   const font =
@@ -101,13 +124,32 @@ export async function addPageNumbers({
           fontSize
         );
 
+      const margin =
+        margins === "narrow"
+          ? 18
+          : margins === "wide"
+            ? 54
+            : 36;
+      const isTop = position.startsWith("top-");
+      const isRight = position.endsWith("-right");
+      const isLeft = position.endsWith("-left");
+      const resolvedX =
+        position.endsWith("-center")
+          ? width / 2 - textWidth / 2
+          : isRight
+            ? width - margin - textWidth
+            : isLeft
+              ? margin
+              : x;
+      const resolvedY = isTop
+        ? page.getHeight() - margin - fontSize
+        : position.startsWith("bottom-")
+          ? margin
+          : y;
+
       page.drawText(text, {
-        x:
-          x === 0
-            ? width / 2 -
-              textWidth / 2
-            : x,
-        y,
+        x: resolvedX,
+        y: resolvedY,
         size: fontSize,
         font,
         color: rgb(

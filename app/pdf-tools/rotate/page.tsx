@@ -1,15 +1,18 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { PDFDocument, degrees } from "pdf-lib";
 import { saveAs } from "file-saver";
 import toast from "react-hot-toast";
 import {
   RotateCw,
+  Download,
   Upload,
   Loader2,
   ShieldCheck,
   FileText,
 } from "lucide-react";
+import PdfFilePreview from "@/components/pdf/PdfFilePreview";
 
 export default function RotatePDFPage() {
   const inputRef =
@@ -18,8 +21,8 @@ export default function RotatePDFPage() {
   const [file, setFile] =
     useState<File | null>(null);
 
-  const [angle, setAngle] =
-    useState<90 | 180 | 270>(90);
+  const [rotation, setRotation] =
+    useState(0);
 
   const [loading, setLoading] =
     useState(false);
@@ -40,13 +43,27 @@ export default function RotatePDFPage() {
     }
 
     setFile(selected);
+    setRotation(0);
 
     toast.success(
       "PDF uploaded successfully."
     );
   }
 
-  async function rotate() {
+  function rotatePreview() {
+    if (!file) {
+      toast.error(
+        "Please select a PDF."
+      );
+      return;
+    }
+
+    setRotation((current) =>
+      (current + 90) % 360
+    );
+  }
+
+  async function downloadRotatedPdf() {
     if (!file) {
       toast.error(
         "Please select a PDF."
@@ -57,40 +74,29 @@ export default function RotatePDFPage() {
     try {
       setLoading(true);
 
-      const formData =
-        new FormData();
-
-      formData.append(
-        "file",
-        file
+      const pdf = await PDFDocument.load(
+        await file.arrayBuffer(),
+        { updateMetadata: false }
       );
 
-      formData.append(
-        "angle",
-        String(angle)
-      );
-
-      const response =
-        await fetch(
-          "/api/pdf/rotate",
-          {
-            method: "POST",
-            body: formData,
-          }
+      pdf.getPages().forEach((page) => {
+        page.setRotation(
+          degrees(
+            (page.getRotation().angle +
+              rotation) %
+              360
+          )
         );
+      });
 
-      if (!response.ok) {
-        const data =
-          await response.json();
-
-        throw new Error(
-          data.message ??
-            "Unable to rotate PDF."
-        );
-      }
-
-      const blob =
-        await response.blob();
+      const output = await pdf.save({
+        useObjectStreams: true,
+        addDefaultPage: false,
+        updateFieldAppearances: false,
+      });
+      const blob = new Blob([new Uint8Array(output)], {
+        type: "application/pdf",
+      });
 
       saveAs(
         blob,
@@ -134,9 +140,9 @@ export default function RotatePDFPage() {
 
           <p className="mx-auto mt-5 max-w-2xl text-lg text-blue-100">
 
-            Rotate every page of your PDF by
-            90°, 180° or 270° and download
-            instantly.
+            Rotate every page of your PDF,
+            preview the result, and download
+            it when ready.
 
           </p>
 
@@ -231,35 +237,13 @@ export default function RotatePDFPage() {
             </div>
           )}
 
-          <div className="mt-8 grid grid-cols-3 gap-4">
-
-            {[90, 180, 270].map(
-              (value) => (
-                <button
-                  key={value}
-                  onClick={() =>
-                    setAngle(
-                      value as
-                        | 90
-                        | 180
-                        | 270
-                    )
-                  }
-                  className={`rounded-2xl border p-5 text-lg font-bold transition ${
-                    angle === value
-                      ? "border-blue-600 bg-blue-600 text-white"
-                      : "hover:bg-slate-100"
-                  }`}
-                >
-                  {value}°
-                </button>
-              )
-            )}
-
-          </div>
+          <PdfFilePreview
+            file={file}
+            rotation={rotation}
+          />
 
           <button
-            onClick={rotate}
+            onClick={rotatePreview}
             disabled={
               !file ||
               loading
@@ -270,15 +254,28 @@ export default function RotatePDFPage() {
               <>
                 <Loader2 className="animate-spin" />
 
-                Rotating PDF...
+                Preparing preview...
               </>
             ) : (
               <>
                 <RotateCw />
 
-                Rotate PDF
+                Rotate Preview
               </>
             )}
+          </button>
+
+          <button
+            onClick={downloadRotatedPdf}
+            disabled={
+              !file ||
+              loading
+            }
+            className="mt-4 flex w-full items-center justify-center gap-3 rounded-2xl border border-blue-600 py-5 text-lg font-bold text-blue-700 transition hover:bg-blue-50 disabled:opacity-60"
+          >
+            <Download />
+
+            Download Rotated PDF
           </button>
 
         </div>
@@ -295,12 +292,12 @@ export default function RotatePDFPage() {
           />
 
           <h3 className="mt-5 text-xl font-bold">
-            Multiple Angles
+            One-click Rotation
           </h3>
 
           <p className="mt-3 text-slate-600">
-            Rotate PDFs by 90°, 180°
-            and 270°.
+            Rotate and review your PDF before
+            downloading it.
           </p>
 
         </div>

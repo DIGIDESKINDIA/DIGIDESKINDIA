@@ -105,13 +105,13 @@ export const menuData: Record<string, MenuCategory> = {
       },
       {
         icon: FileText,
-        title: "PDF to Word",
+        title: "Word to PDF",
         href: "/pdf-tools",
       },
       {
         icon: FileText,
-        title: "Word to PDF",
-        href: "/pdf-tools",
+        title: "PDF to Word",
+        href: "/pdf-tools/pdf-to-word",
       },
       {
         icon: FileText,

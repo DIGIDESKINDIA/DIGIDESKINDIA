@@ -2,171 +2,130 @@
 
 import fs from "fs/promises";
 import path from "path";
+import os from "os";
 import crypto from "crypto";
 import { execa } from "execa";
 
 import { ConvertOptions, ConvertResult } from "../types";
+import { findLibreOfficeExecutable } from "./find-libreoffice";
 
 const OUTPUT_DIR = "storage/output";
 
-/**
- * ==========================================================
- * Digital Desk India
- * LibreOffice Conversion Engine
- *
- * Supports
- * ----------
- * DOCX -> PDF
- * XLSX -> PDF
- * PPTX -> PDF
- * ODT  -> PDF
- * ODS  -> PDF
- * ODP  -> PDF
- *
- * Requires:
- * LibreOffice
- *
- * Windows:
- * soffice.exe
- *
- * Linux:
- * libreoffice
- * ==========================================================
- */
-
-export async function convertOfficeToPDF(
-    options: ConvertOptions
-): Promise<ConvertResult> {
-
-    try {
-
-        await fs.mkdir(
-            OUTPUT_DIR,
-            {
-                recursive: true,
-            }
-        );
-
-        const tempFolder =
-            path.join(
-                OUTPUT_DIR,
-                crypto.randomUUID()
-            );
-
-        await fs.mkdir(tempFolder);
-
-        /**
-         * Convert
-         */
-
-        await execa(
-            "soffice",
-            [
-                "--headless",
-
-                "--convert-to",
-
-                "pdf",
-
-                options.input.path,
-
-                "--outdir",
-
-                tempFolder,
-            ]
-        );
-
-        const files =
-            await fs.readdir(
-                tempFolder
-            );
-
-        const pdf =
-            files.find((file) =>
-                file.endsWith(".pdf")
-            );
-
-        if (!pdf) {
-
-            throw new Error(
-                "LibreOffice conversion failed."
-            );
-
-        }
-
-        return {
-
-            success: true,
-
-            outputName: pdf,
-
-            outputPath:
-                path.join(
-                    tempFolder,
-                    pdf
-                ),
-
-            message:
-                "Converted successfully.",
-
-        };
-
-    } catch (error) {
-
-        return {
-
-            success: false,
-
-            message:
-                error instanceof Error
-                    ? error.message
-                    : "Conversion failed.",
-
-        };
-
-    }
-
+function safeName(name: string) {
+  return name.replace(/[^a-zA-Z0-9._-]/g, "-").trim() || "document";
 }
 
-/**
- * ==========================================================
- * Validation
- * ==========================================================
- */
+export async function convertOfficeToPDF(options: ConvertOptions): Promise<ConvertResult> {
+  try {
+    const sofficeExecutable = await findLibreOfficeExecutable();
+    if (!sofficeExecutable) {
+      console.error("[LIBREOFFICE_CONVERT] LibreOffice not found on system.");
+      return {
+        success: false,
+        message: "LibreOffice is not configured on the server.",
+      };
+    }
 
-export function validateOfficeFile(
-    fileName: string
-) {
+    const workingRoot = path.resolve(OUTPUT_DIR, crypto.randomUUID());
+    const inputDir = path.join(workingRoot, "input");
+    const outputDir = path.join(workingRoot, "output");
+    const userProfile = path.join(workingRoot, "profile");
 
-    return /\.(doc|docx|xls|xlsx|ppt|pptx|odt|ods|odp)$/i.test(
-        fileName
+    await fs.mkdir(inputDir, { recursive: true });
+    await fs.mkdir(outputDir, { recursive: true });
+    await fs.mkdir(userProfile, { recursive: true });
+
+    const safeInputName = safeName(path.basename(options.input.name) || "document");
+    const inputPath = path.join(inputDir, safeInputName);
+
+    await fs.copyFile(options.input.path, inputPath);
+
+    console.log("[LIBREOFFICE_CONVERT] Using soffice executable:", sofficeExecutable);
+    console.log("[LIBREOFFICE_CONVERT] Starting conversion:", inputPath, "->", outputDir);
+
+    const environment = {
+      ...process.env,
+      HOME: userProfile,
+      USERPROFILE: userProfile,
+      TMPDIR: userProfile,
+      TMP: userProfile,
+      TEMP: userProfile,
+    };
+
+    await execa(
+      sofficeExecutable,
+      [
+        "--headless",
+        "--nologo",
+        "--nodefault",
+        "--norestore",
+        "--nolockcheck",
+        "--convert-to",
+        "pdf",
+        "--outdir",
+        outputDir,
+        inputPath,
+      ],
+      {
+        env: environment,
+        timeout: 120000,
+        reject: true,
+      }
     );
 
-}
+    const files = await fs.readdir(outputDir);
+    const pdfFile = files.find((file) => file.toLowerCase().endsWith(".pdf"));
 
-/**
- * ==========================================================
- * LibreOffice Exists
- * ==========================================================
- */
-
-export async function libreOfficeInstalled() {
-
-    try {
-
-        await execa(
-            "soffice",
-            [
-                "--version",
-            ]
-        );
-
-        return true;
-
-    } catch {
-
-        return false;
-
+    if (!pdfFile) {
+      throw new Error("LibreOffice conversion did not produce a PDF file.");
     }
 
+    const pdfPath = path.join(outputDir, pdfFile);
+    const pdfBuffer = await fs.readFile(pdfPath);
+
+    if (pdfBuffer.length === 0) {
+      throw new Error("The generated PDF is empty.");
+    }
+
+    const header = pdfBuffer.subarray(0, 5).toString("ascii");
+    if (header !== "%PDF-") {
+      throw new Error("The generated file is not a valid PDF.");
+    }
+
+    console.log("[LIBREOFFICE_CONVERT] Conversion successful, output file:", pdfPath);
+
+    return {
+      success: true,
+      outputName: pdfFile,
+      outputPath: pdfPath,
+      message: "Converted successfully using LibreOffice.",
+    };
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error("[LIBREOFFICE_CONVERT] Conversion failed:", errorMessage);
+
+    return {
+      success: false,
+      message:
+        error instanceof Error
+          ? error.message
+          : "The uploaded Excel file could not be converted.",
+    };
+  }
+}
+
+export function validateOfficeFile(fileName: string) {
+  return /\.(doc|docx|xls|xlsx|ppt|pptx|odt|ods|odp)$/i.test(fileName);
+}
+
+export async function libreOfficeInstalled() {
+  const sofficeExecutable = await findLibreOfficeExecutable();
+  if (!sofficeExecutable) return false;
+
+  try {
+    await execa(sofficeExecutable, ["--version"], { timeout: 30000 });
+    return true;
+  } catch {
+    return false;
+  }
 }

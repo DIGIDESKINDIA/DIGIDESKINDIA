@@ -1,17 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  --dd-bg: #f8fafc;
-  --dd-bg-muted: #ffffff;
+  --dd-bg: #edf3f6;
+  --dd-bg-muted: #f9fbfc;
   --dd-bg-elevated: #ffffff;
   --dd-surface: #ffffff;
-  --dd-surface-soft: #f8fafc;
-  --dd-surface-strong: #e2e8f0;
-  --dd-text: #0f172a;
+  --dd-surface-soft: #eef5f8;
+  --dd-surface-strong: #d9e7ec;
+  --dd-text: #1b2b36;
   --dd-text-muted: #475569;
   --dd-text-soft: #64748b;
-  --dd-border: #e2e8f0;
-  --dd-border-strong: rgba(15, 23, 42, 0.08);
+  --dd-border: #cfe1ea;
+  --dd-border-strong: rgba(16, 35, 51, 0.1);
+  --dd-navy: #071b2d;
+  --dd-saffron: #f59e0b;
+  --dd-green: #1dc8a2;
+  --dd-cyan: #0891b2;
+  --font-body: var(--font-manrope), "Inter", "Segoe UI", Arial, sans-serif;
+  --font-heading: var(--font-manrope), "Inter", "Segoe UI", Arial, sans-serif;
+  --font-size-nav: 15px;
+  --font-size-hero: clamp(2.8rem, 3.2vw, 5rem);
+  --font-size-subtitle: clamp(1.6rem, 1.9vw, 2.6rem);
+  --font-size-toolbar: 14px;
+  --font-size-page-controls: 14px;
+  --font-size-small: 12px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 800;
+  --header-height: 72px;
+  --toolbar-height: 60px;
+  --page-control-height: 52px;
+  --surface-panel: #f9fbfc;
+  --surface-strong: #e9eff3;
+  --workspace-bg: #dfe5ea;
+  --page-shadow: 0 10px 26px rgba(15, 23, 42, 0.18);
+  --control-border: rgba(32, 105, 147, 0.7);
 }
 
 html[data-theme="dark"] {
@@ -41,6 +65,194 @@ body {
   background: var(--dd-bg);
   color: var(--dd-text);
   overflow-x: hidden;
+  font-family: var(--font-body);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(148, 163, 184, 0.14);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(71, 85, 105, 0.35);
+  border-radius: 999px;
+}
+
+.dd-editor-shell {
+  font-family: var(--font-body);
+  letter-spacing: -0.01em;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+.editor-chrome,
+.toolbar-center-wrapper,
+.dd-toolbar-shell {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.dd-toolbar-shell::before,
+.dd-toolbar-shell::after,
+.toolbar-shell::before,
+.toolbar-shell::after,
+.toolbar-row::before,
+.toolbar-row::after,
+.page-controls-shell::before,
+.page-controls-shell::after,
+.page-controls-row::before,
+.page-controls-row::after {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  content: "" !important;
+}
+
+.toolbar-shell {
+  width: min(100%, 920px);
+  border-radius: 4px;
+  border: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+.toolbar-row {
+  min-height: 42px;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+.page-controls-shell {
+  border-radius: 4px;
+  border: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+.page-controls-row {
+  min-height: 42px;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+.editor-chrome,
+.toolbar-center-wrapper,
+.page-controls-shell,
+.page-controls-row,
+.toolbar-shell,
+.toolbar-row {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.dd-tool-button {
+  border: 1px solid transparent;
+  border-radius: 0;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+  line-height: 1.1;
+  padding-inline: 12px;
+  height: 42px;
+  font-size: 12.9px;
+  letter-spacing: -0.01em;
+}
+
+.dd-tool-button:hover {
+  background: rgba(76, 145, 185, 0.08);
+}
+
+.dd-tool-button[data-active="true"] {
+  background: rgba(47, 142, 187, 0.1);
+  border-color: rgba(47, 142, 187, 0.45);
+  color: #0d5d87;
+}
+
+.dd-toolbar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(71, 85, 105, 0.34) rgba(148, 163, 184, 0.14);
+}
+
+.dd-toolbar-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.pdf-inline-text {
+  border: 1px solid transparent;
+  background: transparent;
+  color: transparent;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pdf-text-no-underline {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.pdf-inline-text-layer,
+.pdf-inline-text-layer .textLayer,
+.pdf-inline-text-layer [data-edit-text-id] {
+  font-variant-ligatures: none !important;
+  text-shadow: none !important;
+}
+
+.pdf-inline-text:hover,
+.pdf-inline-text:focus {
+  outline: none;
+}
+
+.editor-text-hover {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.08);
+}
+
+.editor-text-selected {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.22);
+}
+
+.editor-text-editing {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px rgba(255, 41, 82, 0.28);
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  font: inherit;
 }
 
 .theme-transition,
@@ -108,7 +320,32 @@ html[data-theme="dark"] .shadow-2xl {
 }
 
 .gradient-text {
-  @apply bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-amber-500 via-orange-500 to-green-600 bg-clip-text text-transparent;
+}
+
+.dd-page-surface {
+  background:
+    radial-gradient(circle at 8% 0%, rgba(8, 145, 178, 0.08), transparent 30rem),
+    radial-gradient(circle at 92% 12%, rgba(245, 158, 11, 0.07), transparent 26rem),
+    var(--dd-bg);
+}
+
+.dd-panel {
+  border: 1px solid var(--dd-border);
+  background: color-mix(in srgb, var(--dd-surface) 94%, transparent);
+  box-shadow: 0 14px 36px rgba(7, 27, 45, 0.07);
+}
+
+html[data-theme="dark"] .dd-page-surface {
+  background:
+    radial-gradient(circle at 8% 0%, rgba(8, 145, 178, 0.14), transparent 30rem),
+    radial-gradient(circle at 92% 12%, rgba(245, 158, 11, 0.08), transparent 26rem),
+    var(--dd-bg);
+}
+
+html[data-theme="dark"] .dd-panel {
+  background: color-mix(in srgb, var(--dd-surface) 92%, transparent);
+  box-shadow: 0 20px 48px rgba(2, 6, 23, 0.28);
 }
 
 /* ===========================

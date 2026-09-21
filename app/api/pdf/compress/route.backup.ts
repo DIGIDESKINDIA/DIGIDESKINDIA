@@ -944,7 +944,8 @@ export async function POST(
        3. Process quickly
        4. Get reasonably close to requested size
 
-       Maximum raster passes: 3
+      The target is a hard byte constraint. Keep searching until the
+      safe raster profile floor is exhausted or the target is reached.
     ===================================================== */
 
     const pageSizes =
@@ -973,9 +974,11 @@ export async function POST(
         target * 0.82
       );
 
+    const maxAttempts = 8;
+
     for (
       let attemptIndex = 0;
-      attemptIndex < 3;
+      attemptIndex < maxAttempts;
       attemptIndex++
     ) {
       console.log(
@@ -1086,39 +1089,13 @@ export async function POST(
        * Do NOT compress it again.
        * Another pass would only reduce quality.
        */
-      if (
-        attempt.size < preferredMinimum
-      ) {
-        console.log(
-          `[Digital Desk] Result already below target. Keeping quality instead of recompressing.`
-        );
-
-        return await createPDFResponse({
-          attempt,
-
-          originalSize:
-            uploaded.size,
-
-          target,
-
-          originalName:
-            uploaded.name,
-
-          processingMs:
-            Date.now() -
-            startedAt,
-        });
-      }
-
       /*
        * Still too large.
        *
        * Make one controlled step more aggressive.
        * No grayscale and no ultra-low DPI.
        */
-      if (
-        attemptIndex < 2
-      ) {
+      if (attemptIndex < maxAttempts - 1) {
         const nextProfile =
           getMoreAggressiveProfile(
             profile,

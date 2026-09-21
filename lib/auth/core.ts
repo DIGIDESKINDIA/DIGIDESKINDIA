@@ -13,6 +13,10 @@ function getAuthSecret(): string {
     return explicit.trim();
   }
 
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('AUTH_SECRET must be configured with at least 16 characters in production.');
+  }
+
   // Derive a stable secret from the admin credentials so the system remains
   // functional even when AUTH_SECRET is not set. Prefer setting AUTH_SECRET.
   const fallback = `${process.env.ADMIN_PASSWORD ?? ""}:${process.env.NEXT_PUBLIC_ADMIN_PASSWORD ?? ""}`;

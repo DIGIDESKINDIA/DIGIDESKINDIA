@@ -1,19 +1,17 @@
 "use client";
 
-import Link from "next/link";
-import { FileText, Sparkles, ArrowRight } from "lucide-react";
+import type { ReactNode } from "react";
+import { Sparkles } from "lucide-react";
 
-export default function PdfHero() {
+interface Props {
+  children?: ReactNode;
+}
+
+export default function PdfHero({ children }: Props) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-cyan-600 to-sky-500 py-24 text-white">
-
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_40%)]" />
-
-      <div className="relative mx-auto max-w-7xl px-5">
-
-        <div className="max-w-3xl">
-
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-5 py-2 backdrop-blur">
+    <div className="text-center">
+      <div className="mx-auto max-w-3xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 dark:border-blue-400/20 dark:bg-blue-400/10 dark:text-blue-200">
 
             <Sparkles size={16} />
 
@@ -21,11 +19,11 @@ export default function PdfHero() {
 
           </div>
 
-          <h1 className="mt-6 text-5xl font-black leading-tight lg:text-6xl">
+          <h1 className="mx-auto mt-3 max-w-[22ch] text-3xl font-black leading-[1.05] tracking-tight text-[#102333] dark:text-white sm:text-4xl lg:text-[2.35rem]">
 
             All PDF Tools
 
-            <span className="block text-cyan-200">
+            <span className="text-blue-600 dark:text-blue-400">
 
               In One Place
 
@@ -33,7 +31,7 @@ export default function PdfHero() {
 
           </h1>
 
-          <p className="mt-6 text-lg leading-8 text-blue-100">
+          <p className="mx-auto mt-2 max-w-2xl text-xs leading-5 text-slate-600 dark:text-slate-400 sm:text-sm">
 
             Merge, Split, Compress, Convert,
             Protect, Unlock, Watermark and edit
@@ -41,39 +39,8 @@ export default function PdfHero() {
 
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-4">
-
-            <Link
-              href="#tools"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-4 font-semibold text-blue-700 transition hover:scale-105"
-            >
-              Explore Tools
-              <ArrowRight size={18} />
-            </Link>
-
-            <Link
-              href="/service"
-              className="rounded-xl border border-white/30 px-6 py-4 font-semibold backdrop-blur hover:bg-white/10"
-            >
-              Government Services
-            </Link>
-
-          </div>
-
-        </div>
-
-        <div className="absolute right-10 top-12 hidden lg:block">
-
-          <div className="flex h-40 w-40 items-center justify-center rounded-full bg-white/10 backdrop-blur">
-
-            <FileText size={80} />
-
-          </div>
-
-        </div>
-
+          <div className="mt-4">{children}</div>
       </div>
-
-    </section>
+    </div>
   );
 }

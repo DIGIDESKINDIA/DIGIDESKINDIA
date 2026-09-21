@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { saveAs } from "file-saver";
+import JSZip from "jszip";
 import toast from "react-hot-toast";
 import {
   Download,
@@ -10,6 +11,7 @@ import {
   Loader2,
   Upload,
 } from "lucide-react";
+import PdfFilePreview from "@/components/pdf/PdfFilePreview";
 
 export default function PdfToJpgPage() {
   const inputRef =
@@ -69,64 +71,27 @@ export default function PdfToJpgPage() {
 
     try {
       setLoading(true);
+      const { loadPdf } = await import("@/lib/pdf/worker");
+      const pdf = await loadPdf(file);
+      const selectedPages = parsePages(pages, pdf.numPages);
+      const zip = new JSZip();
 
-      const formData =
-        new FormData();
+      for (const pageNumber of selectedPages) {
+        const page = await pdf.getPage(pageNumber);
+        const viewport = page.getViewport({ scale });
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.ceil(viewport.width);
+        canvas.height = Math.ceil(viewport.height);
+        const context = canvas.getContext("2d");
 
-      formData.append("file", file);
-      formData.append("format", "jpg");
-      formData.append(
-        "quality",
-        String(quality)
-      );
-      formData.append(
-        "scale",
-        String(scale)
-      );
+        if (!context) throw new Error("Unable to create image canvas.");
 
-      if (pages.trim()) {
-        formData.append(
-          "pages",
-          pages.trim()
-        );
+        await page.render({ canvasContext: context, viewport, canvas }).promise;
+        const imageBlob = await canvasToBlob(canvas, quality / 100);
+        zip.file(`page-${String(pageNumber).padStart(3, "0")}.jpg`, imageBlob);
       }
 
-      const response =
-        await fetch(
-          "/api/pdf/pdf-to-image",
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
-
-      if (!response.ok) {
-        let message =
-          "Unable to convert PDF to JPG.";
-
-        try {
-          const data =
-            await response.json();
-
-          message =
-            data.message ?? message;
-        } catch {}
-
-        throw new Error(message);
-      }
-
-      const blob =
-        await response.blob();
-
-      if (
-        blob.size <= 0 ||
-        blob.type !==
-          "application/zip"
-      ) {
-        throw new Error(
-          "The server did not return a valid ZIP file."
-        );
-      }
+      const blob = await zip.generateAsync({ type: "blob" });
 
       const now = new Date();
 
@@ -155,6 +120,28 @@ export default function PdfToJpgPage() {
     } finally {
       setLoading(false);
     }
+  }
+
+  function parsePages(value: string, pageCount: number) {
+    if (!value.trim()) return Array.from({ length: pageCount }, (_, index) => index + 1);
+    const selected = new Set<number>();
+    for (const part of value.split(",")) {
+      const [start, end] = part.trim().split("-").map(Number);
+      if (!Number.isInteger(start)) continue;
+      const last = Number.isInteger(end) ? end : start;
+      for (let page = Math.max(1, start); page <= Math.min(pageCount, last); page += 1) selected.add(page);
+    }
+    if (!selected.size) throw new Error("Enter valid page numbers.");
+    return Array.from(selected).sort((a, b) => a - b);
+  }
+
+  function canvasToBlob(canvas: HTMLCanvasElement, imageQuality: number) {
+    return new Promise<Blob>((resolve, reject) => {
+      canvas.toBlob((blob) => {
+        if (blob) resolve(blob);
+        else reject(new Error("Unable to create JPG image."));
+      }, "image/jpeg", imageQuality);
+    });
   }
 
   return (
@@ -305,6 +292,8 @@ export default function PdfToJpgPage() {
               </div>
             </div>
           )}
+
+          <PdfFilePreview file={file} />
 
           <button
             onClick={handleConvert}

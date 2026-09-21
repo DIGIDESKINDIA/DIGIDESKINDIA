@@ -7,7 +7,7 @@ import os from "os";
  * Safe upload directory path.
  * Uses the current working directory or temp directory to avoid path traversal attacks.
  */
-const UPLOAD_DIR = "storage/uploads";
+const UPLOAD_DIR = process.env.SIGNING_STORAGE_DIR || "storage/uploads";
 
 /**
  * Ensure the upload directory exists
@@ -37,9 +37,10 @@ export function generateSafeFileName(originalName: string): string {
 export function getUploadPath(safeFileName: string): string {
   const fullPath = path.resolve(path.join(UPLOAD_DIR, safeFileName));
   const uploadDirResolved = path.resolve(UPLOAD_DIR);
+  const relativePath = path.relative(uploadDirResolved, fullPath);
 
   // Security: ensure the file path is within the upload directory
-  if (!fullPath.startsWith(uploadDirResolved)) {
+  if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
     throw new Error("Invalid file path");
   }
 

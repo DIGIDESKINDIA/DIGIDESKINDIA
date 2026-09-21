@@ -20,7 +20,7 @@ export default function MainLayout({
 
   return (
     <ManishAIProvider>
-      <div className={theme === "dark" ? "bg-[#050B18] text-white" : "bg-slate-50 text-slate-900"}>
+      <div className={theme === "dark" ? "dd-page-surface min-h-screen text-white" : "dd-page-surface min-h-screen text-slate-900"}>
         <Navbar />
 
         <main>{children}</main>

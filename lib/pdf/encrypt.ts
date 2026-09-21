@@ -13,6 +13,7 @@ import {
 import {
   TEMP_OUTPUT_DIR,
 } from "./constants";
+import { resolveQpdfBinary } from "./qpdf";
 
 /**
  * ==========================================================
@@ -64,7 +65,7 @@ export async function encryptPDF(
     }
 
     await execa(
-      "qpdf",
+      await resolveQpdfBinary(),
       [
         "--encrypt",
         password,

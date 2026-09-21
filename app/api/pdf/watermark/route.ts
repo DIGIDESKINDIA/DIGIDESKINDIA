@@ -61,6 +61,8 @@ export async function POST(
         "center"
     ) as Position;
 
+    const pages = String(form.get("pages") ?? "all");
+
     if (!pdf) {
       return NextResponse.json(
         {
@@ -175,11 +177,30 @@ export async function POST(
         color,
 
         position,
+
+        pages,
       });
 
-    return NextResponse.json(
-      result
-    );
+    if (!result.success || !result.outputPath) {
+      return NextResponse.json(result, { status: 422 });
+    }
+
+    const output = await fs.readFile(result.outputPath);
+    await fs.unlink(pdfPath).catch(() => undefined);
+    await fs.unlink(result.outputPath).catch(() => undefined);
+    if (imagePath) {
+      await fs.unlink(imagePath).catch(() => undefined);
+    }
+
+    return new NextResponse(output, {
+      status: 200,
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": `attachment; filename="watermarked-${pdf.name.replace(/[^a-zA-Z0-9._-]/g, "-")}"`,
+        "Content-Length": String(output.length),
+        "Cache-Control": "no-store",
+      },
+    });
   } catch (error) {
     console.error(error);
 

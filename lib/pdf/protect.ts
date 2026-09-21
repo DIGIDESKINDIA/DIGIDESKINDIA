@@ -1,5 +1,3 @@
-import { PDFDocument } from "pdf-lib";
-
 import type {
   ProtectOptions,
 } from "./types";
@@ -13,6 +11,7 @@ import {
   validatePdf,
   validatePassword,
 } from "./validation";
+import { protectPdf as protectWithAdobe } from "./adobe-services";
 
 /**
  * NOTE
@@ -40,48 +39,8 @@ export async function protectPdf({
     );
   }
 
-  let pdf: PDFDocument;
-
   try {
-    pdf = await PDFDocument.load(
-      file.buffer,
-      {
-        ignoreEncryption: false,
-        updateMetadata: false,
-      }
-    );
-  } catch {
-    throw new ValidationError(
-      "Unable to read PDF."
-    );
-  }
-
-  try {
-    pdf.setProducer(
-      "DigiDesk India"
-    );
-
-    pdf.setCreator(
-      "DigiDesk India PDF Engine"
-    );
-
-    pdf.setModificationDate(
-      new Date()
-    );
-
-    /**
-     * Password encryption
-     * will be implemented
-     * when a dedicated PDF
-     * encryption engine is added.
-     */
-
-    return await pdf.save({
-      useObjectStreams: true,
-      addDefaultPage: false,
-      updateFieldAppearances: false,
-      objectsPerTick: 100,
-    });
+    return new Uint8Array(await protectWithAdobe(file.buffer, password));
   } catch {
     throw new PdfEngineError(
       "Unable to protect PDF."

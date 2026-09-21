@@ -159,9 +159,23 @@ export async function POST(
 
             });
 
-        return NextResponse.json(
-            result
-        );
+        if (!result.success || !result.outputPath) {
+            return NextResponse.json(result, { status: 422 });
+        }
+
+        const output = await fs.readFile(result.outputPath);
+        await fs.unlink(uploadPath).catch(() => undefined);
+        await fs.unlink(result.outputPath).catch(() => undefined);
+
+        return new NextResponse(output, {
+            status: 200,
+            headers: {
+                "Content-Type": "application/pdf",
+                "Content-Disposition": `attachment; filename="rotated-${file.name.replace(/[^a-zA-Z0-9._-]/g, "-")}"`,
+                "Content-Length": String(output.length),
+                "Cache-Control": "no-store",
+            },
+        });
 
     } catch (error) {
 

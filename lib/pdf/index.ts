@@ -26,6 +26,24 @@ export {
   officeMetadata,
 } from "./convert/office";
 export { imageToPDF } from "./convert/image";
+export { txtToPDF } from "./convert/txt";
+export { htmlToPDF } from "./convert/html";
+export {
+  pdfToWord,
+  pdfToWordOutputName,
+} from "./pdf-to-word";
+export {
+  pdfToPptx,
+  pdfToPptxOutputName,
+} from "./pdf-to-pptx";
+export { PDF_TO_PPTX_MAX_FILE_SIZE } from "./pdf-to-pptx-config";
+export { createPdfToPptxJob, getPdfToPptxJob } from "./pdf-to-pptx-jobs";
+export type {
+  PdfToWordMode,
+  OcrLanguage,
+  PdfToWordOptions,
+  PdfToWordResult,
+} from "./pdf-to-word";
 export {
   PdfEngineError,
   ValidationError,
@@ -43,12 +61,8 @@ export {
   CompressionError,
 } from "./errors";
 
-export async function convertHTMLToPDF(_options?: unknown) {
-  return {
-    success: false,
-    message: "HTML to PDF conversion is not available in this build.",
-  };
-}
+export { htmlToPDF as convertHTMLToPDF } from "./convert/html";
+export { signPdf } from "./esign";
 
 export async function convertPDFToImage(_options?: unknown) {
   return {

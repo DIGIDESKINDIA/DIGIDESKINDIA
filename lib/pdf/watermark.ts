@@ -50,34 +50,33 @@ export async function addWatermark(
     const pdf =
       await PDFDocument.load(pdfBytes);
 
-    const font =
-      await pdf.embedFont(
-        StandardFonts.HelveticaBold
-      );
+    const font = await pdf.embedFont(StandardFonts.HelveticaBold);
+
+    let image;
+    if (options.imagePath) {
+      const imageBytes = await fs.readFile(options.imagePath);
+      image = options.imagePath.toLowerCase().endsWith(".png")
+        ? await pdf.embedPng(imageBytes)
+        : await pdf.embedJpg(imageBytes);
+    }
+
+    const selectedPages = parsePageSelection(options.pages, pdf.getPageCount());
 
     const pages = pdf.getPages();
 
-    for (const page of pages) {
+    for (const [pageIndex, page] of pages.entries()) {
+      if (!selectedPages.has(pageIndex + 1)) continue;
       const { width, height } =
         page.getSize();
 
-      page.drawText(options.text, {
-        x: width / 5,
-        y: height / 2,
-        size:
-          options.fontSize ?? 48,
-        font,
-        color: rgb(
-          0.55,
-          0.55,
-          0.55
-        ),
-        opacity:
-          options.opacity ?? 0.25,
-        rotate: degrees(
-          options.rotation ?? 45
-        ),
-      });
+      const coordinates = getWatermarkPosition(options.position, width, height);
+
+      if (image) {
+        const scale = Math.min(160 / image.width, 100 / image.height);
+        page.drawImage(image, { x: coordinates.x, y: coordinates.y, width: image.width * scale, height: image.height * scale, opacity: options.opacity ?? 0.25, rotate: degrees(options.rotation ?? 45) });
+      } else {
+        page.drawText(options.text, { x: coordinates.x, y: coordinates.y, size: options.fontSize ?? 48, font, color: parseColor(options.color), opacity: options.opacity ?? 0.25, rotate: degrees(options.rotation ?? 45) });
+      }
     }
 
     const output =
@@ -166,4 +165,30 @@ export async function watermarkMetadata(
     rotation:
       options.rotation ?? 45,
   };
+}
+
+function parsePageSelection(value: string | undefined, totalPages: number) {
+  if (!value || value.trim().toLowerCase() === "all") return new Set(Array.from({ length: totalPages }, (_, index) => index + 1));
+  const selected = new Set<number>();
+  for (const part of value.split(",")) {
+    const [start, end] = part.trim().split("-").map(Number);
+    if (!Number.isFinite(start)) continue;
+    const last = Number.isFinite(end) ? end : start;
+    for (let page = Math.max(1, start); page <= Math.min(totalPages, last); page += 1) selected.add(page);
+  }
+  return selected;
+}
+
+function getWatermarkPosition(position: string | undefined, width: number, height: number) {
+  const margin = 42;
+  if (position === "top-left") return { x: margin, y: height - margin - 40 };
+  if (position === "top-right") return { x: width / 2, y: height - margin - 40 };
+  if (position === "bottom-left") return { x: margin, y: margin };
+  if (position === "bottom-right") return { x: width / 2, y: margin };
+  return { x: width / 5, y: height / 2 };
+}
+
+function parseColor(value: string | undefined) {
+  const hex = /^#?([a-f\d]{6})$/i.exec(value ?? "#64748b")?.[1] ?? "64748b";
+  return rgb(parseInt(hex.slice(0, 2), 16) / 255, parseInt(hex.slice(2, 4), 16) / 255, parseInt(hex.slice(4, 6), 16) / 255);
 }

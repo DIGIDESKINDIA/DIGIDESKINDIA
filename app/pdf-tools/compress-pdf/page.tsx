@@ -23,56 +23,13 @@ import {
   X,
 } from "lucide-react";
 
-type CompressionMode =
-  | "auto"
-  | "100"
-  | "200"
-  | "500"
-  | "custom";
-
-type CustomUnit = "KB" | "MB";
-
 type CompressionResult = {
   originalSize: number;
   compressedSize: number;
   reductionPercent: number;
-  targetSize: number | null;
-  targetReached: boolean;
   downloadUrl: string;
   fileName: string;
 };
-
-const compressionOptions: {
-  id: CompressionMode;
-  title: string;
-  subtitle: string;
-}[] = [
-  {
-    id: "auto",
-    title: "Automatic",
-    subtitle: "Best balance",
-  },
-  {
-    id: "100",
-    title: "100 KB",
-    subtitle: "Compact",
-  },
-  {
-    id: "200",
-    title: "200 KB",
-    subtitle: "Recommended",
-  },
-  {
-    id: "500",
-    title: "500 KB",
-    subtitle: "Better quality",
-  },
-  {
-    id: "custom",
-    title: "Custom",
-    subtitle: "Choose size",
-  },
-];
 
 function formatBytes(bytes: number) {
   if (!Number.isFinite(bytes) || bytes <= 0) {
@@ -92,6 +49,17 @@ function formatBytes(bytes: number) {
   const mb = kb / 1024;
 
   return `${mb.toFixed(mb >= 10 ? 1 : 2)} MB`;
+}
+
+function estimateCompressedBytes(
+  originalBytes: number,
+  level: number
+) {
+  const ratio = level < 70
+    ? Math.max(0.1, 1 - level * 0.012)
+    : Math.max(0.01, 0.1 - (level - 70) * 0.0102);
+
+  return Math.max(1024, Math.round(originalBytes * ratio));
 }
 
 function getDownloadFileName(
@@ -131,14 +99,11 @@ export default function CompressPDFPage() {
 
   const [file, setFile] = useState<File | null>(null);
 
-  const [mode, setMode] =
-    useState<CompressionMode>("auto");
+  const [previewUrl, setPreviewUrl] =
+    useState<string | null>(null);
 
-  const [customValue, setCustomValue] =
-    useState("100");
-
-  const [customUnit, setCustomUnit] =
-    useState<CustomUnit>("KB");
+  const [compressionLevel, setCompressionLevel] =
+    useState(60);
 
   const [dragging, setDragging] =
     useState(false);
@@ -173,6 +138,14 @@ export default function CompressPDFPage() {
     };
   }, [result]);
 
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
+
   function validateFile(selectedFile: File) {
     const isPDF =
       selectedFile.type === "application/pdf" ||
@@ -204,7 +177,12 @@ export default function CompressPDFPage() {
 
     clearResult();
 
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+    }
+
     setFile(selectedFile);
+    setPreviewUrl(URL.createObjectURL(selectedFile));
     setError("");
     setProgress(0);
   }
@@ -259,7 +237,12 @@ export default function CompressPDFPage() {
 
     clearResult();
 
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+    }
+
     setFile(null);
+    setPreviewUrl(null);
     setError("");
     setProgress(0);
 
@@ -268,66 +251,11 @@ export default function CompressPDFPage() {
     }
   }
 
-  function getTargetBytes() {
-    if (mode === "auto") {
-      return null;
-    }
-
-    if (mode !== "custom") {
-      return Number(mode) * 1024;
-    }
-
-    const value = Number(customValue);
-
-    if (
-      !Number.isFinite(value) ||
-      value <= 0
-    ) {
-      throw new Error(
-        "Please enter a valid custom target size."
-      );
-    }
-
-    const bytes =
-      customUnit === "MB"
-        ? value * 1024 * 1024
-        : value * 1024;
-
-    return Math.round(bytes);
-  }
-
   async function handleCompress() {
     if (!file) {
       setError(
         "Please select a PDF file first."
       );
-      return;
-    }
-
-    let targetBytes: number | null;
-
-    try {
-      targetBytes = getTargetBytes();
-    } catch (targetError) {
-      setError(
-        targetError instanceof Error
-          ? targetError.message
-          : "Invalid target size."
-      );
-
-      return;
-    }
-
-    if (
-      targetBytes !== null &&
-      targetBytes >= file.size
-    ) {
-      setError(
-        `Your PDF is already ${formatBytes(
-          file.size
-        )}. Choose a target smaller than the original file size.`
-      );
-
       return;
     }
 
@@ -363,13 +291,10 @@ export default function CompressPDFPage() {
       const formData = new FormData();
 
       formData.append("file", file);
-
-      if (targetBytes !== null) {
-        formData.append(
-          "targetBytes",
-          String(targetBytes)
-        );
-      }
+      formData.append(
+        "compressionLevel",
+        String(compressionLevel)
+      );
 
       const response = await fetch(
         "/api/pdf/compress",
@@ -427,17 +352,6 @@ export default function CompressPDFPage() {
         ) || "0"
       );
 
-      const responseTarget = Number(
-        response.headers.get(
-          "X-Target-Size"
-        ) || "0"
-      );
-
-      const targetReached =
-        response.headers.get(
-          "X-Target-Reached"
-        ) === "true";
-
       const fileName =
         getDownloadFileName(
           response.headers.get(
@@ -455,11 +369,6 @@ export default function CompressPDFPage() {
         originalSize,
         compressedSize,
         reductionPercent,
-        targetSize:
-          responseTarget > 0
-            ? responseTarget
-            : null,
-        targetReached,
         downloadUrl,
         fileName,
       });
@@ -503,10 +412,13 @@ export default function CompressPDFPage() {
 
     clearResult();
 
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+    }
+
     setFile(null);
-    setMode("auto");
-    setCustomValue("100");
-    setCustomUnit("KB");
+    setPreviewUrl(null);
+    setCompressionLevel(60);
     setError("");
     setProgress(0);
 
@@ -516,7 +428,7 @@ export default function CompressPDFPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900">
+    <main className="min-h-screen bg-white text-[#102333]">
       {/* Header */}
 
       <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-blue-800 text-white">
@@ -524,7 +436,7 @@ export default function CompressPDFPage() {
 
         <div className="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-blue-400/10 blur-3xl" />
 
-        <div className="relative mx-auto max-w-6xl px-5 py-10 sm:px-6 sm:py-12">
+        <div className="relative mx-auto max-w-5xl px-5 py-10 sm:px-6 sm:py-12">
           <Link
             href="/pdf-tools"
             className="inline-flex items-center gap-2 text-sm font-semibold text-blue-100 transition hover:text-white"
@@ -533,7 +445,7 @@ export default function CompressPDFPage() {
             Back to PDF Tools
           </Link>
 
-          <div className="mt-7 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div className="mt-7 flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold backdrop-blur">
                 <Sparkles size={15} />
@@ -546,18 +458,17 @@ export default function CompressPDFPage() {
 
               <p className="mt-3 max-w-2xl text-sm leading-6 text-blue-100 sm:text-base">
                 Reduce PDF file size with
-                automatic optimization or choose
-                your preferred target size.
+                adjustable compression quality.
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-3 text-xs font-semibold text-blue-50">
-              <span className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-4 py-3">
+            <div className="flex shrink-0 flex-wrap gap-2 pt-1 text-xs font-semibold text-blue-50 lg:pt-12">
+              <span className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-3 py-2.5">
                 <ShieldCheck size={17} />
                 Secure Processing
               </span>
 
-              <span className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-4 py-3">
+              <span className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-3 py-2.5">
                 <Gauge size={17} />
                 Large-file processing
               </span>
@@ -569,17 +480,17 @@ export default function CompressPDFPage() {
       {/* Main tool */}
 
       <section className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
-        <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_18px_60px_rgba(15,23,42,0.08)]">
-          <div className="p-5 sm:p-7 lg:p-8">
+        <div className="overflow-hidden border border-slate-200 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.08)]">
+          <div className="p-4 sm:p-6 lg:p-7">
             {!file ? (
               <div
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
-                className={`flex min-h-[300px] cursor-pointer flex-col items-center justify-center rounded-[24px] border-2 border-dashed px-5 py-10 text-center transition ${
+                className={`flex min-h-[280px] cursor-pointer flex-col items-center justify-center rounded-[24px] border-2 border-dashed px-5 py-9 text-center transition ${
                   dragging
                     ? "border-blue-500 bg-blue-50"
-                    : "border-slate-300 bg-slate-50/70 hover:border-blue-400 hover:bg-blue-50/50"
+                    : "border-slate-300 bg-[#f8fafc] hover:border-blue-400 hover:bg-blue-50/50"
                 }`}
                 onClick={() =>
                   inputRef.current?.click()
@@ -589,11 +500,11 @@ export default function CompressPDFPage() {
                   <UploadCloud size={38} />
                 </div>
 
-                <h2 className="mt-6 text-2xl font-black sm:text-3xl">
+                <h2 className="mt-6 text-2xl font-black text-[#102333] sm:text-3xl">
                   Select your PDF
                 </h2>
 
-                <p className="mt-2 text-sm text-slate-500 sm:text-base">
+                <p className="mt-2 text-sm text-slate-600 sm:text-base">
                   Drag & drop your PDF here or
                   click to browse.
                 </p>
@@ -605,7 +516,7 @@ export default function CompressPDFPage() {
                   Choose PDF
                 </button>
 
-                <p className="mt-4 text-xs text-slate-400">
+                <p className="mt-4 text-xs text-slate-500">
                   PDF only • Large valid files are supported
                 </p>
               </div>
@@ -614,6 +525,16 @@ export default function CompressPDFPage() {
                 {/* Selected file */}
 
                 <div className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:flex-row sm:items-center sm:justify-between">
+                  {previewUrl && (
+                    <div className="h-32 w-24 shrink-0 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+                      <iframe
+                        src={`${previewUrl}#page=1&view=FitH&toolbar=0&navpanes=0&scrollbar=0`}
+                        title={`Preview of ${file.name}`}
+                        className="h-[520px] w-[390px] origin-top-left scale-[0.24]"
+                      />
+                    </div>
+                  )}
+
                   <div className="flex min-w-0 items-center gap-4">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-600">
                       <FileText size={25} />
@@ -624,7 +545,7 @@ export default function CompressPDFPage() {
                         {file.name}
                       </p>
 
-                      <p className="mt-1 text-sm text-slate-500">
+                      <p className="mt-1 text-sm text-slate-600 dark:text-slate-200">
                         {formatBytes(file.size)}
                       </p>
                     </div>
@@ -642,121 +563,78 @@ export default function CompressPDFPage() {
                   )}
                 </div>
 
-                {/* Compression size */}
+                {/* Compression level */}
 
                 {!result && (
                   <div className="mt-7">
                     <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
                       <div>
                         <h2 className="text-lg font-black text-slate-900">
-                          Compression Size
+                          Compression Level
                         </h2>
 
-                        <p className="mt-1 text-sm text-slate-500">
-                          Select the output size
-                          you want.
+                        <p className="mt-1 text-sm text-slate-600 dark:text-slate-200">
+                          Move the slider right for
+                          a smaller file.
                         </p>
                       </div>
 
-                      <p className="text-xs font-medium text-slate-400">
+                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-300">
                         Original:{" "}
                         {formatBytes(file.size)}
                       </p>
                     </div>
 
-                    <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-                      {compressionOptions.map(
-                        (option) => {
-                          const active =
-                            mode === option.id;
+                    <div className="mt-6 rounded-2xl border border-blue-100 bg-blue-50/60 p-5">
+                      <div className="flex items-center justify-between gap-4">
+                        <span className="text-xs font-bold uppercase tracking-wide text-slate-600 dark:text-slate-100">
+                          Better quality
+                        </span>
 
-                          return (
-                            <button
-                              key={option.id}
-                              type="button"
-                              disabled={loading}
-                              onClick={() => {
-                                setMode(option.id);
-                                setError("");
-                              }}
-                              className={`min-h-[82px] rounded-2xl border px-3 py-3 text-left transition ${
-                                active
-                                  ? "border-blue-600 bg-blue-50 ring-2 ring-blue-600/10"
-                                  : "border-slate-200 bg-white hover:border-blue-300 hover:bg-slate-50"
-                              } disabled:cursor-not-allowed disabled:opacity-60`}
-                            >
-                              <div
-                                className={`text-sm font-black ${
-                                  active
-                                    ? "text-blue-700"
-                                    : "text-slate-800"
-                                }`}
-                              >
-                                {option.title}
-                              </div>
+                        <output className="text-2xl font-black text-blue-700">
+                          {compressionLevel}%
+                        </output>
 
-                              <div className="mt-1 text-[11px] font-medium text-slate-500">
-                                {option.subtitle}
-                              </div>
-                            </button>
-                          );
-                        }
-                      )}
-                    </div>
-
-                    {mode === "custom" && (
-                      <div className="mt-4 rounded-2xl border border-blue-100 bg-blue-50/60 p-4">
-                        <label className="text-sm font-bold text-slate-800">
-                          Custom target size
-                        </label>
-
-                        <div className="mt-3 flex max-w-md overflow-hidden rounded-xl border border-slate-300 bg-white focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/10">
-                          <input
-                            type="number"
-                            min="1"
-                            step="1"
-                            value={customValue}
-                            disabled={loading}
-                            onChange={(event) => {
-                              setCustomValue(
-                                event.target.value
-                              );
-
-                              setError("");
-                            }}
-                            className="min-w-0 flex-1 px-4 py-3 text-sm font-semibold outline-none"
-                            placeholder="Enter size"
-                          />
-
-                          <select
-                            value={customUnit}
-                            disabled={loading}
-                            onChange={(event) =>
-                              setCustomUnit(
-                                event.target
-                                  .value as CustomUnit
-                              )
-                            }
-                            className="border-l border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none"
-                          >
-                            <option value="KB">
-                              KB
-                            </option>
-
-                            <option value="MB">
-                              MB
-                            </option>
-                          </select>
-                        </div>
-
-                        <p className="mt-2 text-xs leading-5 text-slate-500">
-                          The target must be smaller
-                          than the original PDF.
-                          Extremely small targets may
-                          reduce image quality.
-                        </p>
+                        <span className="text-right text-xs font-bold uppercase tracking-wide text-slate-600 dark:text-slate-100">
+                          Smaller file
+                        </span>
                       </div>
-                    )}
+
+                      <input
+                        type="range"
+                        min="1"
+                        max="100"
+                        value={compressionLevel}
+                        disabled={loading}
+                        onChange={(event) => {
+                          setCompressionLevel(
+                            Number(event.target.value)
+                          );
+                          setError("");
+                        }}
+                        aria-label="Compression level"
+                        className="mt-5 h-2 w-full cursor-pointer accent-blue-600 disabled:cursor-not-allowed"
+                      />
+
+                      <p className="mt-3 text-xs leading-5 text-slate-600 dark:text-slate-200">
+                        Higher levels reduce image quality more aggressively.
+                      </p>
+
+                      <div className="mt-4 flex items-center justify-between rounded-xl border border-blue-100 bg-white px-4 py-3 dark:border-slate-500/40 dark:bg-slate-950/70">
+                        <span className="text-xs font-bold uppercase tracking-wide text-slate-600 dark:text-slate-100">
+                          Estimated new size
+                        </span>
+
+                        <strong className="text-lg font-black text-blue-700">
+                          {formatBytes(
+                            estimateCompressedBytes(
+                              file.size,
+                              compressionLevel
+                            )
+                          )}
+                        </strong>
+                      </div>
+                    </div>
 
                     {/* Error */}
 
@@ -916,28 +794,6 @@ export default function CompressPDFPage() {
                         </div>
                       </div>
 
-                      {result.targetSize && (
-                        <div
-                          className={`mt-4 rounded-xl border px-4 py-3 text-sm font-semibold ${
-                            result.targetReached
-                              ? "border-emerald-200 bg-white text-emerald-700"
-                              : "border-amber-200 bg-amber-50 text-amber-800"
-                          }`}
-                        >
-                          {result.targetReached
-                            ? `Target reached. Requested ${formatBytes(
-                                result.targetSize
-                              )}, output ${formatBytes(
-                                result.compressedSize
-                              )}.`
-                            : `The requested ${formatBytes(
-                                result.targetSize
-                              )} target could not be reached safely. The smallest generated result is ${formatBytes(
-                                result.compressedSize
-                              )}.`}
-                        </div>
-                      )}
-
                       <button
                         type="button"
                         onClick={downloadPDF}
@@ -993,33 +849,33 @@ export default function CompressPDFPage() {
 
           {/* Bottom info */}
 
-          <div className="grid border-t border-slate-100 bg-slate-50/70 sm:grid-cols-3">
-            <div className="border-b border-slate-100 px-5 py-4 sm:border-b-0 sm:border-r">
-              <p className="text-sm font-bold text-slate-800">
+          <div className="grid border-t border-slate-200 bg-slate-50 sm:grid-cols-3">
+            <div className="border-b border-slate-200 px-5 py-4 sm:border-b-0 sm:border-r">
+              <p className="text-sm font-bold text-[#102333]">
                 Real Compression
               </p>
 
-              <p className="mt-1 text-xs text-slate-500">
+                <p className="mt-1 text-xs text-slate-600 dark:text-slate-200">
                 Server-side PDF optimization
               </p>
             </div>
 
-            <div className="border-b border-slate-100 px-5 py-4 sm:border-b-0 sm:border-r">
-              <p className="text-sm font-bold text-slate-800">
-                Target Size
+            <div className="border-b border-slate-200 px-5 py-4 sm:border-b-0 sm:border-r">
+              <p className="text-sm font-bold text-[#102333]">
+                Compression Level
               </p>
 
-              <p className="mt-1 text-xs text-slate-500">
-                Preset and custom output sizes
+              <p className="mt-1 text-xs text-slate-600 dark:text-slate-200">
+                1% to 100% quality control
               </p>
             </div>
 
             <div className="px-5 py-4">
-              <p className="text-sm font-bold text-slate-800">
+              <p className="text-sm font-bold text-[#102333]">
                 Private
               </p>
 
-              <p className="mt-1 text-xs text-slate-500">
+              <p className="mt-1 text-xs text-slate-600 dark:text-slate-200">
                 Temporary files are removed
                 after processing
               </p>

@@ -1,5 +1,3 @@
-import { PDFDocument } from "pdf-lib";
-
 import type {
   UnlockOptions,
 } from "./types";
@@ -13,6 +11,7 @@ import {
   validatePdf,
   validatePassword,
 } from "./validation";
+import { unlockPdf as unlockWithAdobe } from "./adobe-services";
 
 /**
  * ----------------------------------------------------
@@ -42,46 +41,8 @@ export async function unlockPdf({
     throw new ValidationError("File buffer is required.");
   }
 
-  let pdf: PDFDocument;
-
   try {
-    pdf = await PDFDocument.load(
-      file.buffer,
-      {
-        ignoreEncryption: true,
-        updateMetadata: false,
-      }
-    );
-  } catch {
-    throw new ValidationError(
-      "Unable to open PDF."
-    );
-  }
-
-  try {
-    pdf.setProducer(
-      "DigiDesk India"
-    );
-
-    pdf.setCreator(
-      "DigiDesk India PDF Engine"
-    );
-
-    pdf.setModificationDate(
-      new Date()
-    );
-
-    /**
-     * Real password removal will be
-     * implemented using qpdf in v2.
-     */
-
-    return await pdf.save({
-      useObjectStreams: true,
-      addDefaultPage: false,
-      updateFieldAppearances: false,
-      objectsPerTick: 100,
-    });
+    return new Uint8Array(await unlockWithAdobe(file.buffer, password));
   } catch {
     throw new PdfEngineError(
       "Unable to unlock PDF."

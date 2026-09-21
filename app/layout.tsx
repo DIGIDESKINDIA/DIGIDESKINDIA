@@ -1,7 +1,7 @@
 // File: app/layout.tsx
 
 import type { Metadata, Viewport } from "next";
-import { Manrope } from "next/font/google";
+import { Manrope, Sora } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
 import ThemeProvider from "@/components/theme/ThemeProvider";
@@ -10,6 +10,11 @@ import "./globals.css";
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
+});
+
+const sora = Sora({
+  subsets: ["latin"],
+  variable: "--font-sora",
 });
 
 export const metadata: Metadata = {
@@ -98,8 +103,9 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
+    icon: "/images/logo.png",
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
   },
 
   manifest: "/manifest.webmanifest",
@@ -141,7 +147,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className={`${manrope.className} theme-transition overflow-x-hidden antialiased`}>
+      <body className={`${manrope.className} ${sora.variable} theme-transition overflow-x-hidden antialiased`}>
         <ThemeProvider>{children}</ThemeProvider>
 
         <Toaster

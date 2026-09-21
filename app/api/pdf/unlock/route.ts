@@ -1,14 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-
-import {
-  PdfFile,
-  ValidationError,
-  PdfEngineError,
-} from "@/lib/pdf";
-
-import { unlockPdf } from "@/lib/pdf/unlock";
+import { unlockPdfWithFallback } from "@/lib/pdf/secure-fallback";
 
 export const runtime = "nodejs";
+
+function safeBaseName(name: string) {
+  return (
+    name
+      .replace(/\.pdf$/i, "")
+      .replace(/[^a-zA-Z0-9._ -]/g, "-")
+      .trim() || "document"
+  );
+}
 
 export async function POST(
   request: NextRequest
@@ -17,66 +19,91 @@ export async function POST(
     const formData =
       await request.formData();
 
-    const upload = formData.get(
-      "file"
-    ) as File | null;
+    const upload =
+      formData.get("file");
 
     const password = String(
       formData.get("password") ?? ""
     ).trim();
 
-    if (!upload) {
-      throw new ValidationError(
-        "No PDF selected."
+    if (!(upload instanceof File)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "No PDF selected.",
+        },
+        { status: 400 }
       );
     }
 
-    if (
-      upload.type !==
-      "application/pdf"
-    ) {
-      throw new ValidationError(
-        "Please upload a valid PDF."
+    const isPdf =
+      upload.type === "application/pdf" ||
+      upload.name
+        .toLowerCase()
+        .endsWith(".pdf");
+
+    if (!isPdf) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Please upload a valid PDF.",
+        },
+        { status: 400 }
       );
     }
 
     if (upload.size === 0) {
-      throw new ValidationError(
-        "Selected PDF is empty."
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Selected PDF is empty.",
+        },
+        { status: 400 }
       );
     }
 
-    const pdf: PdfFile = {
-      name: upload.name,
-      size: upload.size,
-      buffer: new Uint8Array(
-        await upload.arrayBuffer()
-      ),
-    };
+    if (!password) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Please enter the PDF password.",
+        },
+        { status: 400 }
+      );
+    }
 
-    const output =
-      await unlockPdf({
-        file: pdf,
-        password,
-      });
+    const output = await unlockPdfWithFallback(
+      new Uint8Array(await upload.arrayBuffer()),
+      password
+    );
 
-    const now = new Date();
+    if (output.length === 0) {
+      throw new Error(
+        "PDF worker returned an empty file."
+      );
+    }
 
-    const fileName = `Unlocked-${now.getFullYear()}-${String(
-      now.getMonth() + 1
-    ).padStart(2, "0")}-${String(
-      now.getDate()
-    ).padStart(2, "0")}.pdf`;
+    const fileName =
+      `${safeBaseName(
+        upload.name
+      )}-unlocked.pdf`;
 
     return new NextResponse(
-      Buffer.from(output),
+      new Uint8Array(output),
       {
         status: 200,
         headers: {
           "Content-Type":
             "application/pdf",
 
-          "Content-Disposition": `attachment; filename="${fileName}"`,
+          "Content-Disposition":
+            `attachment; filename="${fileName}"`,
+
+          "Content-Length":
+            String(output.length),
 
           "Cache-Control":
             "no-store",
@@ -89,34 +116,19 @@ export async function POST(
       error
     );
 
-    if (
-      error instanceof
-        ValidationError ||
-      error instanceof
-        PdfEngineError
-    ) {
-      return NextResponse.json(
-        {
-          success: false,
-          message:
-            error.message,
-        },
-        {
-          status:
-            error.statusCode,
-        }
-      );
-    }
+    const dependencyUnavailable =
+      error instanceof Error &&
+      error.message.includes("requires qpdf installed");
 
     return NextResponse.json(
       {
         success: false,
         message:
-          "Unable to unlock PDF.",
+          error instanceof Error
+            ? error.message
+            : "Unable to unlock PDF.",
       },
-      {
-        status: 500,
-      }
+      { status: dependencyUnavailable ? 503 : 500 }
     );
   }
 }

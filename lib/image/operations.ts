@@ -1,4 +1,6 @@
 import sharp, { type OverlayOptions, type Sharp } from "sharp";
+import { spawn } from "node:child_process";
+import path from "node:path";
 import { PDFDocument } from "pdf-lib";
 import { ValidationError } from "@/lib/pdf/errors";
 
@@ -526,158 +528,158 @@ type BackgroundRemovalResult = {
 };
 
 type BackgroundRemovalOptions = {
-  // Color-distance tolerance (0-100). Higher removes more aggressive edges
-  // but risks eating softer foreground edges.
+  // Kept for API compatibility. Segmentation is model-driven rather than RGB-threshold-driven.
   tolerance?: number;
 };
 
-const MAX_ANALYSIS_DIMENSION = 800;
+/**
+ * Validate the invariants that protect against the previous corruption mode:
+ * the result must be RGBA, retain a non-empty subject, and never alter the
+ * source RGB values while applying the segmentation alpha.
+ */
+async function validateBackgroundRemovalOutput(
+  source: Buffer,
+  output: Buffer,
+  width: number,
+  height: number
+): Promise<void> {
+  const sourcePixels = sharp(source).ensureAlpha();
+  const outputPixels = sharp(output).ensureAlpha();
 
-function colorDistanceSq(
-  r1: number, g1: number, b1: number,
-  r2: number, g2: number, b2: number
-): number {
-  const dr = r1 - r2;
-  const dg = g1 - g2;
-  const db = b1 - b2;
-  return dr * dr + dg * dg + db * db;
+  const [sourceRaw, outputRaw] = await Promise.all([
+    sourcePixels.raw().toBuffer(),
+    outputPixels.raw().toBuffer(),
+  ]);
+      if (outputRaw.length !== width * height * 4) {
+        throw new ValidationError("Background removal did not produce an RGBA image.");
+      }
+
+      let opaquePixels = 0;
+      let nonTransparentPixels = 0;
+      let changedForegroundRgb = 0;
+      let minX = width;
+      let minY = height;
+      let maxX = -1;
+      let maxY = -1;
+      let opaqueBorderPixels = 0;
+      let borderPixels = 0;
+
+      for (let index = 0; index < width * height; index++) {
+        const offset = index * 4;
+        const alpha = outputRaw[offset + 3];
+        const x = index % width;
+        const y = Math.floor(index / width);
+
+        if (alpha > 0) {
+          nonTransparentPixels++;
+          minX = Math.min(minX, x);
+          minY = Math.min(minY, y);
+          maxX = Math.max(maxX, x);
+          maxY = Math.max(maxY, y);
+        }
+        if (alpha >= 250) {
+          opaquePixels++;
+          if (
+            outputRaw[offset] !== sourceRaw[offset] ||
+            outputRaw[offset + 1] !== sourceRaw[offset + 1] ||
+            outputRaw[offset + 2] !== sourceRaw[offset + 2]
+          ) {
+            changedForegroundRgb++;
+          }
+        }
+
+        if (x === 0 || y === 0 || x === width - 1 || y === height - 1) {
+          borderPixels++;
+          if (alpha >= 250) opaqueBorderPixels++;
+        }
+      }
+
+      if (!nonTransparentPixels || !opaquePixels) {
+        throw new ValidationError("Background segmentation did not detect a foreground subject.");
+      }
+
+      if (maxX < minX || maxY < minY || (maxX - minX + 1) * (maxY - minY + 1) < width * height * 0.01) {
+        throw new ValidationError("Background segmentation produced an incomplete subject mask.");
+      }
+
+      if (opaqueBorderPixels > borderPixels * 0.2) {
+        throw new ValidationError("Background segmentation left a large opaque background region.");
+      }
+
+      if (changedForegroundRgb > 0) {
+        throw new ValidationError("Background removal changed foreground RGB pixels.");
+      }
 }
 
-/**
- * Remove a (relatively uniform) background using a border-seeded region
- * growing algorithm over adjacency, so smooth gradients are handled better
- * than a naive single-threshold key. Runs entirely on the server with
- * `sharp` and requires no third-party API.
- */
+function runForegroundSegmentation(source: Buffer): Promise<Buffer> {
+  const workerPath = path.join(process.cwd(), "scripts", "background-segmentation-worker.mjs");
+
+  return new Promise((resolve, reject) => {
+    const worker = spawn(process.execPath, [workerPath], {
+      stdio: ["pipe", "pipe", "pipe"],
+      windowsHide: true,
+    });
+    const stdout: Buffer[] = [];
+    const stderr: Buffer[] = [];
+
+    worker.stdout.on("data", (chunk: Buffer) => stdout.push(chunk));
+    worker.stderr.on("data", (chunk: Buffer) => stderr.push(chunk));
+    worker.on("error", reject);
+    worker.on("close", (code) => {
+      if (code !== 0) {
+        reject(new ValidationError(`Foreground segmentation failed: ${Buffer.concat(stderr).toString("utf8").slice(-500)}`));
+        return;
+      }
+
+      try {
+        resolve(Buffer.from(Buffer.concat(stdout).toString("utf8").trim(), "base64"));
+      } catch {
+        reject(new ValidationError("Foreground segmentation returned an invalid mask."));
+      }
+    });
+
+    worker.stdin.end(source.toString("base64"));
+  });
+}
+
 export async function removeImageBackground(
   input: ImageUploadFile,
   options: BackgroundRemovalOptions = {}
 ): Promise<BackgroundRemovalResult> {
   validateImageFile(input);
 
+  void options;
   const buffer = Buffer.from(input.buffer);
-  const fullPipeline = sharp(buffer);
-  const metadata = await fullPipeline.metadata();
+  const metadata = await sharp(buffer).metadata();
 
   if (!metadata.width || !metadata.height) {
     throw new ValidationError("Unable to read image dimensions.");
   }
 
-  // ---------- 1. Downscale for cheap analysis -----------------------------
-  const analysisScale = Math.min(
-    1,
-    MAX_ANALYSIS_DIMENSION / Math.max(metadata.width, metadata.height)
-  );
-  const analysisWidth = Math.max(1, Math.round(metadata.width * analysisScale));
-  const analysisHeight = Math.max(1, Math.round(metadata.height * analysisScale));
-
-  const analysis = await sharp(buffer)
-    .resize(analysisWidth, analysisHeight, { fit: "fill" })
-    .ensureAlpha()
-    .raw()
-    .toBuffer({ resolveWithObject: true });
-
-  const px = analysis.data;
-  const { width: aw, height: ah, channels: ac } = analysis.info;
-  const step = ac;
-
-  // ---------- 2. Border-seeded flood fill ----------------------------------
-  const tolerance = clamp(options.tolerance ?? 40, 5, 200);
-  // Reference background color = average colour along the outer frame.
-  let bgR = 0, bgG = 0, bgB = 0, seedCount = 0;
-
-  const sampleBorder = (x: number, y: number) => {
-    const i = (y * aw + x) * step;
-    bgR += px[i];
-    bgG += px[i + 1];
-    bgB += px[i + 2];
-    seedCount++;
-  };
-
-  for (let x = 0; x < aw; x++) {
-    sampleBorder(x, 0);
-    sampleBorder(x, ah - 1);
-  }
-  for (let y = 1; y < ah - 1; y++) {
-    sampleBorder(0, y);
-    sampleBorder(aw - 1, y);
+  const segmentedOutput = await runForegroundSegmentation(buffer);
+  const expectedRawBytes = metadata.width * metadata.height * 4;
+  if (segmentedOutput.length !== expectedRawBytes) {
+    throw new ValidationError("Foreground segmentation returned an invalid RGBA image.");
   }
 
-  if (seedCount === 0) {
-    throw new ValidationError("Unable to sample the image background.");
-  }
-
-  bgR = Math.round(bgR / seedCount);
-  bgG = Math.round(bgG / seedCount);
-  bgB = Math.round(bgB / seedCount);
-
-  const maxDistanceSq = tolerance * tolerance * 3;
-  const isBackground = new Uint8Array(aw * ah);
-
-  const queue = new Int32Array(aw * ah);
-  let head = 0;
-  let tail = 0;
-
-  const push = (index: number) => { queue[tail++] = index; };
-
-  for (let x = 0; x < aw; x++) {
-    push(x);
-    push((ah - 1) * aw + x);
-  }
-  for (let y = 1; y < ah - 1; y++) {
-    push(y * aw);
-    push(y * aw + (aw - 1));
-  }
-
-  while (head < tail) {
-    const index = queue[head++];
-    if (isBackground[index]) continue;
-
-    const x = index % aw;
-    const y = (index / aw) | 0;
-    const p = index * step;
-    const r = px[p];
-    const g = px[p + 1];
-    const b = px[p + 2];
-
-    // Keep only connected pixels close to the reference background colour.
-    if (colorDistanceSq(r, g, b, bgR, bgG, bgB) > maxDistanceSq) {
-      continue;
-    }
-
-    isBackground[index] = 1;
-
-    if (x > 0) push(index - 1);
-    if (x < aw - 1) push(index + 1);
-    if (y > 0) push(index - aw);
-    if (y < ah - 1) push(index + aw);
-  }
-
-  // ---------- 3. Apply per-pixel alpha on the full-resolution image --------
-  const fullRes = await sharp(buffer)
-    .ensureAlpha()
-    .raw()
-    .toBuffer({ resolveWithObject: true });
-
-  const full = fullRes.data;
-  const { width: fw, height: fh, channels: fc } = fullRes.info;
-  const stepFull = fc;
-
-  for (let y = 0; y < fh; y++) {
-    const sy = Math.min(ah - 1, Math.round((y / fh) * (ah - 1)));
-    for (let x = 0; x < fw; x++) {
-      const sx = Math.min(aw - 1, Math.round((x / fw) * (aw - 1)));
-      if (isBackground[sy * aw + sx]) {
-        full[(y * fw + x) * stepFull + 3] = 0;
-      }
-    }
-  }
-
-  const output = await sharp(Buffer.from(full), {
-    raw: { width: fw, height: fh, channels: stepFull },
+  const output = await sharp(segmentedOutput, {
+    raw: { width: metadata.width, height: metadata.height, channels: 4 },
   })
-    .png({ compressionLevel: 9, palette: true })
+    .png({ compressionLevel: 9, palette: false, adaptiveFiltering: false })
     .toBuffer();
+
+  const outputMetadata = await sharp(output).metadata();
+  if (
+    outputMetadata.width !== metadata.width ||
+    outputMetadata.height !== metadata.height ||
+    outputMetadata.channels !== 4 ||
+    outputMetadata.hasAlpha !== true ||
+    outputMetadata.isPalette === true
+  ) {
+    throw new ValidationError("Background removal output is not a true RGBA PNG.");
+  }
+
+  await validateBackgroundRemovalOutput(buffer, output, metadata.width, metadata.height);
 
   return {
     buffer: output,

@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { saveAs } from "file-saver";
 
 import toast from "react-hot-toast";
 
 import {
+  ImagePlus,
+  Move,
+  RotateCw,
   Stamp,
 } from "lucide-react";
 
@@ -28,14 +31,32 @@ export default function WatermarkPdfPage() {
   const [text, setText] =
     useState("DigiDesk India");
 
+  const [watermarkType, setWatermarkType] =
+    useState<"text" | "image">("text");
+
+  const [image, setImage] =
+    useState<File | null>(null);
+
+  const [imagePreview, setImagePreview] =
+    useState("");
+
   const [opacity, setOpacity] =
-    useState(0.25);
+    useState(25);
 
   const [fontSize, setFontSize] =
     useState(42);
 
   const [rotation, setRotation] =
     useState(45);
+
+  const [color, setColor] =
+    useState("#64748b");
+
+  const [position, setPosition] =
+    useState("center");
+
+  const [pages, setPages] =
+    useState("all");
 
   const [processing, setProcessing] =
     useState(false);
@@ -49,6 +70,16 @@ export default function WatermarkPdfPage() {
   const [error, setError] =
     useState("");
 
+  useEffect(() => {
+    if (!imagePreview) return;
+    return () => URL.revokeObjectURL(imagePreview);
+  }, [imagePreview]);
+
+  function selectWatermarkImage(file: File | null) {
+    setImage(file);
+    setImagePreview(file ? URL.createObjectURL(file) : "");
+  }
+
   async function applyWatermark() {
     if (!file) {
       toast.error(
@@ -57,7 +88,7 @@ export default function WatermarkPdfPage() {
       return;
     }
 
-    if (!text.trim()) {
+    if (watermarkType === "text" && !text.trim()) {
       toast.error(
         "Enter watermark text."
       );
@@ -89,12 +120,14 @@ export default function WatermarkPdfPage() {
 
       formData.append(
         "text",
-        text
+        watermarkType === "text" ? text : ""
       );
+
+      if (image) formData.append("image", image);
 
       formData.append(
         "opacity",
-        String(opacity)
+        String(opacity / 100)
       );
 
       formData.append(
@@ -106,6 +139,10 @@ export default function WatermarkPdfPage() {
         "rotation",
         String(rotation)
       );
+
+      formData.append("color", color);
+      formData.append("position", position);
+      formData.append("pages", pages);
 
       const response =
         await fetch(
@@ -164,9 +201,14 @@ export default function WatermarkPdfPage() {
     setProgress(0);
 
     setText("DigiDesk India");
-    setOpacity(0.25);
+    setWatermarkType("text");
+    setImage(null);
+    setOpacity(25);
     setFontSize(42);
     setRotation(45);
+    setColor("#64748b");
+    setPosition("center");
+    setPages("all");
   }
 
   return (
@@ -196,10 +238,27 @@ export default function WatermarkPdfPage() {
 
             <SettingsPanel
               title="Watermark Settings"
-              description="Customize the watermark appearance."
+              description="Create a mark, tune its look, and choose where it appears."
             >
 
-              <div>
+              <div className="grid grid-cols-2 gap-2 rounded-xl bg-slate-100 p-1">
+                <button
+                  type="button"
+                  onClick={() => setWatermarkType("text")}
+                  className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${watermarkType === "text" ? "bg-white text-blue-700 shadow-sm" : "text-slate-500"}`}
+                >
+                  Text watermark
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setWatermarkType("image")}
+                  className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${watermarkType === "image" ? "bg-white text-blue-700 shadow-sm" : "text-slate-500"}`}
+                >
+                  Logo or image
+                </button>
+              </div>
+
+              {watermarkType === "text" ? <div>
 
                 <label className="mb-2 block text-sm font-semibold">
 
@@ -219,21 +278,28 @@ export default function WatermarkPdfPage() {
                   className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-600"
                 />
 
-              </div>
+              </div> : <div>
+                <label className="mb-2 block text-sm font-semibold">Watermark image</label>
+                <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-slate-300 px-4 py-3 text-sm text-slate-500 transition hover:border-blue-500 hover:text-blue-600">
+                  <ImagePlus size={20} />
+                  <span>{image?.name ?? "Choose a PNG or JPG logo"}</span>
+                  <input type="file" accept="image/png,image/jpeg" className="hidden" onChange={(e) => selectWatermarkImage(e.target.files?.[0] ?? null)} />
+                </label>
+              </div>}
 
               <div>
 
                 <label className="mb-2 block text-sm font-semibold">
 
-                  Opacity ({opacity})
+                  Opacity ({opacity}%)
 
                 </label>
 
                 <input
                   type="range"
-                  min={0.05}
-                  max={1}
-                  step={0.05}
+                  min={1}
+                  max={100}
+                  step={1}
                   value={opacity}
                   onChange={(e) =>
                     setOpacity(
@@ -270,6 +336,29 @@ export default function WatermarkPdfPage() {
                   className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-600"
                 />
 
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="mb-2 block text-sm font-semibold">Position</label>
+                  <select value={position} onChange={(e) => setPosition(e.target.value)} className="w-full rounded-xl border border-slate-300 px-3 py-3 outline-none transition focus:border-blue-600">
+                    <option value="center">Center</option>
+                    <option value="top-left">Top left</option>
+                    <option value="top-right">Top right</option>
+                    <option value="bottom-left">Bottom left</option>
+                    <option value="bottom-right">Bottom right</option>
+                    <option value="tile">Tile</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="mb-2 block text-sm font-semibold">Color</label>
+                  <input type="color" value={color} onChange={(e) => setColor(e.target.value)} className="h-[52px] w-full rounded-xl border border-slate-300 px-2 py-2" disabled={watermarkType === "image"} />
+                </div>
+              </div>
+
+              <div>
+                <label className="mb-2 block text-sm font-semibold">Pages to mark</label>
+                <input type="text" value={pages} onChange={(e) => setPages(e.target.value)} placeholder="all or 1-3, 5" className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-600" />
               </div>
 
               <div>
@@ -344,12 +433,26 @@ export default function WatermarkPdfPage() {
           />
         )}
 
+        {file && (
+          <div className="rounded-2xl border border-slate-200 bg-slate-100 p-5 shadow-sm">
+            <div className="mb-4 flex items-center justify-between text-sm font-semibold text-slate-700">
+              <span className="flex items-center gap-2"><Move size={16} /> Live page preview</span>
+              <span className="flex items-center gap-1 text-xs font-normal text-slate-500"><RotateCw size={14} /> {rotation}°</span>
+            </div>
+            <div className="relative mx-auto flex aspect-[1/1.414] max-w-[440px] items-center justify-center overflow-hidden bg-white shadow-md">
+              <div className="absolute inset-5 border border-dashed border-slate-200" />
+              {watermarkType === "image" && imagePreview ? <img src={imagePreview} alt="Watermark preview" className="relative max-h-28 max-w-[65%] object-contain" style={{ opacity: opacity / 100, transform: `rotate(${rotation}deg)` }} /> : <span className="relative max-w-[90%] break-words text-center font-bold" style={{ color, opacity: opacity / 100, fontSize: `${Math.max(18, fontSize / 2)}px`, transform: `rotate(${rotation}deg)` }}>{text || "Your watermark"}</span>}
+            </div>
+            <p className="mt-3 text-center text-xs text-slate-500">What you see here is the placement and look used for the generated PDF.</p>
+          </div>
+        )}
+
         <Toolbar
           title="Watermark PDF"
           processing={processing}
           canProcess={
             !!file &&
-            !!text.trim()
+            (watermarkType === "image" ? !!image : !!text.trim())
           }
           onProcess={applyWatermark}
           onReset={reset}

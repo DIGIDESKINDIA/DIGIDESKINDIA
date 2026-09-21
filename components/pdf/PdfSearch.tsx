@@ -12,7 +12,7 @@ export default function PdfSearch({
   onChange,
 }: Props) {
   return (
-    <div className="mx-auto mb-8 max-w-2xl">
+    <div className="mx-auto max-w-[560px]">
       <div className="relative">
 
         <Search
@@ -24,7 +24,7 @@ export default function PdfSearch({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder="Search PDF tools..."
-          className="h-14 w-full rounded-2xl border border-slate-300 bg-white pl-12 pr-5 text-slate-700 shadow-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+          className="h-10 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-4 text-xs text-slate-700 shadow-[0_4px_14px_rgba(15,23,42,0.08)] outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-white/10 dark:bg-[#101d31] dark:text-slate-200 dark:shadow-[0_8px_22px_rgba(2,6,23,0.24)] dark:focus:border-blue-400 dark:focus:ring-blue-400/10"
         />
 
       </div>

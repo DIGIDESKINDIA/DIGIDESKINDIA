@@ -8,11 +8,11 @@ import {
   RotateCw,
   ShieldCheck,
   Unlock,
-  FileOutput,
   FileInput,
   ImageIcon,
   ScanText,
   FileSearch,
+  FileOutput,
   ArrowRight,
 } from "lucide-react";
 
@@ -46,6 +46,13 @@ const tools = [
     badge: "Easy",
   },
   {
+    title: "Sign PDF",
+    desc: "Add signatures, initials, dates and approval text.",
+    href: "/sign-pdf",
+    icon: ShieldCheck,
+    badge: "New",
+  },
+  {
     title: "Protect PDF",
     desc: "Password protect your PDF.",
     href: "/pdf-tools",
@@ -60,18 +67,18 @@ const tools = [
     badge: "Popular",
   },
   {
-    title: "PDF to Word",
-    desc: "Convert PDF into DOCX.",
-    href: "/pdf-tools",
-    icon: FileOutput,
-    badge: "AI",
-  },
-  {
     title: "Word to PDF",
     desc: "Convert Word into PDF.",
     href: "/pdf-tools",
     icon: FileInput,
     badge: "Fast",
+  },
+  {
+    title: "PDF to Word",
+    desc: "Convert PDF into editable Word.",
+    href: "/pdf-tools/pdf-to-word",
+    icon: FileOutput,
+    badge: "New",
   },
   {
     title: "PDF to JPG",

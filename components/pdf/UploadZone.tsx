@@ -3,12 +3,13 @@
 import {
   useRef,
   useState,
+  useEffect,
+  useMemo,
   DragEvent,
 } from "react";
 
 import {
   UploadCloud,
-  FileText,
 } from "lucide-react";
 
 import toast from "react-hot-toast";
@@ -27,6 +28,33 @@ interface UploadZoneProps {
   onFilesChange(
     files: File[]
   ): void;
+}
+
+export function FileThumbnail({ file }: { file: File }) {
+  const url = useMemo(() => URL.createObjectURL(file), [file]);
+  const isPdf = file.type === "application/pdf" || /\.pdf$/i.test(file.name);
+
+  useEffect(() => {
+    return () => URL.revokeObjectURL(url);
+  }, [url]);
+
+  if (isPdf) {
+    return (
+      <div className="h-20 w-16 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+        <iframe
+          src={`${url}#page=1&view=FitH&toolbar=0&navpanes=0&scrollbar=0`}
+          title={`Preview of ${file.name}`}
+          className="h-[330px] w-[260px] origin-top-left scale-[0.245]"
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="h-20 w-16 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+      <img src={url} alt={`Preview of ${file.name}`} className="h-full w-full object-cover" />
+    </div>
+  );
 }
 
 export default function UploadZone({
@@ -195,14 +223,7 @@ export default function UploadZone({
               >
                 <div className="flex items-center gap-4">
 
-                  <div className="rounded-xl bg-red-100 p-3">
-
-                    <FileText
-                      size={22}
-                      className="text-red-600"
-                    />
-
-                  </div>
+                  <FileThumbnail file={file} />
 
                   <div>
 

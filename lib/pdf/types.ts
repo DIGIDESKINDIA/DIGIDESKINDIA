@@ -27,6 +27,7 @@ export interface ConvertResult {
   outputName?: string;
   message: string;
   metadata?: Record<string, unknown>;
+  errorCode?: string;
 }
 
 export interface PdfFile {
@@ -108,6 +109,7 @@ export interface WatermarkOptions {
   imagePath?: string;
   color?: string;
   position?: string;
+  pages?: string;
 }
 
 export interface PdfToImageOptions {
@@ -148,6 +150,8 @@ export interface AddPageNumberOptions {
   pages?: number[];
   startFrom?: number;
   fontSize?: number;
+  position?: "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right";
+  margins?: "narrow" | "default" | "wide";
   x?: number;
   y?: number;
 }

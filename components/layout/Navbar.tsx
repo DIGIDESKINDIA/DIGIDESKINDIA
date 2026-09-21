@@ -58,7 +58,7 @@ export default function Navbar() {
             </div>
 
             {/* RIGHT ACTIONS */}
-            <div className="flex items-center gap-3 xl:gap-4">
+            <div className="hidden items-center gap-3 xl:flex xl:gap-4">
               {/* SEARCH */}
               <Link
                 href="/search"
@@ -82,7 +82,7 @@ export default function Navbar() {
               {/* SIGN UP */}
               <Link
                 href="/login"
-                className="rounded-full bg-gradient-to-r from-[#6D28D9] to-[#2563EB] px-5 py-2.5 text-sm font-bold text-white whitespace-nowrap shadow-[0_12px_36px_rgba(109,40,217,0.22)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_44px_rgba(109,40,217,0.32)] focus:outline-none focus:ring-2 focus:ring-[#6D28D9]"
+                className="rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-green-600 px-5 py-2.5 text-sm font-bold text-white whitespace-nowrap shadow-[0_12px_36px_rgba(245,158,11,0.24)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_44px_rgba(22,163,74,0.26)] focus:outline-none focus:ring-2 focus:ring-amber-500"
               >
                 Sign Up
               </Link>

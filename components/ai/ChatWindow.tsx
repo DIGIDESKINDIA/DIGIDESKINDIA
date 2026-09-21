@@ -13,6 +13,50 @@ type Message = {
   text: string;
 };
 
+function renderTextWithLinks(text: string) {
+  const linkPattern = /\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]+)\)/g;
+  const parts: Array<{ type: "text" | "link"; value: string; href?: string }> = [];
+  let lastIndex = 0;
+
+  for (const match of text.matchAll(linkPattern)) {
+    const [fullMatch, label, href] = match;
+    const start = match.index ?? 0;
+
+    if (start > lastIndex) {
+      parts.push({ type: "text", value: text.slice(lastIndex, start) });
+    }
+
+    parts.push({ type: "link", value: label, href });
+    lastIndex = start + fullMatch.length;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push({ type: "text", value: text.slice(lastIndex) });
+  }
+
+  if (!parts.length) {
+    return text;
+  }
+
+  return parts.map((part, index) => {
+    if (part.type === "link") {
+      return (
+        <a
+          key={`${part.href}-${index}`}
+          href={part.href}
+          target={part.href?.startsWith("http") ? "_blank" : undefined}
+          rel={part.href?.startsWith("http") ? "noreferrer" : undefined}
+          className="font-semibold text-blue-600 underline decoration-blue-400 underline-offset-2 hover:text-blue-500"
+        >
+          {part.value}
+        </a>
+      );
+    }
+
+    return <span key={`text-${index}`}>{part.value}</span>;
+  });
+}
+
 export default function ChatWindow({ onClose }: Props) {
   const { theme } = useTheme();
   const isDark = theme === "dark";
@@ -155,7 +199,7 @@ export default function ChatWindow({ onClose }: Props) {
                 )}
               </div>
 
-              {msg.text}
+              <div className="break-words">{renderTextWithLinks(msg.text)}</div>
             </div>
           </div>
         ))}

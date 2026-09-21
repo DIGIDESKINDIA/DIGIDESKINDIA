@@ -58,6 +58,18 @@ export async function POST(
       formData.get("y") ?? 25
     );
 
+    const positionValue = formData.get("position");
+    const position =
+      typeof positionValue === "string" && positionValue
+        ? positionValue as "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"
+        : "bottom-center";
+
+    const marginsValue = formData.get("margins");
+    const margins =
+      marginsValue === "narrow" || marginsValue === "wide"
+        ? marginsValue
+        : "default";
+
     const pagesValue =
       formData.get("pages");
 
@@ -95,6 +107,8 @@ export async function POST(
         pages,
         startFrom,
         fontSize,
+        position,
+        margins,
         x,
         y,
       });

@@ -155,7 +155,7 @@ export default function ImageToolsSection() {
 
         </div>
 
-        <div className="mt-16 grid gap-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mt-12 grid grid-cols-[repeat(auto-fit,minmax(205px,1fr))] gap-4 sm:gap-5">
 
           {tools.map((tool) => {
 
@@ -166,18 +166,18 @@ export default function ImageToolsSection() {
               <Link
                 key={tool.title}
                 href={tool.href}
-                className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-emerald-500 hover:shadow-2xl"
+                className="group flex min-h-[212px] flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-400 hover:shadow-lg dark:border-white/10 dark:bg-white/5"
               >
 
                 <div className="flex items-center justify-between">
 
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-600 via-teal-500 to-cyan-400 text-white shadow-[0_8px_20px_rgba(16,185,129,0.2)] ring-4 ring-emerald-500/10">
 
-                    <Icon size={28} />
+                    <Icon size={21} />
 
                   </div>
 
-                  <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-700">
+                  <span className="rounded-md bg-emerald-500/10 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">
 
                     {tool.badge}
 
@@ -185,25 +185,25 @@ export default function ImageToolsSection() {
 
                 </div>
 
-                <h3 className="mt-6 text-xl font-bold text-slate-900">
+                <h3 className="mt-4 text-base font-bold text-slate-900 dark:text-white">
 
                   {tool.title}
 
                 </h3>
 
-                <p className="mt-3 text-sm leading-7 text-slate-600">
+                <p className="mt-2 flex-1 text-xs leading-5 text-slate-600 dark:text-slate-300">
 
                   {tool.desc}
 
                 </p>
 
-                <div className="mt-6 flex items-center gap-2 font-semibold text-emerald-700">
+                <div className="mt-4 flex items-center gap-2 text-xs font-bold text-emerald-700 dark:text-emerald-300">
 
                   Open Tool
 
                   <ArrowRight
-                    size={18}
-                    className="transition group-hover:translate-x-2"
+                    size={15}
+                    className="transition group-hover:translate-x-1"
                   />
 
                 </div>

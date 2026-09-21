@@ -32,6 +32,7 @@ import {
   Gauge,
   RotateCw,
   ShieldCheck,
+  Signature,
 } from "lucide-react";
 
 /* ======================================================
@@ -152,10 +153,23 @@ const mainPDFTools: DropdownItem[] = [
     icon: <RotateCw size={18} />,
   },
   {
+    name: "Sign PDF",
+    description: "Place signatures and approval fields",
+    href: "/sign-pdf",
+    icon: <Signature size={18} />,
+    badge: "New",
+  },
+  {
     name: "JPG to PDF",
     description: "Convert images into PDF",
     href: "/pdf-tools/jpg-to-pdf",
     icon: <FileImage size={18} />,
+  },
+  {
+    name: "PDF to Word",
+    description: "Convert PDF into editable Word",
+    href: "/pdf-tools/pdf-to-word",
+    icon: <FileText size={18} />,
   },
 ];
 
@@ -177,31 +191,6 @@ const compressPDFTools: DropdownItem[] = [
   href: "/pdf-tools/increase-pdf-size",
   icon: <Gauge size={18} />,
 },
-  {
-    name: "Compress to 100KB",
-    description: "Target file size around 100KB",
-    href: "/pdf-tools/compress-pdf?size=100",
-    icon: <Gauge size={18} />,
-  },
-  {
-    name: "Compress to 200KB",
-    description: "Target file size around 200KB",
-    href: "/pdf-tools/compress-pdf?size=200",
-    icon: <Gauge size={18} />,
-  },
-  {
-    name: "Compress to 500KB",
-    description: "Target file size around 500KB",
-    href: "/pdf-tools/compress-pdf?size=500",
-    icon: <Gauge size={18} />,
-  },
-  {
-    name: "Custom PDF Size",
-    description: "Increase or decrease to your target size",
-    href: "/pdf-tools/compress-pdf?mode=custom",
-    icon: <Gauge size={18} />,
-    badge: "Custom",
-  },
 ];
 
 /* ======================================================
@@ -243,13 +232,6 @@ const convertToPDFTools: DropdownItem[] = [
 ====================================================== */
 
 const convertFromPDFTools: DropdownItem[] = [
-  {
-    name: "PDF to Word",
-    description: "PDF to editable DOCX",
-    href: "/pdf-tools/pdf-to-word",
-    icon: <FileType2 size={18} />,
-    badge: "New",
-  },
   {
     name: "PDF to Excel",
     description: "PDF tables to XLSX",
@@ -345,24 +327,57 @@ const navItems: NavItem[] = [
    DESKTOP DROPDOWN
 ====================================================== */
 
-function DesktopDropdown({ item }: { item: NavItem }) {
+function DesktopDropdown({
+  item,
+}: {
+  item: NavItem;
+}) {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="group relative flex min-w-0 flex-1">
+    <div
+      className="
+        relative
+        flex
+        min-w-0
+        flex-1
+      "
+      onMouseEnter={() => {
+        setOpen(true);
+      }}
+      onMouseLeave={() => {
+        setOpen(false);
+      }}
+    >
+      {/* MAIN NAV ITEM */}
+
       <Link
         href={item.href || "#"}
-        className="
-          flex h-[64px] w-full min-w-0
-          items-center justify-center gap-2
-          border-r border-white/10
+        className={`
+          flex
+          h-[64px]
+          w-full
+          min-w-0
+          items-center
+          justify-center
+          gap-2
+          border-r
+          border-white/10
           px-2
-          text-[15px] font-bold text-white
-          transition-all duration-200
+          text-[15px]
+          font-bold
+          text-white
+          transition-all
+          duration-200
           hover:bg-white/15
           2xl:px-3
           2xl:text-[16px]
-        "
+          ${open ? "bg-white/15" : ""}
+        `}
       >
-        <span className="shrink-0">{item.icon}</span>
+        <span className="shrink-0">
+          {item.icon}
+        </span>
 
         <span className="whitespace-nowrap">
           {item.name}
@@ -371,84 +386,182 @@ function DesktopDropdown({ item }: { item: NavItem }) {
         {item.children && (
           <ChevronDown
             size={15}
-            className="
+            className={`
               shrink-0
-              transition-transform duration-300
-              group-hover:rotate-180
-            "
+              transition-transform
+              duration-200
+              ${open ? "rotate-180" : ""}
+            `}
           />
         )}
       </Link>
 
-      {item.children && (
-        <>
-          {/* Invisible hover bridge */}
-          <div className="absolute left-0 top-full h-2 w-full" />
+      {/* DROPDOWN + INVISIBLE HOVER BRIDGE */}
+
+      {item.children && open && (
+        <div
+          className="
+            absolute
+            left-0
+            top-full
+            z-[99999]
+            w-[320px]
+            pt-3
+          "
+          onMouseEnter={() => {
+            setOpen(true);
+          }}
+          onMouseLeave={() => {
+            setOpen(false);
+          }}
+        >
+          {/* Invisible bridge between navbar and dropdown */}
 
           <div
             className="
-              invisible absolute left-0
-              top-[calc(100%+6px)]
-              z-[200]
-              w-[320px]
-              translate-y-1
+              absolute
+              left-0
+              right-0
+              top-0
+              h-4
+            "
+          />
+
+          {/* ACTUAL DROPDOWN */}
+
+          <div
+            className="
+              relative
               rounded-2xl
-              border border-slate-200
+              border
+              border-slate-200
               bg-white
               p-1.5
-              opacity-0
               shadow-[0_18px_50px_-15px_rgba(15,23,42,0.28)]
-              transition-all duration-200
-              group-hover:visible
-              group-hover:translate-y-0
-              group-hover:opacity-100
             "
           >
-            {/* Dropdown arrow */}
+            {/* DROPDOWN ARROW */}
 
-            <div className="absolute -top-2 left-8 h-4 w-4 rotate-45 border-l border-t border-slate-200 bg-white" />
+            <div
+              className="
+                absolute
+                -top-2
+                left-8
+                h-4
+                w-4
+                rotate-45
+                border-l
+                border-t
+                border-slate-200
+                bg-white
+              "
+            />
 
-            {/* Header */}
+            {/* HEADER */}
 
-            <div className="relative mb-1 flex items-center justify-between rounded-xl bg-gradient-to-r from-blue-50 to-cyan-50 px-3.5 py-2.5">
+            <div
+              className="
+                relative
+                mb-1
+                flex
+                items-center
+                justify-between
+                rounded-xl
+                bg-gradient-to-r
+                from-blue-50
+                to-cyan-50
+                px-3.5
+                py-2.5
+              "
+            >
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-blue-500">
-                  Digital Desk
+                <p
+                  className="
+                    text-[9px]
+                    font-bold
+                    uppercase
+                    tracking-[0.18em]
+                    text-blue-500
+                  "
+                >
+                  DigiDesk India
                 </p>
 
-                <p className="mt-0.5 text-[17px] font-bold leading-tight text-slate-900">
+                <p
+                  className="
+                    mt-0.5
+                    text-[17px]
+                    font-bold
+                    leading-tight
+                    text-slate-900
+                  "
+                >
                   {item.name}
                 </p>
               </div>
 
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-blue-600 shadow-sm">
+              <div
+                className="
+                  flex
+                  h-8
+                  w-8
+                  items-center
+                  justify-center
+                  rounded-lg
+                  bg-white
+                  text-blue-600
+                  shadow-sm
+                "
+              >
                 {item.icon}
               </div>
             </div>
 
-            {/* Dropdown items */}
+            {/* SERVICES */}
 
-            <div className="max-h-[390px] overflow-y-auto overscroll-contain">
+            <div
+              className="
+                max-h-[390px]
+                overflow-y-auto
+                overscroll-contain
+              "
+            >
               {item.children.map((child) => (
                 <Link
                   key={`${item.name}-${child.name}`}
                   href={child.href}
+                  onClick={() => {
+                    setOpen(false);
+                  }}
                   className="
                     group/link
-                    flex items-center gap-2.5
+                    flex
+                    cursor-pointer
+                    items-center
+                    gap-2.5
                     rounded-xl
-                    px-2.5 py-2
-                    transition-all duration-200
+                    px-2.5
+                    py-2
+                    transition-all
+                    duration-200
                     hover:bg-blue-50
                   "
                 >
+                  {/* ICON */}
+
                   <div
                     className="
-                      flex h-9 w-9 shrink-0
-                      items-center justify-center
+                      flex
+                      h-9
+                      w-9
+                      shrink-0
+                      items-center
+                      justify-center
                       rounded-xl
-                      bg-slate-100 text-slate-600
-                      transition-all duration-200
+                      bg-slate-100
+                      text-slate-600
+                      transition-all
+                      duration-200
                       group-hover/link:bg-blue-600
                       group-hover/link:text-white
                     "
@@ -456,21 +569,50 @@ function DesktopDropdown({ item }: { item: NavItem }) {
                     {child.icon}
                   </div>
 
+                  {/* TEXT */}
+
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-1.5">
-                      <p className="truncate text-[13px] font-bold leading-tight text-slate-800 transition group-hover/link:text-blue-700">
+                    <div
+                      className="
+                        flex
+                        items-center
+                        gap-1.5
+                      "
+                    >
+                      <p
+                        className="
+                          truncate
+                          text-[13px]
+                          font-bold
+                          leading-tight
+                          text-slate-800
+                          transition-colors
+                          group-hover/link:text-blue-700
+                        "
+                      >
                         {child.name}
                       </p>
 
                       {child.badge && (
                         <span
-                          className={`shrink-0 rounded-full px-1.5 py-0.5 text-[7px] font-bold uppercase ${
-                            child.badge === "Popular"
-                              ? "bg-emerald-100 text-emerald-700"
-                              : child.badge === "Custom"
-                                ? "bg-violet-100 text-violet-700"
-                                : "bg-blue-100 text-blue-700"
-                          }`}
+                          className={`
+                            shrink-0
+                            rounded-full
+                            px-1.5
+                            py-0.5
+                            text-[7px]
+                            font-bold
+                            uppercase
+                            ${
+                              child.badge ===
+                              "Popular"
+                                ? "bg-emerald-100 text-emerald-700"
+                                : child.badge ===
+                                    "Custom"
+                                  ? "bg-violet-100 text-violet-700"
+                                  : "bg-blue-100 text-blue-700"
+                            }
+                          `}
                         >
                           {child.badge}
                         </span>
@@ -478,17 +620,29 @@ function DesktopDropdown({ item }: { item: NavItem }) {
                     </div>
 
                     {child.description && (
-                      <p className="mt-0.5 truncate text-[10px] leading-tight text-slate-500">
+                      <p
+                        className="
+                          mt-0.5
+                          truncate
+                          text-[10px]
+                          leading-tight
+                          text-slate-500
+                        "
+                      >
                         {child.description}
                       </p>
                     )}
                   </div>
 
+                  {/* RIGHT ARROW */}
+
                   <ChevronRight
                     size={14}
                     className="
-                      shrink-0 text-slate-300
-                      transition-all duration-200
+                      shrink-0
+                      text-slate-300
+                      transition-all
+                      duration-200
                       group-hover/link:translate-x-0.5
                       group-hover/link:text-blue-600
                     "
@@ -497,25 +651,39 @@ function DesktopDropdown({ item }: { item: NavItem }) {
               ))}
             </div>
 
+            {/* FOOTER */}
+
             {item.href && (
               <Link
                 href={item.href}
+                onClick={() => {
+                  setOpen(false);
+                }}
                 className="
-                  mt-1 flex items-center justify-between
-                  border-t border-slate-100
-                  px-3 py-2
-                  text-[11px] font-bold text-blue-600
-                  transition
+                  mt-1
+                  flex
+                  items-center
+                  justify-between
+                  border-t
+                  border-slate-100
+                  px-3
+                  py-2
+                  text-[11px]
+                  font-bold
+                  text-blue-600
+                  transition-colors
                   hover:bg-blue-50
                 "
               >
-                <span>Open {item.name}</span>
+                <span>
+                  Open {item.name}
+                </span>
 
                 <ArrowRight size={14} />
               </Link>
             )}
           </div>
-        </>
+        </div>
       )}
     </div>
   );

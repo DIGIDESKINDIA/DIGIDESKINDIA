@@ -26,9 +26,9 @@ export async function POST(
       await request.formData();
 
     const uploads =
-      formData.getAll(
-        "images"
-      ) as File[];
+      (formData.getAll("images").length
+        ? formData.getAll("images")
+        : formData.getAll("files")) as File[];
 
     if (!uploads.length) {
       throw new ValidationError(

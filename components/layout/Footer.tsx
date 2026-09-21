@@ -24,6 +24,7 @@ const pdfTools = [
   { name: "Split PDF", href: "/pdf-tools/split" },
   { name: "JPG to PDF", href: "/pdf-tools/jpg-to-pdf" },
   { name: "PDF to JPG", href: "/pdf-tools/pdf-to-jpg" },
+  { name: "PDF to Word", href: "/pdf-tools/pdf-to-word" },
   { name: "Delete Pages", href: "/pdf-tools/delete-pages" },
   { name: "More Tools", href: "/pdf-tools" },
 ];
@@ -60,8 +61,10 @@ export default function Footer() {
 
   return (
     <footer className={isDark ? "bg-[#050B18] text-white" : "bg-slate-950 text-white"}>
-      <div className={isDark ? "border-b border-white/10 bg-[linear-gradient(135deg,#050B18,#081225,#0B1428)]" : "border-b border-white/10 bg-gradient-to-r from-slate-950 via-slate-950 to-blue-950"}>
-        <div className="mx-auto grid max-w-7xl gap-6 px-0 py-14 sm:px-5 lg:grid-cols-[1.2fr_.8fr] lg:items-center">
+      <div className={isDark ? "relative isolate overflow-hidden border-b border-white/10 bg-[#050B18]" : "relative isolate isolate overflow-hidden border-b border-white/10 bg-slate-950"}>
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_10%,rgba(14,165,233,0.12),transparent_32%),radial-gradient(circle_at_88%_18%,rgba(99,102,241,0.11),transparent_30%),radial-gradient(circle_at_72%_100%,rgba(16,185,129,0.08),transparent_34%)]" />
+        <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.035] [background-image:linear-gradient(rgba(255,255,255,0.8)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.8)_1px,transparent_1px)] [background-size:36px_36px]" />
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-14 lg:grid-cols-[.8fr_1.2fr] lg:items-stretch">
           <div className="flex flex-col items-start text-left">
             <Image
               src="/images/logo.png"
@@ -71,16 +74,18 @@ export default function Footer() {
               className="h-16 w-auto"
             />
 
-            <p className="mt-5 max-w-2xl text-left text-base leading-8 text-slate-300">
+            <div className="mt-5 h-px w-24 bg-gradient-to-r from-cyan-400 via-blue-500 to-transparent" />
+
+            <p className="mt-5 max-w-[460px] text-left text-base leading-8 text-slate-300">
               DigiDesk India is a premium digital services platform for government help,
               document tools, image tools, and instant AI assistance built for India.
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-4 rounded-[28px] border border-white/10 bg-white/5 p-5 backdrop-blur">
-            <InfoPill icon={<Phone size={18} />} title="Support" value="+91 9696295457" />
-            <InfoPill icon={<Mail size={18} />} title="Email" value="yoursdigideskindia@gmail.com" />
-            <InfoPill icon={<MapPin size={18} />} title="Location" value="Kanpur, India" />
+          <div className="grid grid-cols-1 gap-3 rounded-[28px] border border-white/10 bg-white/[0.045] p-4 shadow-[0_20px_60px_rgba(2,6,23,0.18)] backdrop-blur-sm sm:grid-cols-2 xl:grid-cols-3">
+            <InfoPill accent="phone" icon={<Phone size={18} />} title="Support" value="+91 9696295457" />
+            <InfoPill accent="email" icon={<Mail size={18} />} title="Email" value="yoursdigideskindia@gmail.com" />
+            <InfoPill accent="location" icon={<MapPin size={18} />} title="Location" value="Kanpur, India" />
           </div>
         </div>
       </div>
@@ -119,7 +124,7 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h3 className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-200">
+      <h3 className="font-[family-name:var(--font-sora)] text-sm font-semibold uppercase tracking-[0.18em] text-slate-100">
         {title}
       </h3>
 
@@ -143,22 +148,39 @@ function FooterColumn({
 }
 
 function InfoPill({
+  accent,
   icon,
   title,
   value,
 }: {
+  accent: "phone" | "email" | "location";
   icon: ReactNode;
   title: string;
   value: string;
 }) {
+  const accentStyles = {
+    phone: {
+      card: "hover:border-cyan-400/30",
+      tile: "bg-gradient-to-br from-blue-500/30 via-cyan-400/20 to-cyan-300/10 text-cyan-200 ring-cyan-300/20",
+    },
+    email: {
+      card: "hover:border-indigo-400/30",
+      tile: "bg-gradient-to-br from-indigo-500/30 via-violet-500/20 to-fuchsia-400/10 text-indigo-200 ring-indigo-300/20",
+    },
+    location: {
+      card: "hover:border-emerald-400/30",
+      tile: "bg-gradient-to-br from-emerald-500/30 via-teal-400/20 to-cyan-300/10 text-emerald-200 ring-emerald-300/20",
+    },
+  }[accent];
+
   return (
-    <div className="flex min-w-[250px] w-auto flex-col gap-3 rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500/15 text-cyan-300">
+    <div className={`group flex min-w-0 flex-col gap-3 rounded-2xl border border-white/10 bg-slate-950/40 p-4 shadow-[0_12px_28px_rgba(2,6,23,0.16)] transition duration-200 hover:bg-slate-950/55 ${accentStyles.card}`}>
+      <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ring-1 ${accentStyles.tile}`}>
         {icon}
       </div>
       <div className="min-w-0">
         <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{title}</p>
-        <p className="mt-1 whitespace-nowrap text-sm font-semibold leading-snug text-white">
+        <p className="mt-1 break-words text-sm font-semibold leading-snug text-white xl:whitespace-nowrap xl:text-[13px]">
           {value}
         </p>
       </div>

@@ -38,11 +38,11 @@ export default function PageNumbersPage() {
   const [fontSize, setFontSize] =
     useState(12);
 
-  const [x, setX] =
-    useState(0);
+  const [position, setPosition] =
+    useState<"top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right">("bottom-center");
 
-  const [y, setY] =
-    useState(25);
+  const [margins, setMargins] =
+    useState<"narrow" | "default" | "wide">("default");
 
   const [processing, setProcessing] =
     useState(false);
@@ -102,15 +102,8 @@ export default function PageNumbersPage() {
         String(fontSize)
       );
 
-      formData.append(
-        "x",
-        String(x)
-      );
-
-      formData.append(
-        "y",
-        String(y)
-      );
+      formData.append("position", position);
+      formData.append("margins", margins);
 
       const response =
         await fetch(
@@ -173,8 +166,8 @@ export default function PageNumbersPage() {
 
     setStartFrom(1);
     setFontSize(12);
-    setX(0);
-    setY(25);
+    setPosition("bottom-center");
+    setMargins("default");
   }
 
   async function loadPreview(
@@ -266,78 +259,46 @@ export default function PageNumbersPage() {
               </div>
 
               <div>
+                <label className="mb-2 block text-sm font-semibold">Position</label>
+                <div className="grid grid-cols-3 overflow-hidden rounded-xl border border-slate-300">
+                  {(["top-left", "top-center", "top-right", "bottom-left", "bottom-center", "bottom-right"] as const).map((option) => (
+                    <button
+                      key={option}
+                      type="button"
+                      aria-label={option}
+                      aria-pressed={position === option}
+                      onClick={() => setPosition(option)}
+                      className={`h-12 border-b border-r border-slate-200 transition ${position === option ? "bg-blue-600 text-white" : "bg-white hover:bg-blue-50"}`}
+                    >
+                      <span className={`mx-auto block h-5 w-5 rounded-full border-2 ${position === option ? "border-white bg-blue-600 ring-2 ring-white ring-inset" : "border-slate-400"}`} />
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-                <label className="mb-2 block text-sm font-semibold">
+              <div>
+                <label className="mb-2 block text-sm font-semibold">Margins</label>
+                <select
+                  value={margins}
+                  onChange={(e) => setMargins(e.target.value as typeof margins)}
+                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 focus:border-blue-600 focus:outline-none"
+                >
+                  <option value="narrow">Narrow</option>
+                  <option value="default">Default</option>
+                  <option value="wide">Wide</option>
+                </select>
+              </div>
 
-                  Font Size
-
-                </label>
-
+              <div>
+                <label className="mb-2 block text-sm font-semibold">Font Size</label>
                 <input
                   type="number"
                   min={8}
                   max={72}
                   value={fontSize}
-                  onChange={(e) =>
-                    setFontSize(
-                      Number(
-                        e.target.value
-                      )
-                    )
-                  }
+                  onChange={(e) => setFontSize(Number(e.target.value))}
                   className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:border-blue-600 focus:outline-none"
                 />
-
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-
-                <div>
-
-                  <label className="mb-2 block text-sm font-semibold">
-
-                    X Position
-
-                  </label>
-
-                  <input
-                    type="number"
-                    value={x}
-                    onChange={(e) =>
-                      setX(
-                        Number(
-                          e.target.value
-                        )
-                      )
-                    }
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:border-blue-600 focus:outline-none"
-                  />
-
-                </div>
-
-                <div>
-
-                  <label className="mb-2 block text-sm font-semibold">
-
-                    Y Position
-
-                  </label>
-
-                  <input
-                    type="number"
-                    value={y}
-                    onChange={(e) =>
-                      setY(
-                        Number(
-                          e.target.value
-                        )
-                      )
-                    }
-                    className="w-full rounded-xl border border-slate-300 px-4 py-3 focus:border-blue-600 focus:outline-none"
-                  />
-
-                </div>
-
               </div>
 
             </SettingsPanel>

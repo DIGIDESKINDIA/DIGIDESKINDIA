@@ -39,6 +39,15 @@ const nextConfig: NextConfig = {
 
   productionBrowserSourceMaps: false,
 
+  serverExternalPackages: [
+    "@napi-rs/canvas",
+    "@imgly/background-removal-node",
+    "onnxruntime-node",
+    "sharp",
+    "pdfjs-dist",
+    "tesseract.js",
+  ],
+
   typescript: {
     ignoreBuildErrors: false,
   },
