@@ -1,0 +1,131 @@
+{
+  "baseUrl": "http://localhost:3100",
+  "generatedAt": "2026-09-05T17:31:25.400Z",
+  "excluded": [
+    "Merge PDF",
+    "Split PDF",
+    "Compress PDF"
+  ],
+  "results": [
+    {
+      "tool": "Rotate PDF",
+      "input": "test-files/small.pdf",
+      "inputBytes": 898,
+      "httpStatus": 200,
+      "processingTimeMs": 180,
+      "outputType": "application/pdf",
+      "outputBytes": 904,
+      "validation": true,
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "tool": "Watermark PDF",
+      "input": "test-files/small.pdf",
+      "inputBytes": 898,
+      "httpStatus": 200,
+      "processingTimeMs": 116,
+      "outputType": "application/pdf",
+      "outputBytes": 1360,
+      "validation": true,
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "tool": "JPG to PDF",
+      "input": "test-files/small.jpg",
+      "inputBytes": 6223,
+      "httpStatus": 200,
+      "processingTimeMs": 60,
+      "outputType": "application/pdf",
+      "outputBytes": 7141,
+      "validation": true,
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "tool": "PDF to JPG",
+      "input": "test-files/multi-page.pdf",
+      "inputBytes": 1781,
+      "httpStatus": 503,
+      "processingTimeMs": 135,
+      "outputType": "application/json",
+      "outputBytes": 0,
+      "validation": false,
+      "status": "DEPENDENCY_MISSING",
+      "error": "{\"success\":false,\"message\":\"PDF image conversion requires the configured PDF worker or Adobe PDF credentials.\"}"
+    },
+    {
+      "tool": "Protect PDF",
+      "input": "test-files/small.pdf",
+      "inputBytes": 898,
+      "httpStatus": 200,
+      "processingTimeMs": 15964,
+      "outputType": "application/pdf",
+      "outputBytes": 1702,
+      "validation": true,
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "tool": "Unlock PDF",
+      "input": "protected output",
+      "inputBytes": 1702,
+      "httpStatus": 200,
+      "processingTimeMs": 146,
+      "outputType": "application/pdf",
+      "outputBytes": 1087,
+      "validation": true,
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "tool": "Unlock wrong password",
+      "input": "protected output",
+      "inputBytes": 1702,
+      "httpStatus": 500,
+      "processingTimeMs": null,
+      "outputType": "application/json",
+      "outputBytes": 402,
+      "validation": true,
+      "status": "PASS",
+      "error": null
+    },
+    {
+      "tool": "Word to PDF",
+      "input": "missing fixture (.docx)",
+      "inputBytes": 0,
+      "httpStatus": null,
+      "processingTimeMs": null,
+      "outputType": null,
+      "outputBytes": 0,
+      "validation": false,
+      "status": "DEPENDENCY_MISSING",
+      "error": "LibreOffice/soffice is not installed in this runtime."
+    },
+    {
+      "tool": "Excel to PDF",
+      "input": "missing fixture (.xlsx)",
+      "inputBytes": 0,
+      "httpStatus": null,
+      "processingTimeMs": null,
+      "outputType": null,
+      "outputBytes": 0,
+      "validation": false,
+      "status": "DEPENDENCY_MISSING",
+      "error": "LibreOffice/soffice is not installed in this runtime."
+    },
+    {
+      "tool": "PowerPoint to PDF",
+      "input": "missing fixture (.pptx)",
+      "inputBytes": 0,
+      "httpStatus": null,
+      "processingTimeMs": null,
+      "outputType": null,
+      "outputBytes": 0,
+      "validation": false,
+      "status": "DEPENDENCY_MISSING",
+      "error": "LibreOffice/soffice is not installed in this runtime."
+    }
+  ]
+}

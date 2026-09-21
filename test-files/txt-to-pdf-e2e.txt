@@ -1,0 +1,5 @@
+English paragraph one.
+
+हिन्दी अनुच्छेद दो: यह Unicode text है।
+
+This is a deliberately long line that should wrap inside the A4 page rather than being clipped at the right margin. This sentence continues with enough words to exercise measured wrapping.

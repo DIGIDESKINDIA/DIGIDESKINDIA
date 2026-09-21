@@ -1,0 +1,3361 @@
+{
+  "benchmark": {
+    "sourcePdf": "ViewDocument_current.rendered.pdf",
+    "sourcePages": 118,
+    "oldWordPages": 63,
+    "currentWordPages": 163,
+    "extraWordPages": 45,
+    "explicitPageBreaks": 117,
+    "paragraphCountInDocx": 3821,
+    "tableCountInDocx": 42,
+    "imageCountInDocx": 76,
+    "measuredWordCount": 163,
+    "measuredLibreOfficeCount": null,
+    "note": "LibreOffice is not installed in this execution environment, so no actual render-page count was available."
+  },
+  "dominantCause": {
+    "summary": "The 45 extra pages are caused by content height inflation in the generated DOCX plus explicit page breaks after each source page. Exact line spacing causes the serializer to generate content that exceeds the usable Word body height, which pushes a subset of pages beyond one Word page; the explicit break then adds another page boundary even when the content is already near overflow.",
+    "evidence": [
+      "The serializer sets w:lineRule=\"exact\" in paragraphXml(), which prevents Word from reflowing compactly and increases height.",
+      "The generated OOXML contains 117 explicit page breaks, which adds a hard page boundary after each digital source page.",
+      "The per-page source-to-Word mapping shows a meaningful fraction of pages exceed the document body height estimate."
+    ]
+  },
+  "pageMapping": [
+    {
+      "sourcePageNumber": 1,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 1,
+        "end": 1
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 2,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 13,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 202,
+      "generatedDocxContentHeightEstimate": 299,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 2,
+        "end": 2
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 3,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 3,
+        "end": 3
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 4,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 4,
+        "end": 4
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 5,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 24,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 417,
+      "generatedDocxContentHeightEstimate": 617,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 5,
+        "end": 5
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 6,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 6,
+        "end": 6
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 7,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 7,
+        "end": 7
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 8,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 25,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 429,
+      "generatedDocxContentHeightEstimate": 635,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 8,
+        "end": 8
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 9,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 8,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 308,
+      "generatedDocxContentHeightEstimate": 456,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 9,
+        "end": 9
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 10,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 10,
+        "end": 10
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 11,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 11,
+        "end": 11
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 12,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 33,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 621,
+      "generatedDocxContentHeightEstimate": 1099,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 12,
+        "end": 13
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 13,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 14,
+        "end": 14
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 14,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 15,
+        "end": 15
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 15,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 22,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 447,
+      "generatedDocxContentHeightEstimate": 842,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 16,
+        "end": 17
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 16,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 18,
+        "end": 18
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 17,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 19,
+        "end": 19
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 18,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 67,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 1117,
+      "generatedDocxContentHeightEstimate": 1833,
+      "resultingWordPages": 3,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 20,
+        "end": 22
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 19,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 23,
+        "end": 23
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 20,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 24,
+        "end": 24
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 21,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 33,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 576,
+      "generatedDocxContentHeightEstimate": 1032,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 25,
+        "end": 26
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 22,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 3,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 75,
+      "generatedDocxContentHeightEstimate": 111,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 27,
+        "end": 27
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 23,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 28,
+        "end": 28
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 24,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 29,
+        "end": 29
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 25,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 9,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 153,
+      "generatedDocxContentHeightEstimate": 226,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 30,
+        "end": 30
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 26,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 31,
+        "end": 31
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 27,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 175,
+      "generatedDocxContentHeightEstimate": 259,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 32,
+        "end": 32
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 28,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 22,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 411,
+      "generatedDocxContentHeightEstimate": 788,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 33,
+        "end": 34
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 29,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 5,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 120,
+      "generatedDocxContentHeightEstimate": 178,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 35,
+        "end": 35
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 30,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 36,
+        "end": 36
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 31,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 37,
+        "end": 37
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 32,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 29,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 585,
+      "generatedDocxContentHeightEstimate": 1046,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 38,
+        "end": 39
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 33,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 40,
+        "end": 40
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 34,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 41,
+        "end": 41
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 35,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 32,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 780,
+      "generatedDocxContentHeightEstimate": 1334,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 42,
+        "end": 43
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 36,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 175,
+      "generatedDocxContentHeightEstimate": 259,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 44,
+        "end": 44
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 37,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 45,
+        "end": 45
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 38,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 26,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 492,
+      "generatedDocxContentHeightEstimate": 908,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 46,
+        "end": 47
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 39,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 48,
+        "end": 48
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 40,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 49,
+        "end": 49
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 41,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 33,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 621,
+      "generatedDocxContentHeightEstimate": 1099,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 50,
+        "end": 51
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 42,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 52,
+        "end": 52
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 43,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 53,
+        "end": 53
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 44,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 39,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 846,
+      "generatedDocxContentHeightEstimate": 1432,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 54,
+        "end": 55
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 45,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 175,
+      "generatedDocxContentHeightEstimate": 259,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 56,
+        "end": 56
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 46,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 57,
+        "end": 57
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 47,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 30,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 527,
+      "generatedDocxContentHeightEstimate": 960,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 58,
+        "end": 59
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 48,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 60,
+        "end": 60
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 49,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 61,
+        "end": 61
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 50,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 20,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 319,
+      "generatedDocxContentHeightEstimate": 472,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 62,
+        "end": 62
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 51,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 63,
+        "end": 63
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 52,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 64,
+        "end": 64
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 53,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 37,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 537,
+      "generatedDocxContentHeightEstimate": 795,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 65,
+        "end": 66
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 54,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 175,
+      "generatedDocxContentHeightEstimate": 259,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 67,
+        "end": 67
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 55,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 68,
+        "end": 68
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 56,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 28,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 430,
+      "generatedDocxContentHeightEstimate": 636,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 69,
+        "end": 69
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 57,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 70,
+        "end": 70
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 58,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 71,
+        "end": 71
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 59,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 26,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 426,
+      "generatedDocxContentHeightEstimate": 630,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 72,
+        "end": 72
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 60,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 73,
+        "end": 73
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 61,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 74,
+        "end": 74
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 62,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 15,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 226,
+      "generatedDocxContentHeightEstimate": 334,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 75,
+        "end": 75
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 63,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 175,
+      "generatedDocxContentHeightEstimate": 259,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 76,
+        "end": 76
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 64,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 77,
+        "end": 77
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 65,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 27,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 543,
+      "generatedDocxContentHeightEstimate": 984,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 78,
+        "end": 79
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 66,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 80,
+        "end": 80
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 67,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 81,
+        "end": 81
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 68,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 17,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 312,
+      "generatedDocxContentHeightEstimate": 462,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 82,
+        "end": 82
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 69,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 83,
+        "end": 83
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 70,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 84,
+        "end": 84
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 71,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 16,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 309,
+      "generatedDocxContentHeightEstimate": 457,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 85,
+        "end": 85
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 72,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 175,
+      "generatedDocxContentHeightEstimate": 259,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 86,
+        "end": 86
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 73,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 87,
+        "end": 87
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 74,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 31,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 607,
+      "generatedDocxContentHeightEstimate": 1078,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 88,
+        "end": 89
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 75,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 10,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 205,
+      "generatedDocxContentHeightEstimate": 303,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 90,
+        "end": 90
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 76,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 91,
+        "end": 91
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 77,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 92,
+        "end": 92
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 78,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 27,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 542,
+      "generatedDocxContentHeightEstimate": 982,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 93,
+        "end": 94
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 79,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 95,
+        "end": 95
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 80,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 96,
+        "end": 96
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 81,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 35,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 807,
+      "generatedDocxContentHeightEstimate": 1374,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 97,
+        "end": 98
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 82,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 99,
+        "end": 99
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 83,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 100,
+        "end": 100
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 84,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 17,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 367,
+      "generatedDocxContentHeightEstimate": 723,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 101,
+        "end": 101
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 85,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 102,
+        "end": 102
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 86,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 103,
+        "end": 103
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 87,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 32,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 786,
+      "generatedDocxContentHeightEstimate": 1343,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 104,
+        "end": 105
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 88,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 106,
+        "end": 106
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 89,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 107,
+        "end": 107
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 90,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 33,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 712,
+      "generatedDocxContentHeightEstimate": 1234,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 108,
+        "end": 109
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 91,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 110,
+        "end": 110
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 92,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 111,
+        "end": 111
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 93,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 37,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 605,
+      "generatedDocxContentHeightEstimate": 1075,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 112,
+        "end": 113
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 94,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 114,
+        "end": 114
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 95,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 115,
+        "end": 115
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 96,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 36,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 611,
+      "generatedDocxContentHeightEstimate": 1084,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 116,
+        "end": 117
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 97,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 118,
+        "end": 118
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 98,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 119,
+        "end": 119
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 99,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 31,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 633,
+      "generatedDocxContentHeightEstimate": 937,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 120,
+        "end": 121
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 100,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 122,
+        "end": 122
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 101,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 123,
+        "end": 123
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 102,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 31,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 582,
+      "generatedDocxContentHeightEstimate": 1041,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 124,
+        "end": 125
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 103,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 126,
+        "end": 126
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 104,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 127,
+        "end": 127
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 105,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 33,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 621,
+      "generatedDocxContentHeightEstimate": 1099,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 128,
+        "end": 129
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 106,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 130,
+        "end": 130
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 107,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 131,
+        "end": 131
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 108,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 30,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 730,
+      "generatedDocxContentHeightEstimate": 1260,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 132,
+        "end": 133
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 109,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 134,
+        "end": 134
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 110,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 135,
+        "end": 135
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 111,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 27,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 478,
+      "generatedDocxContentHeightEstimate": 887,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 136,
+        "end": 137
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 112,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 138,
+        "end": 138
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 113,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 139,
+        "end": 139
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 114,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 32,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 520,
+      "generatedDocxContentHeightEstimate": 950,
+      "resultingWordPages": 2,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 140,
+        "end": 141
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 115,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 142,
+        "end": 142
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 116,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 1,
+      "tableCount": 0,
+      "imageCount": 2,
+      "sourceContentHeightEstimate": 25,
+      "generatedDocxContentHeightEstimate": 37,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 143,
+        "end": 143
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 117,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 34,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 936,
+      "generatedDocxContentHeightEstimate": 1565,
+      "resultingWordPages": 3,
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 144,
+        "end": 146
+      },
+      "explicitBreakInDocx": true
+    },
+    {
+      "sourcePageNumber": 118,
+      "sourcePageDimensions": {
+        "width": 595,
+        "height": 842
+      },
+      "extractedParagraphCount": 8,
+      "tableCount": 1,
+      "imageCount": 0,
+      "sourceContentHeightEstimate": 178,
+      "generatedDocxContentHeightEstimate": 263,
+      "resultingWordPages": 1,
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": false,
+      "usableBodyHeight": 770,
+      "generatedWordPages": {
+        "start": 147,
+        "end": 147
+      },
+      "explicitBreakInDocx": false
+    }
+  ],
+  "sourcePageDimensions": [
+    {
+      "pageNumber": 1,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 2,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 3,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 4,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 5,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 6,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 7,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 8,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 9,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 10,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 11,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 12,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 13,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 14,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 15,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 16,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 17,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 18,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 19,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 20,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 21,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 22,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 23,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 24,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 25,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 26,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 27,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 28,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 29,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 30,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 31,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 32,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 33,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 34,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 35,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 36,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 37,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 38,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 39,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 40,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 41,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 42,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 43,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 44,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 45,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 46,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 47,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 48,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 49,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 50,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 51,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 52,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 53,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 54,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 55,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 56,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 57,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 58,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 59,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 60,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 61,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 62,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 63,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 64,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 65,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 66,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 67,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 68,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 69,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 70,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 71,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 72,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 73,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 74,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 75,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 76,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 77,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 78,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 79,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 80,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 81,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 82,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 83,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 84,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 85,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 86,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 87,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 88,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 89,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 90,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 91,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 92,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 93,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 94,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 95,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 96,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 97,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 98,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 99,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 100,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 101,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 102,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 103,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 104,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 105,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 106,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 107,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 108,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 109,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 110,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 111,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 112,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 113,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 114,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 115,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 116,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 117,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    },
+    {
+      "pageNumber": 118,
+      "width": 595,
+      "height": 842,
+      "bodyHeight": 770
+    }
+  ],
+  "wordPageTypeTotals": {
+    "expectedContentPage": 1,
+    "overflowContinuation": 27,
+    "mostlyBlank": 27,
+    "tableOverflow": 42,
+    "imageOverflow": 38,
+    "paragraphSpacingOverflow": 0,
+    "headerFooterOverflow": 0,
+    "explicitPageBreakArtifact": 27
+  },
+  "representativeSourcePageMap": [
+    {
+      "sourcePageNumber": 1,
+      "mappedWordPages": {
+        "start": 1,
+        "end": 1
+      },
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "generatedDocxContentHeightEstimate": 37,
+      "sourceContentHeightEstimate": 25
+    },
+    {
+      "sourcePageNumber": 2,
+      "mappedWordPages": {
+        "start": 2,
+        "end": 2
+      },
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "generatedDocxContentHeightEstimate": 299,
+      "sourceContentHeightEstimate": 202
+    },
+    {
+      "sourcePageNumber": 3,
+      "mappedWordPages": {
+        "start": 3,
+        "end": 3
+      },
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "generatedDocxContentHeightEstimate": 37,
+      "sourceContentHeightEstimate": 25
+    },
+    {
+      "sourcePageNumber": 10,
+      "mappedWordPages": {
+        "start": 10,
+        "end": 10
+      },
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "generatedDocxContentHeightEstimate": 37,
+      "sourceContentHeightEstimate": 25
+    },
+    {
+      "sourcePageNumber": 20,
+      "mappedWordPages": {
+        "start": 24,
+        "end": 24
+      },
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "generatedDocxContentHeightEstimate": 37,
+      "sourceContentHeightEstimate": 25
+    },
+    {
+      "sourcePageNumber": 43,
+      "mappedWordPages": {
+        "start": 53,
+        "end": 53
+      },
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "generatedDocxContentHeightEstimate": 37,
+      "sourceContentHeightEstimate": 25
+    },
+    {
+      "sourcePageNumber": 44,
+      "mappedWordPages": {
+        "start": 54,
+        "end": 55
+      },
+      "overflowOccurs": true,
+      "explicitPageBreakOccurs": true,
+      "generatedDocxContentHeightEstimate": 1432,
+      "sourceContentHeightEstimate": 846
+    },
+    {
+      "sourcePageNumber": 60,
+      "mappedWordPages": {
+        "start": 73,
+        "end": 73
+      },
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "generatedDocxContentHeightEstimate": 37,
+      "sourceContentHeightEstimate": 25
+    },
+    {
+      "sourcePageNumber": 80,
+      "mappedWordPages": {
+        "start": 96,
+        "end": 96
+      },
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "generatedDocxContentHeightEstimate": 37,
+      "sourceContentHeightEstimate": 25
+    },
+    {
+      "sourcePageNumber": 100,
+      "mappedWordPages": {
+        "start": 122,
+        "end": 122
+      },
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": true,
+      "generatedDocxContentHeightEstimate": 37,
+      "sourceContentHeightEstimate": 25
+    },
+    {
+      "sourcePageNumber": 118,
+      "mappedWordPages": {
+        "start": 147,
+        "end": 147
+      },
+      "overflowOccurs": false,
+      "explicitPageBreakOccurs": false,
+      "generatedDocxContentHeightEstimate": 263,
+      "sourceContentHeightEstimate": 178
+    }
+  ],
+  "pageBreakLogic": {
+    "explicitPageBreaks": 117,
+    "pagesWithOverflow": 27,
+    "pagesWithExplicitBreaks": 117,
+    "note": "The overflow estimate and explicit page break count both contribute to the extra pages. This is not a single-cause failure; it is a combined height-inflation and break-boundary issue."
+  },
+  "paragraphSpacingAudit": {
+    "serializer": "paragraphXml()",
+    "exactLineSetting": "w:line derived from font size with w:lineRule=\"exact\"",
+    "implications": [
+      "This makes Word reserve a fixed vertical line height and reduces compacting.",
+      "Pages with lots of paragraphs are more likely to exceed their body height and spill into an extra page."
+    ]
+  }
+}

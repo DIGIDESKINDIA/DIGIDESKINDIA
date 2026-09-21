@@ -29,6 +29,7 @@ type CompressionResult = {
   reductionPercent: number;
   downloadUrl: string;
   fileName: string;
+  notice?: string;
 };
 
 function formatBytes(bytes: number) {
@@ -51,15 +52,36 @@ function formatBytes(bytes: number) {
   return `${mb.toFixed(mb >= 10 ? 1 : 2)} MB`;
 }
 
-function estimateCompressedBytes(
-  originalBytes: number,
-  level: number
-) {
-  const ratio = level < 70
-    ? Math.max(0.1, 1 - level * 0.012)
-    : Math.max(0.01, 0.1 - (level - 70) * 0.0102);
+function getCompressionStrengthLabel(level: number) {
+  if (level <= 25) {
+    return "Low compression / Best quality";
+  }
 
-  return Math.max(1024, Math.round(originalBytes * ratio));
+  if (level <= 50) {
+    return "Balanced compression";
+  }
+
+  if (level <= 75) {
+    return "Strong compression";
+  }
+
+  return "Maximum compression";
+}
+
+function getCompressionStrengthDescription(level: number) {
+  if (level <= 25) {
+    return "Document quality is preserved more closely; size savings are usually modest.";
+  }
+
+  if (level <= 50) {
+    return "Balances image quality and file size for everyday sharing and storage.";
+  }
+
+  if (level <= 75) {
+    return "Applies stronger optimization for a noticeably smaller output file.";
+  }
+
+  return "Uses the strongest optimization available; file size may change more aggressively depending on the PDF content.";
 }
 
 function getDownloadFileName(
@@ -352,6 +374,11 @@ export default function CompressPDFPage() {
         ) || "0"
       );
 
+      const notice =
+        response.headers.get(
+          "X-Compression-Notice"
+        ) || undefined;
+
       const fileName =
         getDownloadFileName(
           response.headers.get(
@@ -371,6 +398,7 @@ export default function CompressPDFPage() {
         reductionPercent,
         downloadUrl,
         fileName,
+        notice,
       });
     } catch (compressionError) {
       setProgress(0);
@@ -588,7 +616,7 @@ export default function CompressPDFPage() {
                     <div className="mt-6 rounded-2xl border border-blue-100 bg-blue-50/60 p-5">
                       <div className="flex items-center justify-between gap-4">
                         <span className="text-xs font-bold uppercase tracking-wide text-slate-600 dark:text-slate-100">
-                          Better quality
+                          Low compression / Best quality
                         </span>
 
                         <output className="text-2xl font-black text-blue-700">
@@ -596,7 +624,7 @@ export default function CompressPDFPage() {
                         </output>
 
                         <span className="text-right text-xs font-bold uppercase tracking-wide text-slate-600 dark:text-slate-100">
-                          Smaller file
+                          Maximum compression
                         </span>
                       </div>
 
@@ -617,22 +645,23 @@ export default function CompressPDFPage() {
                       />
 
                       <p className="mt-3 text-xs leading-5 text-slate-600 dark:text-slate-200">
-                        Higher levels reduce image quality more aggressively.
+                        The actual output size depends on the PDF’s images, fonts, and internal structure. Higher settings increase optimization strength, not a guaranteed percentage reduction.
                       </p>
 
-                      <div className="mt-4 flex items-center justify-between rounded-xl border border-blue-100 bg-white px-4 py-3 dark:border-slate-500/40 dark:bg-slate-950/70">
-                        <span className="text-xs font-bold uppercase tracking-wide text-slate-600 dark:text-slate-100">
-                          Estimated new size
-                        </span>
+                      <div className="mt-4 rounded-xl border border-blue-100 bg-white px-4 py-3 dark:border-slate-500/40 dark:bg-slate-950/70">
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="text-xs font-bold uppercase tracking-wide text-slate-600 dark:text-slate-100">
+                            Compression strength
+                          </span>
 
-                        <strong className="text-lg font-black text-blue-700">
-                          {formatBytes(
-                            estimateCompressedBytes(
-                              file.size,
-                              compressionLevel
-                            )
-                          )}
-                        </strong>
+                          <strong className="text-right text-sm font-black text-blue-700 sm:text-base">
+                            {getCompressionStrengthLabel(compressionLevel)}
+                          </strong>
+                        </div>
+
+                        <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-200">
+                          {getCompressionStrengthDescription(compressionLevel)}
+                        </p>
                       </div>
                     </div>
 
@@ -738,6 +767,12 @@ export default function CompressPDFPage() {
                           smaller
                         </span>
                       </div>
+
+                      {result.notice && (
+                        <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-800">
+                          {result.notice}
+                        </div>
+                      )}
 
                       <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
                         <div className="rounded-2xl border border-white bg-white p-4 shadow-sm">

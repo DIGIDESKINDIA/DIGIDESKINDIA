@@ -149,9 +149,9 @@ export default function CompressPdfPage() {
   }
 
   const estimatedReduction = {
-    low: "10% - 25%",
-    medium: "30% - 50%",
-    high: "50% - 75%",
+    low: "Low compression / Best quality",
+    medium: "Balanced compression",
+    high: "Strong compression",
   };
 
   return (
@@ -202,14 +202,13 @@ export default function CompressPdfPage() {
 
                     <h4 className="font-bold">
 
-                      Low Compression
+                      Low compression / Best quality
 
                     </h4>
 
                     <p className="text-sm text-slate-500">
 
-                      Highest quality with
-                      slight size reduction.
+                      Preserves file quality with the smallest practical size reduction.
 
                     </p>
 
@@ -236,14 +235,13 @@ export default function CompressPdfPage() {
 
                     <h4 className="font-bold">
 
-                      Medium Compression
+                      Balanced compression
 
                     </h4>
 
                     <p className="text-sm text-slate-500">
 
-                      Balanced quality and
-                      file size.
+                      Balances appearance and file size for typical sharing use.
 
                     </p>
 
@@ -268,14 +266,13 @@ export default function CompressPdfPage() {
 
                     <h4 className="font-bold">
 
-                      High Compression
+                      Strong compression
 
                     </h4>
 
                     <p className="text-sm text-slate-500">
 
-                      Maximum reduction with
-                      slightly reduced quality.
+                      More aggressive optimization for a noticeably smaller PDF.
 
                     </p>
 

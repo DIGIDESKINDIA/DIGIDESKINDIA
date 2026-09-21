@@ -30,14 +30,14 @@
       "tool": "Compress",
       "endpoint": "compress",
       "upload": "PASS",
-      "processing": "FAIL",
-      "output": "BLOCKED",
-      "download": "BLOCKED",
-      "validation": "BLOCKED",
+      "processing": "PASS",
+      "output": "PASS",
+      "download": "PASS",
+      "validation": "FAIL",
       "status": "FAIL",
       "size_input": "0.00",
-      "size_output": "0",
-      "error": "Ghostscript could not be found. Install Ghostscript or set GHOSTSCRIPT_PATH."
+      "size_output": "0.00",
+      "error": "Output validation failed - invalid file format"
     },
     {
       "tool": "Rotate",
@@ -121,27 +121,27 @@
       "tool": "Protect",
       "endpoint": "protect",
       "upload": "PASS",
-      "processing": "PASS",
-      "output": "PASS",
-      "download": "PASS",
-      "validation": "FAIL",
+      "processing": "FAIL",
+      "output": "BLOCKED",
+      "download": "BLOCKED",
+      "validation": "BLOCKED",
       "status": "FAIL",
       "size_input": "0.00",
-      "size_output": "0.00",
-      "error": "Output validation failed - invalid file format"
+      "size_output": "0",
+      "error": "PDF protection requires qpdf installed locally or configured Adobe PDF credentials."
     },
     {
       "tool": "Unlock",
       "endpoint": "unlock",
       "upload": "PASS",
-      "processing": "PASS",
-      "output": "PASS",
-      "download": "PASS",
-      "validation": "FAIL",
+      "processing": "FAIL",
+      "output": "BLOCKED",
+      "download": "BLOCKED",
+      "validation": "BLOCKED",
       "status": "FAIL",
       "size_input": "0.00",
-      "size_output": "0.00",
-      "error": "Output validation failed - invalid file format"
+      "size_output": "0",
+      "error": "PDF unlocking requires qpdf installed locally or configured Adobe PDF credentials."
     },
     {
       "tool": "Image to PDF",
@@ -167,7 +167,7 @@
       "status": "FAIL",
       "size_input": "0.00",
       "size_output": "0",
-      "error": "Ghostscript is required for PDF to image conversion. Install Ghostscript or set GHOSTSCRIPT_PATH."
+      "error": "PDF processing is not configured. Set PDF_SERVICES_CLIENT_ID and PDF_SERVICES_CLIENT_SECRET."
     },
     {
       "tool": "Info",
@@ -315,5 +315,5 @@
       "error": null
     }
   ],
-  "timestamp": "2026-08-18T17:53:46.880Z"
+  "timestamp": "2026-08-23T18:42:35.961Z"
 }

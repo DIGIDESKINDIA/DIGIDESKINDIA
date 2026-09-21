@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PDFDocument } from "pdf-lib";
 import { compressPdf as compressWithAdobe } from "@/lib/pdf/adobe-services";
+import { computeCompressionStats } from "@/lib/pdf/compression-stats";
 
 export const runtime = "nodejs";
 
@@ -35,6 +36,26 @@ function providerConfigured() {
     process.env.PDF_SERVICES_CLIENT_ID?.trim() &&
       process.env.PDF_SERVICES_CLIENT_SECRET?.trim()
   );
+}
+
+async function validatePdfBytes(bytes: Uint8Array, label: string) {
+  try {
+    const pdf = await PDFDocument.load(bytes, {
+      updateMetadata: false,
+    });
+
+    if (pdf.getPageCount() < 1) {
+      throw new Error("The PDF contains no pages.");
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+
+    if (/password|encrypted|requires a password/i.test(message)) {
+      throw new Error("Password-protected PDFs are not supported.");
+    }
+
+    throw new Error(`The ${label} PDF is invalid or corrupted.`);
+  }
 }
 
 function getCompressionQuality(level: number) {
@@ -96,6 +117,9 @@ export async function POST(request: NextRequest) {
     const quality = getCompressionQuality(compressionLevel);
 
     const source = new Uint8Array(await file.arrayBuffer());
+
+    await validatePdfBytes(source, "uploaded");
+
     const targetBytes = getTargetBytesForLevel(
       source.length,
       compressionLevel
@@ -149,9 +173,19 @@ export async function POST(request: NextRequest) {
       output = await compressLocally(source);
     }
 
-    if (output.length >= source.length) {
+    if (output.length === 0) {
+      throw new Error("PDF compression returned an empty file.");
+    }
+
+    await validatePdfBytes(output, "compressed");
+
+    const originalSize = file.size;
+    const preservedOriginal = output.length >= source.length;
+
+    if (preservedOriginal) {
       output = source;
       preset = "original-preserved";
+      strategy = "original-preserved";
     }
 
     if (response && !response.ok && !providerConfigured()) {
@@ -159,17 +193,14 @@ export async function POST(request: NextRequest) {
       console.warn("[COMPRESS_PDF] worker failed; using local fallback", text);
     }
 
-    if (output.length === 0) {
-      throw new Error("PDF compression returned an empty file.");
-    }
+    const finalStats = computeCompressionStats(originalSize, output.length);
+    const notice =
+      finalStats.compressedSize >= finalStats.originalSize && finalStats.originalSize > 0
+        ? "Compression did not reduce the file size, so the original file was kept."
+        : undefined;
 
-    const originalSize = file.size;
-    const compressedSize = output.length;
-    const reductionPercent = originalSize > 0
-      ? Math.max(0, Math.round(((originalSize - compressedSize) / originalSize) * 10000) / 100)
-      : 0;
     console.log(
-      `[COMPRESS_PDF] final=${compressedSize} bytes level=${compressionLevel}`
+      `[COMPRESS_PDF] final=${finalStats.compressedSize} bytes level=${compressionLevel}`
     );
 
     const outputBody = output.buffer.slice(
@@ -182,22 +213,24 @@ export async function POST(request: NextRequest) {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": `attachment; filename="${safeName(file.name)}"`,
-        "Content-Length": String(compressedSize),
-        "X-Original-Size": String(originalSize),
-        "X-Compressed-Size": String(compressedSize),
-        "X-Saved-Bytes": String(Math.max(0, originalSize - compressedSize)),
-        "X-Reduction-Percent": String(reductionPercent),
+        "Content-Length": String(finalStats.compressedSize),
+        "X-Original-Size": String(finalStats.originalSize),
+        "X-Compressed-Size": String(finalStats.compressedSize),
+        "X-Saved-Bytes": String(finalStats.savedBytes),
+        "X-Reduction-Percent": String(finalStats.reductionPercent),
         "X-Compression-Preset": preset,
         "X-Target-Size": "0",
         "X-Target-Bytes": "0",
-        "X-Output-Bytes": String(compressedSize),
-        "X-Target-Reached": "false",
-        "X-Best-Achievable": "false",
+        "X-Output-Bytes": String(finalStats.compressedSize),
+        "X-Target-Reached": String(finalStats.isReduced),
+        "X-Best-Achievable": String(finalStats.isReduced),
         "X-Compression-Level": String(compressionLevel),
-        "X-Best-Achievable-Bytes": String(compressedSize),
+        "X-Best-Achievable-Bytes": String(finalStats.compressedSize),
         "X-Attempt-Count": attemptCount,
         "X-Compression-Attempts": attemptCount,
         "X-Compression-Strategy": strategy,
+        "X-Compression-Notice": notice ?? "",
+        "X-Compression-Outcome": finalStats.isReduced ? "compressed" : "original-preserved",
         "X-Processing-Time-Ms": String(Math.round(performance.now() - startedAt)),
         "Cache-Control": "no-store",
       },

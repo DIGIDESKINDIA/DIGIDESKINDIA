@@ -10,16 +10,7 @@ import { chromium } from "playwright";
 const BASE_URL = "http://localhost:3000";
 const TEST_FILES_DIR = "./test-files";
 
-interface TestResult {
-  tool: string;
-  category: "pdf" | "image" | "auth" | "admin" | "ai";
-  desktop: "pass" | "fail";
-  mobile: "pass" | "fail" | "skip";
-  outputVerified: boolean;
-  error?: string;
-}
-
-const results: TestResult[] = [];
+const results = [];
 
 // Helper to wait for download
 async function waitForDownload(page, callback) {
